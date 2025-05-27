@@ -103,6 +103,9 @@
             font-size: 1rem;
             color: var(--text-light);
         }
+        .emoji-border {
+            border: 2px solid green;
+        }
         /*.slider {
             width: 44px;
             height: 24px;
@@ -132,14 +135,13 @@
     right: 10px;
     opacity: 0;
 }
-
-.theme-switch-checkbox:checked + .slider {
+.theme-switch-checkbox:checked  {
     transform:var(--transition) translateX(30px);
 }
-.theme-switch-checkbox:checked + .slider + .light-emoji {
+.theme-switch-checkbox:checked  + .light-emoji {
     opacity: 0;
 }
-.theme-switch-checkbox:checked + .slider + .light-emoji + .dark-emoji {
+.theme-switch-checkbox:checked  + .light-emoji + .dark-emoji {
     opacity: 1;
 }
 /*.slider::before {
@@ -175,4 +177,11 @@
         body.dark .social-links a:hover, body.dark .projects a:hover {
             background: var(--accent);
             color: #181c23;
+        }
+        .theme-switch-label {
+            border: 2px solid var(--accent);
+            border-top-left-radius: 30%;
+            border-top-right-radius: 30%;
+            border-bottom-left-radius: 30%;
+            border-bottom-right-radius: 30%;
         }

@@ -3,48 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>My Portfolio</title>
+    <meta name="description" content="Portfolio of Nkeng Sama Mokom - Web Developer and Tech Enthusiast">
+    <title>Nkeng Sama Mokom | Web Developer Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="toggle-switch">
-            <label for="theme-toggle" class="theme-switch-label">
-                <input type="checkbox" id="theme-toggle" class="theme-switch-checkbox">
-                <!--<span class="slider"></span>-->
-                <span class="emoji light-emoji">🌞</span>
-                <span class="emoji dark-emoji">🌜</span>
-            </label>
-            <span id="theme-label"><div class="mode-label"></div></span>
+    <!-- Header / Navigation -->
+    <header>
+        <nav aria-label="Theme controls">
+            <div class="toggle-switch">
+                <label for="theme-toggle" class="theme-switch-label">
+                    <input type="checkbox" id="theme-toggle" class="theme-switch-checkbox" aria-label="Toggle dark mode">
+                    <span class="emoji light-emoji" aria-hidden="true">🌞</span>
+                    <span class="emoji dark-emoji" aria-hidden="true">🌜</span>
+                </label>
+                <span id="theme-label" aria-live="polite"><div class="mode-label"></div></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Hero / Introduction Section -->
+            <section id="hero" class="hero-section">
+                <div class="logo">
+                    <img src="New headshot 2.png" alt="Professional headshot of Nkeng Sama Mokom" class="logo-image">
+                    <h1>Nkeng Sama Mokom</h1>
+                    <p class="tagline">Web Developer | Tech Enthusiast | Student at The University of Buea</p>
+                </div>
+            </section>
+
+            <!-- About Me Section -->
+            <section id="about" class="about-section">
+                <h2>About Me</h2>
+                <p>Hi, I'm Nkeng Sama Mokom, a passionate web developer with a keen interest in creating innovative solutions. I am currently a student at The University of Buea, where I am honing my skills in web development and technology. My portfolio showcases my projects and skills, reflecting my dedication to continuous learning and improvement.</p>
+                <p>I believe in the power of technology to transform lives and I'm excited to contribute to this dynamic field. Whether it's building responsive websites or exploring new technologies, I am committed to delivering high-quality work that meets the needs of users and clients alike.</p>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="projects-section">
+                <h2>Projects</h2>
+                <p>Here are some of my recent projects:</p>
+                <ul class="projects">
+                    <li>
+                        <article class="project-card">
+                            <h3>Quick Shop</h3>
+                            <p>A Small scale E-Commerce Platform which helps both vendors and buyers alike</p>
+                            <a href="https://x-clussive-shop.onrender.com/" target="_blank" rel="noopener noreferrer" aria-label="View Quick Shop project (opens in new tab)">View Project</a>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="project-card">
+                            <h3>Kitchen Sync</h3>
+                            <p>A Web based Restaurant Management system which allows Restaurant owners to monitor various processes in their restaurants in a more efficient and smart way</p>
+                            <a href="https://kitchen-sync-1.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Kitchen Sync project (opens in new tab)">View Project</a>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="project-card">
+                            <h3>Project Three</h3>
+                            <p>A personal blog platform built with a focus on simplicity and user experience.</p>
+                            <a href="https://yourproject3.com" target="_blank" rel="noopener noreferrer" aria-label="View Project Three (opens in new tab)">View Project</a>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Experience & Accomplishments Section -->
+            <section id="experience" class="experience-section">
+                <h2>Experience & Accomplishments</h2>
+                <p>Currently building expertise in web development through academic studies and hands-on project work at The University of Buea.</p>
+                <ul>
+                    <li>Developed multiple full-stack web applications</li>
+                    <li>Strong focus on user experience and responsive design</li>
+                    <li>Continuously learning and adapting to new technologies</li>
+                </ul>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="skills-section">
+                <h2>Skills</h2>
+                <ul class="skills-list">
+                    <li>Web Development (HTML, CSS, JavaScript)</li>
+                    <li>Responsive Design</li>
+                    <li>Full-Stack Development</li>
+                    <li>E-Commerce Solutions</li>
+                    <li>Restaurant Management Systems</li>
+                    <li>User Experience Design</li>
+                </ul>
+            </section>
+
+            <!-- Resume / Download CV Section -->
+            <section id="resume" class="resume-section">
+                <h2>Resume</h2>
+                <p>Download my CV to learn more about my education, experience, and technical skills.</p>
+                <a href="Nkeng_Sama_Mokom_CV.pdf" download class="cv-download-btn" aria-label="Download CV (PDF format)">Download CV</a>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section">
+                <h2>Contact</h2>
+                <p>Let's connect! Find me on these platforms:</p>
+                <nav aria-label="Social media links">
+                    <ul class="social-links">
+                        <li><a href="https://github.com/Sama-Mokom" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in new tab)">GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/sama-mokom-784161283" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile (opens in new tab)">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/sama_mokom?" target="_blank" rel="noopener noreferrer" aria-label="Visit my Instagram profile (opens in new tab)">Instagram</a></li>
+                        <li><a href="https://www.threads.com/@sama_mokom?" target="_blank" rel="noopener noreferrer" aria-label="Visit my Threads profile (opens in new tab)">Threads</a></li>
+                        <li><a href="http://wa.me/237672656777" target="_blank" rel="noopener noreferrer" aria-label="Contact me on WhatsApp (opens in new tab)">WhatsApp</a></li>
+                        <li><a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Visit my Facebook profile (opens in new tab)">Facebook</a></li>
+                        <li><a href="mailto:yungkaparaz@gmail.com" aria-label="Send me an email">Email</a></li>
+                    </ul>
+                </nav>
+            </section>
         </div>
-        <div class="logo">
-            <img src="New headshot 2.png" alt="Logo" class="logo-image">
-            <h1>Nkeng Sama Mokom</h1>
-            <h2>Web Developer | Tech Enthusiast | Student at The University of Buea</h2>
-            <p>Hi, I'm Nkeng Sama Mokom, a passionate web developer with a keen interest in creating innovative solutions. I am currently a student at The University of Buea, where I am honing my skills in web development and technology. My portfolio showcases my projects and skills, reflecting my dedication to continuous learning and improvement.
-                I believe in the power of technology to transform lives and I'm excited to contribute to this dynamic field. Whether it's building responsive websites or exploring new technologies, I am committed to delivering high-quality work that meets the needs of users and clients alike.
-            </p>
-        </div>
-        <h2>Projects</h2>
-        <p>Here are some of my recent projects:</p>
-        <ul class="projects">
-            <li><p>A Small scale E-Commerce Platform which helps both vendors and buyers alike</p><a href="https://x-clussive-shop.onrender.com/" target="_blank">Quick Shop</a></li>
-            <li><p>A Web based Restaurant Management system which allows Restaurant owners to monitor various processes in their restaurants in a more efficient and smart way</p><a href="https://kitchen-sync-1.netlify.app/" target="_blank">Kitchen Sync</a></li>
-            <li><p>A personal blog platform built with a focus on simplicity and user experience.</p><a href="https://yourproject3.com" target="_blank">Project Three</a></li>
-            <!-- Add more projects as needed -->
-        </ul>
-        <h2>Contacts</h2>
-        <ul class="social-links">
-            <li><a href="https://github.com/Sama-Mokom" target="_blank">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/sama-mokom-784161283" target="_blank">LinkedIn</a></li>
-            <li><a href="https://www.instagram.com/sama_mokom?" target="_blank">Instagram</a></li>
-            <li><a href="https://www.threads.com/@sama_mokom?" target="_blank">Threads</a></li>
-            <li><a href="http://wa.me/237672656777" target="_blank">Whatsapp</a></li>
-            <li><a href="https://twitter.com/yourusername" target="_blank">Facebook</a></li>
-            <li><a href="mailto:yungkaparaz@gmail.com" target="_blank">Email</a></li>
-            <!-- Add more social links as needed -->
-        </ul>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Nkeng Sama Mokom. All rights reserved.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

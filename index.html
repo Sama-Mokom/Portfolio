@@ -7,15 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Nkeng Sama Mokom - Web Developer & Computer Engineering Student at University of Buea. Specializing in HTML, CSS, JavaScript, React. View my portfolio of e-commerce platforms, restaurant management systems, and responsive web applications.">
-    <meta name="keywords" content="web developer, frontend developer, Nkeng Sama Mokom, portfolio, JavaScript, React, HTML, CSS, University of Buea, Cameroon developer">
+    <meta name="description" content="Nkeng Sama Mokom - Full-Stack Developer & Computer Engineering Student at University of Buea. Specializing in Next.js, TypeScript, NestJS, React. View my portfolio including the Cameroon Music Industry Platform, e-commerce solutions, and enterprise web applications.">
+    <meta name="keywords" content="full-stack developer, web developer, Nkeng Sama Mokom, Next.js, TypeScript, NestJS, React, MySQL, Prisma, portfolio, University of Buea, Cameroon developer, music platform">
     <meta name="author" content="Nkeng Sama Mokom">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph Meta Tags (for social media sharing) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Nkeng Sama Mokom | Web Developer Portfolio">
-    <meta property="og:description" content="Computer Engineering Student & Web Developer specializing in responsive web applications. Explore my projects including e-commerce platforms and restaurant management systems.">
+    <meta property="og:description" content="Full-Stack Developer & Computer Engineering Student specializing in Next.js, TypeScript, and NestJS. Explore my portfolio including the Cameroon Music Industry Platform, e-commerce solutions, and enterprise applications.">
     <meta property="og:url" content="https://sama-mokom.github.io/portfolio">
     <meta property="og:image" content="https://sama-mokom.github.io/portfolio/New headshot 2.png">
     <meta property="og:site_name" content="Nkeng Sama Mokom Portfolio">
@@ -83,8 +83,39 @@
                 <h2>Projects</h2>
                 <p class="section-intro">Here are some of my recent projects showcasing full-stack development and user-focused design:</p>
                 <div class="projects-grid">
-                    <!-- Project 1: Quick Shop -->
-                    <article class="project-card">
+                    <!-- Project 1: Cameroon Music Industry Platform (Featured) -->
+                    <article class="project-card featured-project" data-project="music-platform">
+                        <div class="project-image">
+                            <div class="project-placeholder">
+                                <span class="project-icon">🎵</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Cameroon Music Industry Platform</h3>
+                            <span class="project-badge featured">Featured Project</span>
+                            <button class="view-details-btn" aria-label="View full project details">
+                                <span class="details-icon">👁️</span> View Details
+                            </button>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Next.js 14</span>
+                                <span class="tech-badge">TypeScript</span>
+                                <span class="tech-badge">NestJS</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Prisma</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Sama-Mokom/cameroon-music-platform" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Cameroon Music Platform on GitHub (opens in new tab)">
+                                    <span class="link-icon">⚡</span> GitHub
+                                </a>
+                                <a href="#" class="btn-primary btn-disabled" aria-label="Live demo coming soon" title="Deployment in progress">
+                                    <span class="link-icon">🚧</span> Coming Soon
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Quick Shop -->
+                    <article class="project-card" data-project="quick-shop">
                         <div class="project-image">
                             <div class="project-placeholder">
                                 <span class="project-icon">🛒</span>
@@ -92,15 +123,17 @@
                         </div>
                         <div class="project-content">
                             <h3>Quick Shop</h3>
-                            <p class="project-description">A small-scale e-commerce platform that helps both vendors and buyers manage online sales efficiently with user-friendly interfaces.</p>
+                            <button class="view-details-btn" aria-label="View full project details">
+                                <span class="details-icon">👁️</span> View Details
+                            </button>
                             <div class="tech-stack">
-                                <span class="tech-badge">HTML</span>
-                                <span class="tech-badge">CSS</span>
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
                                 <span class="tech-badge">JavaScript</span>
                                 <span class="tech-badge">Node.js</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Sama-Mokom" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Quick Shop on GitHub (opens in new tab)">
+                                <a href="https://github.com/Sama-Mokom/my-ecommerce-app" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Quick Shop on GitHub (opens in new tab)">
                                     <span class="link-icon">⚡</span> GitHub
                                 </a>
                                 <a href="https://x-clussive-shop.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-primary" aria-label="View Quick Shop live demo (opens in new tab)">
@@ -111,7 +144,7 @@
                     </article>
 
                     <!-- Project 2: Kitchen Sync -->
-                    <article class="project-card">
+                    <article class="project-card" data-project="kitchen-sync">
                         <div class="project-image">
                             <div class="project-placeholder">
                                 <span class="project-icon">🍽️</span>
@@ -119,7 +152,9 @@
                         </div>
                         <div class="project-content">
                             <h3>Kitchen Sync</h3>
-                            <p class="project-description">A web-based restaurant management system enabling owners to monitor operations, track orders, and manage inventory in real-time.</p>
+                            <button class="view-details-btn" aria-label="View full project details">
+                                <span class="details-icon">👁️</span> View Details
+                            </button>
                             <div class="tech-stack">
                                 <span class="tech-badge">React</span>
                                 <span class="tech-badge">CSS</span>
@@ -127,7 +162,7 @@
                                 <span class="tech-badge">Firebase</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Sama-Mokom" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Kitchen Sync on GitHub (opens in new tab)">
+                                <a href="https://github.com/Sama-Mokom/KitchenSync" target="_blank" rel="noopener noreferrer" class="btn-secondary" aria-label="View Kitchen Sync on GitHub (opens in new tab)">
                                     <span class="link-icon">⚡</span> GitHub
                                 </a>
                                 <a href="https://kitchen-sync-1.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn-primary" aria-label="View Kitchen Sync live demo (opens in new tab)">
@@ -137,8 +172,8 @@
                         </div>
                     </article>
 
-                    <!-- Project 3: Portfolio Website -->
-                    <article class="project-card">
+                    <!-- Project 4: Portfolio Website -->
+                    <article class="project-card" data-project="portfolio">
                         <div class="project-image">
                             <div class="project-placeholder">
                                 <span class="project-icon">💼</span>
@@ -146,7 +181,9 @@
                         </div>
                         <div class="project-content">
                             <h3>Portfolio Website</h3>
-                            <p class="project-description">A responsive personal portfolio showcasing projects, skills, and experience with accessible design and dark mode support.</p>
+                            <button class="view-details-btn" aria-label="View full project details">
+                                <span class="details-icon">👁️</span> View Details
+                            </button>
                             <div class="tech-stack">
                                 <span class="tech-badge">HTML5</span>
                                 <span class="tech-badge">CSS3</span>
@@ -184,11 +221,11 @@
                     <!-- Experience Item 2 -->
                     <article class="experience-card">
                         <div class="experience-header">
-                            <h3>Frontend Web Developer</h3>
+                            <h3>Full-Stack Developer</h3>
                             <span class="experience-date">2024 – Present</span>
                         </div>
                         <p class="experience-org">Personal Projects</p>
-                        <p class="experience-description">Built responsive web interfaces using HTML, CSS, JavaScript, and React. Focused on creating user-friendly experiences and clean, maintainable code.</p>
+                        <p class="experience-description">Built full-stack web applications using Next.js, TypeScript, NestJS, and MySQL. Implemented authentication systems, payment integrations, and scalable backend architectures with industry-standard practices.</p>
                     </article>
 
                     <!-- Experience Item 3 -->
@@ -225,21 +262,42 @@
                         <span class="skill-badge">HTML5</span>
                         <span class="skill-badge">CSS3</span>
                         <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">TypeScript</span>
                         <span class="skill-badge">React</span>
+                        <span class="skill-badge">Vue</span>
+                        <span class="skill-badge">Next.js 14</span>
+                        <span class="skill-badge">TailwindCSS</span>
                         <span class="skill-badge">Responsive Design</span>
                         <span class="skill-badge">Accessibility</span>
                     </div>
                 </div>
 
+                <!-- Backend & Database -->
+                <div class="skill-category">
+                    <h3 class="category-title">Backend & Database</h3>
+                    <div class="skills-grid">
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">NestJS</span>
+                        <span class="skill-badge">MySQL</span>
+                        <span class="skill-badge">Prisma ORM</span>
+                        <span class="skill-badge">Redis</span>
+                        <span class="skill-badge">Firebase</span>
+                        <span class="skill-badge">JWT Auth</span>
+                        <span class="skill-badge">REST APIs</span>
+                    </div>
+                </div>
+
                 <!-- Tools & Technologies -->
                 <div class="skill-category">
-                    <h3 class="category-title">Tools & Technologies</h3>
+                    <h3 class="category-title">Tools & DevOps</h3>
                     <div class="skills-grid">
                         <span class="skill-badge">Git & GitHub</span>
                         <span class="skill-badge">VS Code</span>
-                        <span class="skill-badge">Node.js</span>
-                        <span class="skill-badge">Firebase</span>
+                        <span class="skill-badge">Postman</span>
+                        <span class="skill-badge">Docker</span>
                         <span class="skill-badge">Netlify</span>
+                        <span class="skill-badge">Vercel</span>
+                        <span class="skill-badge">Render</span>
                         <span class="skill-badge">Chrome DevTools</span>
                     </div>
                 </div>
@@ -295,6 +353,18 @@
         <p class="footer-note">Built with HTML, CSS, and JavaScript. Designed for accessibility and performance.</p>
     </footer>
 
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">✕</button>
+            <div class="modal-body">
+                <h2 id="modal-title" class="modal-project-title"></h2>
+                <div class="modal-project-details"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="script.js" defer></script>
 
@@ -318,7 +388,7 @@
             "https://www.instagram.com/sama_mokom",
             "https://www.threads.com/@sama_mokom"
         ],
-        "knowsAbout": ["Web Development", "HTML", "CSS", "JavaScript", "React", "Node.js", "Firebase"],
+        "knowsAbout": ["Web Development", "HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "NestJS", "MySQL", "Prisma", "Redis", "Firebase", "Full-Stack Development", "REST APIs", "JWT Authentication"],
         "description": "Computer Engineering Student and Web Developer specializing in responsive web applications and e-commerce solutions."
     }
     </script>

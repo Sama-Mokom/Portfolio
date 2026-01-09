@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main page -->
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/</loc>
+    <loc>https://samomokom.netlify.app/</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -10,42 +10,42 @@
 
   <!-- Sections (accessible via hash links) -->
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#about</loc>
+    <loc>https://samomokom.netlify.app/#about</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#projects</loc>
+    <loc>https://samomokom.netlify.app/#projects</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#experience</loc>
+    <loc>https://samomokom.netlify.app/#experience</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#skills</loc>
+    <loc>https://samomokom.netlify.app/#skills</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#resume</loc>
+    <loc>https://samomokom.netlify.app/#resume</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://sama-mokom.github.io/portfolio/#contact</loc>
+    <loc>https://samomokom.netlify.app/#contact</loc>
     <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

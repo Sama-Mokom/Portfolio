@@ -395,3 +395,56 @@ function initProjectModals() {
 
 // Initialize modal functionality
 document.addEventListener('DOMContentLoaded', initProjectModals);
+
+/* ==========================================================================\r
+   FORMSPREE CONTACT FORM AJAX SUBMISSION\r
+   ========================================================================== */
+const contactForm = document.getElementById('portfolio-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Stop page reload
+        
+        const statusDiv = document.getElementById('form-status');
+        const submitBtn = document.getElementById('form-submit-btn');
+        const formData = new FormData(contactForm);
+
+        // UI Feedback: Disable button during transit
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending Message...';
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: contactForm.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success UI State
+                statusDiv.removeAttribute('hidden');
+                statusDiv.className = 'form-status-msg success-state';
+                statusDiv.textContent = 'Thanks! Your message has been sent successfully.';
+                contactForm.reset(); // Clean fields
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Submission failed');
+            }
+        } catch (error) {
+            // Error Handling UI State
+            statusDiv.removeAttribute('hidden');
+            statusDiv.className = 'form-status-msg error-state';
+            statusDiv.textContent = 'Oops! There was a problem submitting your form. Please try again.';
+        } finally {
+            // Re-enable interactive elements
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            
+            // Fade status notice out after 5 seconds
+            setTimeout(() => {
+                statusDiv.setAttribute('hidden', '');
+            }, 5000);
+        }
+    });
+}

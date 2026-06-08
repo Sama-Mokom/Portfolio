@@ -476,98 +476,63 @@
         </section>
 
         <!-- Resume / Download CV Section -->
-        <section id="resume" class="resume-section">
-          <div class="resume-content">
-            <div class="resume-icon" aria-hidden="true">📄</div>
-            <h2>Resume</h2>
-            <p>
-              Download my CV to learn more about my education, technical skills,
-              and project experience in detail.
-            </p>
-            <a
-              href="Nkeng_Sama_Mokom_CV.pdf"
-              download
-              class="cv-download-btn"
-              aria-label="Download CV in PDF format"
-            >
-              <span class="download-icon" aria-hidden="true">⬇</span> Download
-              CV
-            </a>
-          </div>
-        </section>
+       <!-- Resume / Download CV Section -->
+<section id="resume" class="resume-section">
+  <div class="resume-inline-container">
+    <div class="resume-text">
+      <h2>Resume</h2>
+      <p>Download my CV to explore my education, technical skills, and detailed project experience.</p>
+    </div>
+    <div class="resume-action">
+      <a href="Nkeng_Sama_Mokom_CV.pdf" download class="cv-download-btn" aria-label="Download CV in PDF format">
+        <span class="download-icon" aria-hidden="true">⬇</span> Download CV
+      </a>
+    </div>
+  </div>
+</section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-          <h2>Contact</h2>
-          <p class="section-intro">
-            Let's connect! Find me on these platforms:
-          </p>
-          <nav aria-label="Social media links">
-            <ul class="social-links">
-              <li>
-                <a
-                  href="https://github.com/Sama-Mokom"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit my GitHub profile (opens in new tab)"
-                  >GitHub</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/sama-mokom-784161283"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit my LinkedIn profile (opens in new tab)"
-                  >LinkedIn</a
-                >
-              </li>
-              <!-- <li>
-                <a
-                  href="https://www.instagram.com/sama_mokom?"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit my Instagram profile (opens in new tab)"
-                  >Instagram</a
-                >
-              </li> -->
-              <!-- <li>
-                <a
-                  href="https://www.threads.com/@sama_mokom?"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit my Threads profile (opens in new tab)"
-                  >Threads</a
-                >
-              </li> -->
-              <li>
-                <a
-                  href="http://wa.me/237674138372"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Contact me on WhatsApp (opens in new tab)"
-                  >WhatsApp</a
-                >
-              </li>
-              <!-- <li>
-                <a
-                  href="https://twitter.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Visit my Facebook profile (opens in new tab)"
-                  >Facebook</a
-                >
-              </li> -->
-              <li>
-                <a
-                  href="mailto:samamokom50@gmail.com"
-                  aria-label="Send me an email"
-                  >Email</a
-                >
-              </li>
-            </ul>
-          </nav>
-        </section>
+        <section id="contact" class="contact-section reveal">
+    <h2>Get In Touch</h2>
+    <p class="section-intro">Have a project in mind or want to discuss opportunities? Drop a message directly!</p>
+    
+    <div class="contact-container">
+        <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <p>Feel free to reach out via email or follow my professional networks.</p>
+            <div class="contact-links">
+                <a href="mailto:samamokom50@gmail.com" class="contact-link-item">
+                    <span class="icon">✉️</span> samamokom50@gmail.com
+                </a>
+                </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <form id="portfolio-form" action="https://formspree.io/f/mbdeovbl" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="form-name">Name</label>
+                    <input type="text" id="form-name" name="name" placeholder="Your Name" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="form-email">Email Address</label>
+                    <input type="email" id="form-email" name="_replyto" placeholder="name@example.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="form-message">Message</label>
+                    <textarea id="form-message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+                </div>
+
+                <input type="text" name="_gotcha" style="display:none" />
+
+                <button type="submit" id="form-submit-btn" class="btn btn-primary submit-btn">Send Message</button>
+                
+                <div id="form-status" class="form-status-msg" hidden></div>
+            </form>
+        </div>
+    </div>
+</section>
       </div>
     </main>
 

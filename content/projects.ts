@@ -47,7 +47,7 @@ export const projects: Project[] = [
     status: "Active · deployment planning",
     technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL"],
     featured: true,
-    repository: null,
+    repository: "https://github.com/Sama-Mokom/CampusDesk",
     live: null,
     architecture: {
       nodes: [
@@ -353,7 +353,7 @@ export const projects: Project[] = [
     status: "Delivered · coursework",
     technologies: ["React Native", "Expo", "Node.js", "MongoDB"],
     featured: true,
-    repository: null,
+    repository: "https://github.com/Sama-Mokom/CEF_440_Group_16",
     live: null,
     architecture: {
       nodes: [
@@ -503,7 +503,7 @@ export const projects: Project[] = [
       "PostgreSQL",
     ],
     featured: false,
-    repository: null,
+    repository: "https://github.com/Sama-Mokom/cameroon-music-platform",
     live: null,
     architecture: {
       nodes: [

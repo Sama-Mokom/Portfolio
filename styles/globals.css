@@ -194,6 +194,29 @@ li + li {
   font-size: 0.9rem;
   font-weight: 500;
 }
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.25rem;
+  margin-top: 1rem;
+  font: 0.7rem/1.5 var(--mono);
+}
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--control);
+}
+.project-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.study-project-links {
+  margin-top: 1.5rem;
+}
 .icon {
   width: 20px;
   height: 20px;
@@ -552,6 +575,9 @@ a.tag {
 .work-meta {
   font: 0.75rem/1.6 var(--mono);
   color: var(--muted);
+}
+.work-band .text-link {
+  margin-bottom: 0;
 }
 .other-work {
   margin: 0;

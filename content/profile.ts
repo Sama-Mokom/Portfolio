@@ -186,8 +186,8 @@ export const otherWork = [
       "An e-commerce onboarding project from my first V-Groups internship, built to learn the company stack. The project is now dormant.",
     technologies: ["Vue 3", "Node.js", "PostgreSQL"],
     status: "Dormant · onboarding project",
-    // The old portfolio supplies a Render URL, but current availability has not been verified.
-    href: null,
+    repository: "https://github.com/Sama-Mokom/my-ecommerce-app",
+    href: "https://x-clussive-shop.onrender.com/",
   },
   {
     title: "GoHighLevel integrations",
@@ -195,6 +195,7 @@ export const otherWork = [
       "Workflows, custom actions, OAuth and webhooks developed as part of my learning and work during the second V-Groups internship stint.",
     technologies: ["GoHighLevel", "PHP", "Laravel"],
     status: "Active · internship journey",
+    repository: null,
     href: "/lab#oauth",
   },
   {
@@ -203,6 +204,7 @@ export const otherWork = [
       "Browser automation created to help a friend generate mock survey data for a data-analysis project, separate from the NetInsight team project.",
     technologies: ["Node.js", "Playwright", "Selenium"],
     status: "Complete · mock-data tooling",
+    repository: null,
     href: "/lab#survey-automation",
   },
 ];

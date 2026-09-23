@@ -4,6 +4,7 @@ import { projects } from "@/content/projects";
 import { getProject, getArticle } from "@/lib/content";
 import { Arrow, Tags } from "@/components/ui";
 import { ProjectArt } from "@/components/project-art";
+import { ProjectLinks } from "@/components/project-links";
 import {
   ReadingProgress,
   TableOfContents,
@@ -70,6 +71,7 @@ export default async function CaseStudy({
           <h1>{project.title}</h1>
           <p className="lead">{project.tagline}</p>
           <Tags values={project.technologies} />
+          <ProjectLinks project={project} className="study-project-links" />
         </div>
         <ProjectArt slug={project.slug} />
       </header>

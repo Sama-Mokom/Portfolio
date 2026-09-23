@@ -1,6 +1,7 @@
 import Link from "@/components/link";
 import type { Project } from "@/content/projects";
 import { ProjectArt } from "./project-art";
+import { ProjectLinks } from "./project-links";
 import { Arrow, Tags } from "./ui";
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -16,6 +17,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
       </Link>
+      <ProjectLinks project={project} />
     </article>
   );
 }

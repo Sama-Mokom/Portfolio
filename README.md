@@ -1,224 +1,75 @@
-# 💼 Nkeng Sama Mokom - Portfolio Website
+# Mokom — personal portfolio
 
-A modern, responsive portfolio website showcasing my web development projects, skills, and experience. Built with vanilla HTML, CSS, and JavaScript with a focus on accessibility, performance, and user experience.
+A responsive portfolio for Nkeng Sama Mokom, built with Next.js App Router, strict TypeScript, and locally hosted fonts. The supplied blueprint and mockups guide the implementation; factual content and privacy constraints take precedence over example copy and imagery.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://sama-mokom.github.io/portfolio)
-[![GitHub](https://img.shields.io/badge/github-repository-blue)](https://github.com/Sama-Mokom/portfolio)
+## Run locally
 
-## 🌟 Features
+Use Node.js 22 or newer and npm. From the project directory:
 
-### Design & UX
-- **Responsive Design**: Mobile-first approach that works seamlessly across all devices
-- **Dark Mode**: Persistent theme toggle with system preference detection
-- **Smooth Animations**: Subtle scroll reveal effects and hover interactions
-- **Modern UI**: Card-based layout with professional visual identity
-
-### Accessibility
-- **WCAG Compliant**: Meets accessibility standards for color contrast and navigation
-- **Keyboard Navigation**: Full keyboard accessibility with visible focus states
-- **Screen Reader Friendly**: Semantic HTML with proper ARIA labels
-- **Skip to Content**: Quick navigation for assistive technologies
-- **Reduced Motion Support**: Respects user motion preferences
-
-### Performance
-- **Optimized Assets**: Compressed images and minified code
-- **Lazy Loading**: Progressive image loading for better performance
-- **Fast Load Times**: Lightweight vanilla JavaScript (no frameworks)
-- **SEO Optimized**: Comprehensive meta tags and structured data
-
-## 🛠️ Tech Stack
-
-- **HTML5**: Semantic markup with accessibility best practices
-- **CSS3**: Custom properties, Flexbox, Grid, and responsive design
-- **JavaScript (ES6+)**: Vanilla JS with modern APIs
-  - Intersection Observer for scroll animations
-  - localStorage for theme persistence
-  - Event delegation for performance
-
-## 📂 Project Structure
-
-```
-portfolio/
-├── index.html              # Main HTML file
-├── style.css              # Stylesheet with CSS custom properties
-├── script.js              # JavaScript functionality
-├── New headshot 2.png     # Profile image
-├── Nkeng_Sama_Mokom_CV.pdf # Downloadable CV
-└── README.md              # Project documentation
+```sh
+npm ci
+npm run dev
 ```
 
-## 🚀 Getting Started
+Open http://localhost:3000. The original `index.html`, `style.css`, and `script.js` are retained as historical source; they are not the current application or served by Next.js. The original planning document and mockups are also outside the public directory.
 
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Optional: Local web server for development
+## Validate
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Sama-Mokom/portfolio.git
-   cd portfolio
-   ```
-
-2. **Open locally**
-   - Simply open `index.html` in your browser, or
-   - Use a local server (recommended):
-   ```bash
-   # Using Python
-   python -m http.server 8000
-
-   # Using Node.js (http-server)
-   npx http-server
-
-   # Using PHP
-   php -S localhost:8000
-   ```
-
-3. **View in browser**
-   Navigate to `http://localhost:8000`
-
-## 📱 Sections
-
-1. **Hero**: Introduction with profile image and tagline
-2. **About Me**: Professional summary and background
-3. **Projects**: Featured work with tech stacks and live demos
-   - Quick Shop (E-commerce platform)
-   - Kitchen Sync (Restaurant management system)
-   - Portfolio Website
-4. **Experience & Accomplishments**: Timeline of education and work
-5. **Skills**: Categorized technical skills
-   - Frontend Development
-   - Tools & Technologies
-   - Core Competencies
-6. **Resume**: Downloadable CV
-7. **Contact**: Social media links and email
-
-## 🎨 Customization
-
-### Colors
-Edit CSS custom properties in `style.css`:
-```css
-:root {
-    --primary-color: #4fd1c5;
-    --secondary-color: #38b2ac;
-    --accent-color: #319795;
-    /* ... more variables */
-}
+```sh
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npx playwright install chromium
+npm run test:production
 ```
 
-### Content
-Update your information in `index.html`:
-- Personal details in the Hero section
-- Projects in the Projects section
-- Experience timeline
-- Skills and tech stack
-- Social media links
+The production test runner starts a local server, runs Playwright and stops its server. Choose another `PORT` if 3000 is occupied. To inspect the production site and run browser checks against it separately:
 
-### Images
-- Replace `New headshot 2.png` with your photo
-- Update `Nkeng_Sama_Mokom_CV.pdf` with your resume
-- Optimize images for web (recommended: < 500KB)
-
-## 🌐 Deployment
-
-### GitHub Pages
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Enable GitHub Pages**
-   - Go to repository Settings
-   - Navigate to Pages section
-   - Select `main` branch as source
-   - Save and wait for deployment
-
-### Netlify
-
-1. **Deploy via drag-and-drop**
-   - Visit [netlify.com](https://www.netlify.com/)
-   - Drag your project folder to the deploy area
-
-2. **Deploy via Git**
-   ```bash
-   # Install Netlify CLI
-   npm install -g netlify-cli
-
-   # Deploy
-   netlify deploy --prod
-   ```
-
-### Vercel
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy
-vercel --prod
+```sh
+npm run start
+# In another terminal:
+npm run test:e2e
+node scripts/lighthouse.mjs
+npm run resume:pdf
 ```
 
-## 🔧 Browser Support
+Tests cover content validation, contact validation and server behavior, interactive components, all published routes, light/dark accessibility, responsive reflow, internal links, keyboard navigation and progressive enhancement. Browser screenshots and reports go to ignored `test-results/` and `playwright-report/`; Lighthouse reports go to ignored `artifacts/lighthouse/`. Local Lighthouse measurements are not field Core Web Vitals.
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Opera (latest)
+The browser scripts use an existing project-local `.playwright/` cache when present, otherwise Playwright's normal cache. `PLAYWRIGHT_BASE_URL` overrides the running server address for browser tests, Lighthouse and PDF export. On PowerShell, for example: `$env:PLAYWRIGHT_BASE_URL = 'http://127.0.0.1:3100'`.
 
-## 📊 Performance Metrics
+The résumé export requires the production server and writes `public/mokom-resume.pdf`. Review every page after regenerating it, then rebuild to update the displayed download size. Its compact print layout omits duplicated experience summaries and extra skill commentary; the full descriptions remain on the HTML page.
 
-- **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
-- **First Contentful Paint**: < 1.5s
-- **Time to Interactive**: < 3s
-- **Accessibility**: WCAG 2.1 Level AA compliant
+## Structure and editing
 
-## 🤝 Contributing
+- `app/`: routes, metadata, feed, sitemap, error states and contact endpoint.
+- `components/`: navigation, footer, project previews, article tools and contact form.
+- `content/projects.ts`: five case studies, documented architecture and decisions.
+- `content/articles.ts`: newly authored notes based on the supplied project record. Code examples are explicitly illustrative.
+- `content/profile.ts`: canonical profile, experience and supporting content.
+- `content/profile-secondary.ts`: expanded About and Lab narratives.
+- `lib/content.ts`: validation, lookup and reading-time helpers. Invalid content fails the build.
+- `styles/tokens.css`: colors, fonts, spacing and motion. `styles/globals.css` and `app/secondary.css` compose the pages.
+- `public/media/`: the optimized genuine headshot. Project visuals are explanatory HTML diagrams, not fabricated screenshots.
 
-While this is a personal portfolio, suggestions and feedback are welcome!
+Add a project or article to its typed content collection. Use unique lowercase slugs, complete required sections, valid dates and existing related-content slugs. `null` is the correct value for an unavailable demo or repository; never add a dummy URL. Article dates record publication, not the date of the underlying project. Tag archives, reading times, RSS and sitemap entries follow the content automatically.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -m 'Add improvement'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
+No CMS, database, analytics, tracking scripts or runtime font CDN is required. Most pages are statically generated; the contact page and POST endpoint run on the server.
 
-## 📄 License
+## Deployment configuration
 
-This project is open source and available under the [MIT License](LICENSE).
+Copy `.env.example` to `.env.local` for local configuration, or set the same values in the deployment platform. Environment files are ignored. Do not put secrets in `NEXT_PUBLIC_*` variables.
 
-## 👤 Author
+- `SITE_URL`: the actual HTTPS production origin, with no path, query, fragment or credentials. Invalid values fail the build. Leave unset for previews. Unconfigured previews deliberately use `noindex`, disallow crawlers and omit canonical URLs. Set this **before building** production so canonical, social, sitemap and feed links use the real domain.
+- `CONTACT_FORM_ENDPOINT`: optional `https://formspree.io/f/…` endpoint. Without it, the form prepares a draft for the visitor's email app and explicitly says that the visitor must send it. With it, the server validates input and reports delivery success or failure. Formspree account setup, destination verification and abuse controls are deployment responsibilities.
 
-**Nkeng Sama Mokom**
+Deploy to a compatible Node.js host or Vercel using `npm ci`, `npm run build`, and `npm run start`. The start script binds to loopback for local use; on a container host use `npx next start --hostname 0.0.0.0 --port 3000`. This app is not configured as a static export because it includes a contact endpoint and image optimization. `/index.html` permanently redirects to `/`; no other historical route mappings were supplied.
 
-- GitHub: [@Sama-Mokom](https://github.com/Sama-Mokom)
-- LinkedIn: [sama-mokom](https://www.linkedin.com/in/sama-mokom-784161283)
-- Email: yungkaparaz@gmail.com
+No deployment or DNS modification has been performed. Before public launch, supply the real origin, review authored content and the résumé, and complete the remaining source requirements in [the content checklist](docs/CONTENT_REQUIREMENTS.md). See [implementation status](docs/IMPLEMENTATION.md) and [validation results](docs/VALIDATION.md) for executed checks and limits.
 
-## 🙏 Acknowledgments
+## Assets and privacy
 
-- Design inspiration from modern portfolio trends
-- Icons: Emoji (built-in)
-- Fonts: System fonts for optimal performance
-- Built with passion and dedication to clean code
+The genuine portrait is reused from the existing repository and optimized to WebP, with responsive AVIF/WebP delivery through Next Image. Newsreader, Inter and IBM Plex Mono are bundled from their Fontsource packages under their supplied open-font licenses. The original assets and planning files remain unmodified.
 
-## 📸 Screenshots
-
-### Light Mode
-![Portfolio Light Mode](docs/screenshot-light.png)
-
-### Dark Mode
-![Portfolio Dark Mode](docs/screenshot-dark.png)
-
-### Mobile View
-![Portfolio Mobile](docs/screenshot-mobile.png)
-
----
-
-**Built with ❤️ by Nkeng Sama Mokom**
-
-*Last updated: December 2024*
+Only `public/` files are directly downloadable. Do not copy planning documents, private source repositories, raw survey data, credentials, unpublished screenshots or identifiers into that directory. Remaining repositories/screenshots/demos are documented in source and the content checklist.

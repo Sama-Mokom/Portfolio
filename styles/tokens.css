@@ -1,0 +1,64 @@
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #faf9f6;
+  --surface: #f0efeb;
+  --text: #111c24;
+  --muted: #505962;
+  --rule: #d8d8d3;
+  --control: #7b8286;
+  --accent: #174e91;
+  --accent-hover: #103b71;
+  --inverse: #faf9f6;
+  --error: #a52828;
+  --selection: #dce6f2;
+  --serif: var(--font-serif), Georgia, serif;
+  --sans: var(--font-sans), Arial, sans-serif;
+  --mono: var(--font-mono), Consolas, monospace;
+  --text-display: clamp(2.75rem, 2rem + 3.5vw, 5.6rem);
+  --text-h1: clamp(2.5rem, 1.75rem + 2.6vw, 4.5rem);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-12: 5rem;
+  --space-16: 8rem;
+  --page-width: 75rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --duration: 150ms;
+  --ease: ease-out;
+  /* Contrast checked programmatically in tests: body and muted >=4.5; control >=3. */
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121618;
+  --surface: #1d2326;
+  --text: #efeee9;
+  --muted: #b0b7ba;
+  --rule: #363e43;
+  --control: #7f898e;
+  --accent: #91baec;
+  --accent-hover: #c1d9f5;
+  --inverse: #121618;
+  --error: #ffaaa3;
+  --selection: #243e59;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #121618;
+    --surface: #1d2326;
+    --text: #efeee9;
+    --muted: #b0b7ba;
+    --rule: #363e43;
+    --control: #7f898e;
+    --accent: #91baec;
+    --accent-hover: #c1d9f5;
+    --inverse: #121618;
+    --error: #ffaaa3;
+    --selection: #243e59;
+  }
+}

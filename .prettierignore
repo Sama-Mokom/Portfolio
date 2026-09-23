@@ -1,0 +1,12 @@
+node_modules
+.next
+.npm-cache
+package-lock.json
+portfolio-blueprint.html
+portfolio-mockups-separated
+index.html
+style.css
+script.js
+MOCKUPS_MAP.md
+REFFERENCE_MAP.md
+artifacts

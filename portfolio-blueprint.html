@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Portfolio — Design, Content and Technical Blueprint</title>
+<style>
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+  }
+  /* This is a print-style manuscript. The surface is deliberately fixed to
+     black-on-white in every viewer theme; no dark variant is defined. */
+  html { background: var(--paper); }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Times New Roman", Times, "Liberation Serif", "Nimbus Roman", serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    margin: 0 auto;
+    padding: 25mm 20mm;
+    max-width: 210mm;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  h1, h2, h3, h4 { text-align: left; page-break-after: avoid; }
+  h1 {
+    font-size: 16pt; font-weight: bold; text-transform: uppercase;
+    letter-spacing: 0.02em; margin: 2.2em 0 0.8em; line-height: 1.3;
+  }
+  h2 { font-size: 13pt; font-weight: bold; margin: 1.8em 0 0.6em; }
+  h3 { font-size: 11pt; font-weight: bold; font-style: italic; margin: 1.4em 0 0.4em; }
+  h4 { font-size: 11pt; font-weight: bold; margin: 1.2em 0 0.3em; }
+  p { margin: 0 0 0.75em; }
+  ul, ol { margin: 0 0 0.85em; padding-left: 1.6em; }
+  li { margin-bottom: 0.25em; text-align: justify; }
+  hr { border: none; border-top: 1px solid var(--ink); margin: 1.2em 0; }
+  table {
+    border-collapse: collapse; width: 100%; font-size: 10pt;
+    margin: 0.8em 0 1.2em; page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid var(--ink); padding: 5px; vertical-align: top;
+    text-align: left;
+  }
+  th { font-weight: bold; background: var(--paper); }
+  pre {
+    font-family: "Courier New", Courier, "Liberation Mono", monospace;
+    font-size: 10pt; line-height: 1.35;
+    border: 1px solid var(--ink); background: var(--paper);
+    padding: 6px 8px; margin: 0.8em 0 1.2em;
+    white-space: pre-wrap; word-wrap: break-word; overflow-wrap: anywhere;
+    text-align: left;
+  }
+  code {
+    font-family: "Courier New", Courier, "Liberation Mono", monospace;
+    font-size: 10pt;
+  }
+  blockquote {
+    margin: 0.8em 0 1.2em 0; padding-left: 12px;
+    border-left: 1px solid var(--ink);
+  }
+  .idblock { font-weight: bold; text-align: center; line-height: 1.45; margin-bottom: 0.6em; }
+  .doctitle { font-size: 14pt; font-weight: bold; text-align: center; margin: 0.8em 0; }
+  .meta { margin: 0 auto 0.4em; }
+  .meta td { border: none; padding: 2px 8px 2px 0; font-size: 11pt; }
+  .caption { font-size: 10pt; font-style: italic; text-align: left; margin: -0.6em 0 1.2em; }
+  .tag { font-variant: small-caps; font-weight: bold; }
+  .wrap { overflow-x: auto; }
+  a { color: var(--ink); }
+  @media (max-width: 700px) {
+    body { padding: 16px; font-size: 11pt; }
+    table { font-size: 9pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="idblock">
+NKENG SAMA MOKOM<br>
+B.ENG. COMPUTER ENGINEERING (LEVEL 400)<br>
+UNIVERSITY OF BUEA — FACULTY OF ENGINEERING AND TECHNOLOGY<br>
+DEPARTMENT OF COMPUTER ENGINEERING
+</div>
+
+<hr style="border: 1px solid #000000;">
+
+<div class="doctitle">PERSONAL PORTFOLIO WEBSITE<br>DESIGN, CONTENT AND TECHNICAL BLUEPRINT</div>
+
+<table class="meta">
+<tr><td>Author of record:</td><td>Nkeng Sama Mokom ("Mokom")</td></tr>
+<tr><td>Matricule:</td><td>FE23A118</td></tr>
+<tr><td>Academic level:</td><td>Level 400, B.Eng. Computer Engineering</td></tr>
+<tr><td>Institution:</td><td>University of Buea, Cameroon</td></tr>
+<tr><td>Document type:</td><td>Pre-implementation design and architecture specification</td></tr>
+<tr><td>Date of issue:</td><td>18 September 2026</td></tr>
+<tr><td>Status:</td><td>Draft for review — no production UI to be built from this document alone</td></tr>
+</table>
+
+<hr style="border: 1px solid #000000;">
+
+<h2>Preliminary Note on Evidence and Uncertainty</h2>
+
+<p>This document is assembled from the record of prior work and conversation. Throughout Deliverable 1, every factual statement about the author carries one of three markers so that nothing invented is mistaken for something established:</p>
+
+<table>
+<tr><th style="width:18%">Marker</th><th>Meaning</th></tr>
+<tr><td><span class="tag">Established</span></td><td>Directly supported by the record. Safe to publish without further checking.</td></tr>
+<tr><td><span class="tag">Probable</span></td><td>Strongly implied by the record but not stated in those exact terms. Verify before publishing.</td></tr>
+<tr><td><span class="tag">Unknown</span></td><td>Not present in the record at all. Must be supplied by the author before the portfolio can claim it.</td></tr>
+</table>
+
+<p>Sections 1.12 and 1.14 originally recorded a significant content gap: the record was rich in engineering evidence and almost silent on the personal dimension the portfolio is meant to carry. That gap has since been closed directly by the author's own comments on this document, and both sections now reflect the fuller picture. One open item remains — a GitHub handle and a public/private decision on repositories — tracked in Section 1.14.</p>
+
+<p>A formatting note: this document follows the author's standard academic manuscript convention (serif type, justified setting, monochrome, ruled tables). The course-code fields of that convention are omitted because this is not a course submission. The visual system specified <em>inside</em> this document, for the portfolio itself, is an entirely separate matter and is defined in Deliverables 8 and 9.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h2>Contents</h2>
+
+<ol>
+<li>Comprehensive Personal Profile / Knowledge Base</li>
+<li>Portfolio Goals and Audience Analysis</li>
+<li>Information Architecture and Sitemap</li>
+<li>Portfolio Storytelling Strategy</li>
+<li>Detailed Page-by-Page Architecture</li>
+<li>Project Case-Study Framework</li>
+<li>Design Research Findings</li>
+<li>Visual Design Direction</li>
+<li>Design System</li>
+<li>Interaction and Motion System</li>
+<li>Accessibility Strategy</li>
+<li>Responsive Design Strategy</li>
+<li>Technical Architecture</li>
+<li>Blog Architecture</li>
+<li>Performance Strategy</li>
+<li>Implementation Roadmap</li>
+<li>Complete Mockup-Generation Master Prompt</li>
+</ol>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>1. Comprehensive Personal Profile / Knowledge Base</h1>
+
+<h2>1.1 Personal Background</h2>
+
+<ul>
+<li><span class="tag">Established</span> — Full name Nkeng Sama Mokom; goes by Mokom. Matricule FE23A118.</li>
+<li><span class="tag">Established</span> — Level 400 (final-year) B.Eng. Computer Engineering student, Faculty of Engineering and Technology, University of Buea, Cameroon. Expected graduation mid-to-late 2027.</li>
+<li><span class="tag">Established</span> — Based in Buea, within the Silicon Mountain technology cluster, with working and family ties to Yaoundé.</li>
+<li><span class="tag">Established</span> — Currently in the middle of a compulsory six-month industrial attachment (August 2026 – January 2027) at V-Groups in Yaoundé.</li>
+<li><span class="tag">Established</span> — Volunteers with the Grow You Grow Me Foundation (GYGM), a Bamenda-based nonprofit providing free education to young Cameroonians, founded by Formbuwing Dieudonne. Produced the foundation's launch pamphlet in April 2026.</li>
+<li><span class="tag">Established</span> — Anglophone Cameroonian context; the University of Buea is Cameroon's principal anglophone state university, and coursework is conducted primarily in English. French is a secondary language rather than the working language of his studies.</li>
+<li><span class="tag">Established</span> — Origin story: an early fascination with hardware rather than software as such. The household's first desktop — an old machine that struggled even to run GTA: Vice City — broke down often enough that he learned to open it up and diagnose it himself, a habit that persists today across his own devices and those of family and friends, including successful screen and battery replacements on siblings' phones and laptops. After completing the Advanced Level certificate he initially considered Electrical Engineering, until a run of videos from the YouTube creator ThePrimeAgen — technical software content delivered with genuine humour — pulled his interest toward software specifically. That shifted his choice to Computer Engineering (with a software engineering focus) at the University of Buea.</li>
+<li><span class="tag">Unknown</span> — Age and family context beyond the above. Not required for the portfolio and not pursued further here.</li>
+</ul>
+
+<h2>1.2 Education</h2>
+
+<h3>1.2.1 Programme</h3>
+<p><span class="tag">Established</span> — B.Eng. Computer Engineering, University of Buea, Faculty of Engineering and Technology, Department of Computer Engineering. Level 400 in the 2025/2026 and 2026/2027 sessions.</p>
+
+<h3>1.2.2 Coursework of portfolio relevance</h3>
+
+<table>
+<tr><th style="width:14%">Code</th><th style="width:26%">Subject</th><th>Substantive work produced</th></tr>
+<tr><td>CEF438</td><td>Advanced Databases</td><td>PostgreSQL schema for a real-time chat application — nine entities, UUID primary keys, audit triggers implemented in PL/pgSQL, three tiered application roles, built in pgAdmin 4. ERD and DFD modelling in Modelio 5.4. Tutorial work on ACID violations, WAL-based recovery, schedule serializability via precedence graphs, and stored procedures using <code>SELECT FOR UPDATE</code>. Instructor: Dr. Kamdjou HM.</td></tr>
+<tr><td>CEF450</td><td>Cloud Computing</td><td>Flask microservices on AWS EC2 with Apache (IaaS); Google App Engine (PaaS); Google Sheets API via service accounts (SaaS); WSL2 versus Docker benchmark using sysbench; EC2 hardening with fail2ban, UFW and self-signed SSL; S3 AES-256 encryption at rest; a written GDPR versus US CLOUD Act legal analysis.</td></tr>
+<tr><td>CEF474</td><td>Software Verification &amp; Validation</td><td>Full verification cycle on a deliberately defective C++ banking application: fourteen catalogued defects (D1–D14), Cppcheck static analysis, unit, integration and security testing. A buffer overflow was confirmed with a 200-character input; a data race was quantified as losing 25–48% of concurrent deposits. All defects remediated. Separately, nine lab tasks including black-box testing, Node.js integration testing and a formal correctness proof for Bubble Sort.</td></tr>
+<tr><td>CEF444</td><td>Artificial Intelligence / Machine Learning</td><td>Mini-project applying Linear Regression, KNN, SVM and K-Means to a FIFA World Cup 2026 player dataset in Python/Jupyter, including a from-scratch gradient descent implementation used to validate the library results.</td></tr>
+<tr><td>CEF462</td><td>Digital Image Processing</td><td>Convolution, Gaussian kernels, histogram equalisation, morphological operations (erosion, dilation, opening, closing, top-hat, black-hat), noise models, segmentation and shape descriptors, in OpenCV/Python and MATLAB.</td></tr>
+<tr><td>CEF472</td><td>Human–Computer Interaction</td><td>Nielsen's heuristics, user-centred and participatory design, colour theory, usability testing, modular design. Worked past-paper solutions across two sessions.</td></tr>
+<tr><td>CEF451</td><td>Computer Networks</td><td>Laboratory work with pfSense, Snort IDS and subnetting.</td></tr>
+<tr><td>CEF440</td><td>Mobile Application Development</td><td>Team project — see NetInsight, Section 1.5.</td></tr>
+<tr><td>CEF345</td><td>Software Development Tools</td><td>X-Clusive e-commerce project — see Section 1.5.</td></tr>
+<tr><td>CEF482</td><td>XML / Document Validation</td><td>XSD schema reading, DTD authoring, namespaces, restriction and enumeration syntax.</td></tr>
+<tr><td>EEF460</td><td>Control Systems</td><td>Laboratory report on stability via pole location and steady-state error, with MATLAB analysis.</td></tr>
+<tr><td>CEF427 / CEF203 / CEF207 / EEF261</td><td>Advanced Operating Systems; Linear Algebra; C Programming; Circuit Analysis</td><td>Foundational coursework across the degree, including data warehousing and mining, Operational Research (simplex method) and technical writing.</td></tr>
+</table>
+
+<p class="caption">Table 1.1 — Coursework with demonstrable artefacts. Every row here is a potential portfolio content source; not every row deserves to be published.</p>
+
+<h3>1.2.3 Academic pattern</h3>
+<ul>
+<li><span class="tag">Established</span> — Works concept-first: reliably asks for the conceptual model before the implementation, and learns best through guided reasoning rather than receiving finished solutions.</li>
+<li><span class="tag">Established</span> — Strong preference for diagrams — ERDs, state machines, sequence flows, UML — when constructing system-level mental models.</li>
+<li><span class="tag">Established</span> — A recurring self-identified gap: precise technical language and numerical execution under timed exam conditions. This is an exam-performance pattern, not an engineering-competence pattern, and it does <em>not</em> belong in the portfolio.</li>
+<li><span class="tag">Established</span> — Works in concentrated, structured, late-stage bursts before deadlines.</li>
+</ul>
+
+<h2>1.3 Technical Journey</h2>
+
+<p>The record supports a clear four-stage progression. This progression is the spine of the portfolio narrative proposed in Deliverable 4.</p>
+
+<table>
+<tr><th style="width:22%">Stage</th><th style="width:16%">Period</th><th>Character of the work</th></tr>
+<tr><td>Foundations</td><td>Levels 200–300</td><td>C programming, linear algebra, circuit analysis, operating systems. Learning to program rather than learning to build.</td></tr>
+<tr><td>Full-stack breadth</td><td>2025 – early 2026</td><td>X-Clusive (Vue 3 / Node / PostgreSQL), team coursework, first exposure to shipping something that runs for other people. Technology acquisition is broad and somewhat opportunistic.</td></tr>
+<tr><td>Production contact</td><td>Feb 2026 – Mar 2026</td><td>EducLynk at Njomi Tech Solutions. First sustained work in a real codebase with real users, real bugs and real review. Debugging stale closures, OAuth misconfiguration, server-side search — the kind of work that cannot be simulated in coursework.</td></tr>
+<tr><td>Deliberate depth</td><td>Mid 2026 – present</td><td>CampusDesk built under explicit self-imposed learning rules; MQL5 trading systems pushed to genuine quantitative rigour; cloud and DevOps skills acquired intentionally against a named career gap. Technology choice becomes a decision rather than an accident.</td></tr>
+</table>
+
+<h3>1.3.1 Technology inventory</h3>
+
+<table>
+<tr><th style="width:22%">Category</th><th>Technologies with recorded hands-on work</th></tr>
+<tr><td>Languages</td><td>TypeScript, JavaScript, PHP, Python, C, C++, SQL, MQL5</td></tr>
+<tr><td>Frontend</td><td>React, Next.js 14 (App Router), Vue 3, React Native (Expo), Tailwind CSS, Redux, Intersection Observer-driven scroll animation, Ant Design (familiar, generally avoided in favour of custom components)</td></tr>
+<tr><td>Backend</td><td>Laravel (Sanctum, Eloquent, queued jobs, observers, API Resources, Gates, middleware, Tinker), Node.js/Express, Flask; NestJS with Prisma — minimal, exploratory experience rather than a primary backend</td></tr>
+<tr><td>Data</td><td>PostgreSQL, MySQL, SQLite, MongoDB / MongoDB Atlas, Redis</td></tr>
+<tr><td>Cloud &amp; infrastructure</td><td>AWS EC2 and S3, Google App Engine, Google Sheets API with service accounts, Railway, Render, Docker and Docker Compose, WSL2, Apache, fail2ban, UFW, OpenSSL</td></tr>
+<tr><td>Testing &amp; quality</td><td>Cppcheck, unit/integration/security testing, Playwright, Selenium, sysbench, formal correctness proof technique; on CampusDesk specifically — PHPUnit, Pest, Vitest, Vue Test Utils, and ESLint configuration as a quality gate</td></tr>
+<tr><td>Modelling &amp; documentation</td><td>UML and DFD (Modelio 5.4), ERD, IEEE 830 SRS authoring, PL/pgSQL</td></tr>
+<tr><td>Quantitative</td><td>MQL5 / MetaTrader 5 Strategy Tester, walk-forward and multi-year backtesting, custom <code>OnTester()</code> optimisation scoring</td></tr>
+<tr><td>Platform / integration</td><td>GoHighLevel CRM — workflows, custom workflow actions, OAuth 2.0 marketplace apps, webhooks, trigger links</td></tr>
+<tr><td>Environment</td><td>Windows 11 and Ubuntu Linux, VS Code, PowerShell, Git, Composer, PHP 8.3, pandoc, Node <code>docx</code> and <code>pptxgenjs</code> for document generation</td></tr>
+</table>
+
+<h2>1.4 Professional Experience</h2>
+
+<h3>1.4.1 Njomi Tech Solutions — Junior Developer (remote, Douala)</h3>
+<ul>
+<li><span class="tag">Established</span> — Approximately six months, ending March 2026. Resigned because the workload had become unsustainable alongside academic obligations.</li>
+<li><span class="tag">Established</span> — Worked on EducLynk, a tutor-finding platform: React/TypeScript frontend against a Laravel/PHP backend.</li>
+<li><span class="tag">Established</span> — Recorded contributions (February–March 2026) include: fixing stale state and human-readable filter chip naming in <code>ResidenceFilter.tsx</code>; implementing server-side search in a <code>SearchableSelect</code> component; fixing a pagination stale-closure bug using functional state updates; diagnosing a Laravel Passport OAuth misconfiguration traced to a wrong client ID in <code>.env</code>; Git SSL/proxy troubleshooting; and Tailwind responsive corrections.</li>
+<li><span class="tag">Established</span> — Worked through GitHub issues and pull requests submitted for team review. Twelve achievement-oriented CV bullets were later derived from the actual PR and issue history.</li>
+<li><span class="tag">Probable</span> — This is the strongest available evidence of professional code-review discipline and is under-exploited in the current portfolio.</li>
+</ul>
+
+<h3>1.4.2 V-Groups — Intern, Yaoundé</h3>
+<ul>
+<li><span class="tag">Established</span> — Two stints. The first was onboarding-shaped: familiarisation with the company stack, with no direct operational impact. The second is the compulsory six-month industrial attachment running August 2026 – January 2027, undertaken specifically to change that. As of writing, he is roughly halfway through the second stint.</li>
+<li><span class="tag">Established</span> — Has been briefed on the company's ways of working. Current work centres on building custom applications on the GoHighLevel platform, while continuing CampusDesk on the side and studying cloud concepts.</li>
+<li><span class="tag">Established</span> — The conversation with the CEO regarding scope of work, stipend and a coursemate referral has already taken place; every point raised in it was addressed and approved. It is a closed matter, not a pending one.</li>
+<li><span class="tag">Established</span> — This portfolio is itself one of the projects being built during the attachment, alongside the GHL applications mentioned above.</li>
+<li><span class="tag">Established</span> — The attachment is on a software development track with limited cloud exposure, which is why cloud concepts are being studied independently alongside it.</li>
+<li><strong>Privacy note</strong> — named individuals at V-Groups (the CEO and the senior engineer overseeing interns) are not to appear in the public portfolio unless the author explicitly chooses to add them. They are omitted from every portfolio-facing recommendation in this document from this point forward.</li>
+</ul>
+
+<h2>1.5 Major Projects</h2>
+
+<table>
+<tr><th style="width:24%">Project</th><th style="width:22%">Stack</th><th style="width:14%">Status</th><th>Portfolio treatment</th></tr>
+<tr><td>CampusDesk</td><td>Laravel, Vue 3, TypeScript, MySQL</td><td>Active — deployment planning</td><td>Full case study — flagship</td></tr>
+<tr><td>Cameroon Music Industry Platform</td><td>Next.js 14, NestJS, Prisma, PostgreSQL, Redis, Docker</td><td>Halted after Milestone 2 (hackathon MVP)</td><td>Full case study</td></tr>
+<tr><td>NetInsight (CEF440)</td><td>React Native (Expo), Node/Express, MongoDB, Railway</td><td>Delivered</td><td>Full case study</td></tr>
+<tr><td>EducLynk</td><td>React/TypeScript, Laravel</td><td>Contribution ended</td><td>Experience-led contribution study</td></tr>
+<tr><td>GoldStrat / SMC_EA</td><td>MQL5, MetaTrader 5</td><td>Active</td><td>Full case study — differentiator</td></tr>
+<tr><td>X-Clusive</td><td>Vue 3, Node.js, PostgreSQL, Render</td><td>Live, dormant</td><td>Short entry</td></tr>
+<tr><td>GHL integration work</td><td>PHP/Laravel, OAuth 2.0, webhooks</td><td>Active — current internship</td><td>Short entry or blog post</td></tr>
+<tr><td>QoE survey automation</td><td>Node.js, Playwright, Selenium</td><td>Complete</td><td>Blog post</td></tr>
+</table>
+<p class="caption">Table 1.2 — Project inventory and recommended portfolio treatment. Rationale for each treatment decision is given in Deliverable 6.</p>
+
+<h3>1.5.1 CampusDesk</h3>
+<table>
+<tr><th style="width:20%">Purpose</th><td>A university document request and tracking system — students submit requests for official documents, staff process them through defined stages, and every state change is auditable.</td></tr>
+<tr><th>Problem</th><td>Document requests at a Cameroonian university are opaque, physically mediated and unauditable. A student has no way to know where a request is or who is holding it.</td></tr>
+<tr><th>Users</th><td>Students, departmental staff, department administrators, super administrators. Four distinct role surfaces.</td></tr>
+<tr><th>Role</th><td>Sole engineer, by design.</td></tr>
+<tr><th>Stack</th><td>Laravel with Sanctum bearer-token authentication, Eloquent, queued jobs, observers, API Resources, Gates and middleware; Vue 3 with TypeScript and Axios; MySQL; Mailtrap for queued mail. Developed on Ubuntu with PHP 8.3.</td></tr>
+<tr><th>Interesting engineering</th><td>A TOCTOU concurrency bug in stage claiming, resolved with <code>whereExists</code> inside <code>DB::transaction()</code> with <code>lockForUpdate()</code> after an initial simpler fix proved insufficient. A reopen-request feature designed across two rejected revisions before settling on a status-flip approach that avoids schema migration, preserves the audit trail and reuses existing claim/resolve infrastructure. A schema correction moving <code>status_histories.changed_by</code> from <code>staff_profiles.id</code> to <code>users.id</code> once student-triggered history entries entered the model.</td></tr>
+<tr><th>Constraint</th><td>Self-imposed and unusual: all backend code is hand-written against official documentation and Stack Overflow. AI assistance is restricted to Socratic mentoring, design review before implementation, and code review after implementation — never code generation.</td></tr>
+<tr><th>Current state</th><td>Student, Staff, Department Admin and Super Admin dashboards are all fully wired and tested. The project has moved into deployment planning: mapping out a CI/CD pipeline built on Docker and AWS services.</td></tr>
+<tr><th>Planned</th><td>The CI/CD and deployment pipeline itself, which now doubles as his self-hosted AWS project (see Section 1.9). Also: payment integration for processing fees — MTN MoMo and Orange Money researched, currently leaning toward a Cameroon-focused aggregator (Fapshi, with CamPay as alternative) rather than direct telco integration; mark-as-collected endpoint; in-app notifications.</td></tr>
+<tr><th>Demonstrates</th><td>Backend depth, concurrency correctness, audit-trail thinking, deliberate learning discipline, and the ability to reject two of one's own designs before accepting a third.</td></tr>
+</table>
+
+<h3>1.5.2 Cameroon Music Industry Platform</h3>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Digital infrastructure for the Cameroonian music ecosystem, connecting artists, fans and promoters.</td></tr>
+<tr><th>Context</th><td>Built as his MVP for the CIMFEST Hackathon 2025, a 72-hour event hosted by CIMFEST in partnership with NervTek in November 2025. This was his first hackathon; his team placed 11th of 21.</td></tr>
+<tr><th>Users</th><td>Three distinct user types with materially different needs and permissions.</td></tr>
+<tr><th>Stack</th><td>Next.js 14 with TypeScript; NestJS with Prisma; PostgreSQL; Redis for caching; Tailwind with dark mode; Docker Compose for local services; ESLint and Prettier. TypeScript end to end.</td></tr>
+<tr><th>Features</th><td>JWT authentication, role-based access control, booking system, wallet and tipping. Real-time system status dashboard, backend health-check endpoints, CORS configuration, an automated setup script and full setup documentation.</td></tr>
+<tr><th>Current state</th><td>Development halted entirely after Milestones 1 and 2 (foundational architecture and authentication) — a wrapped hackathon project rather than an ongoing one. Present it that way rather than implying present-tense activity.</td></tr>
+<tr><th>Demonstrates</th><td>Multi-sided platform modelling, deliberate architectural separation, and — unusually for a 72-hour build — documentation and developer-experience work treated as a first-class deliverable under time pressure.</td></tr>
+</table>
+
+<h3>1.5.3 NetInsight (CEF440)</h3>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Collects quality-of-experience data — signal strength, latency, jitter, packet loss and GPS position — from Cameroonian mobile subscribers.</td></tr>
+<tr><th>Problem</th><td>There is no accessible, subscriber-side evidence base for mobile network quality in Cameroon. Users experience degradation; nobody measures it from their side.</td></tr>
+<tr><th>Role</th><td>Member of a five-person team. Recorded personal ownership: Task 2 (requirements gathering, survey instrument, IEEE 830 SRS) and Task 6 (database design — MongoDB schemas, REST endpoints, offline sync architecture, deployment design).</td></tr>
+<tr><th>Stack</th><td>React Native (Expo), Node.js/Express, MongoDB Atlas, deployed on Railway.</td></tr>
+<tr><th>Artefacts</th><td>An IEEE 830 SRS and six modelling diagrams — context, level-1 DFD, use case, sequence, class and deployment.</td></tr>
+<tr><th>Interesting engineering</th><td>Offline synchronisation architecture, which is the correct and non-obvious response to the operating context: a network-measurement app must work when the network does not.</td></tr>
+<tr><th>Demonstrates</th><td>Requirements engineering, data modelling, team collaboration, and designing for local infrastructure reality rather than for an assumed-connected world.</td></tr>
+</table>
+
+<h3>1.5.4 GoldStrat / SMC_EA — algorithmic trading systems</h3>
+<table>
+<tr><th style="width:20%">Purpose</th><td>MetaTrader 5 Expert Advisors implementing Smart Money Concepts / ICT-style strategies on XAUUSD, developed and refined through systematic backtesting.</td></tr>
+<tr><th>Origin</th><td>Initial files came from a friend who trades a funded account; the work since has been iterative improvement and correctness engineering.</td></tr>
+<tr><th>Engineering problems solved</th><td>A position-sizing bug producing lot sizes roughly ten times too large, traced to a manual tick-value formula and fixed by delegating to the broker's own <code>OrderCalcProfit()</code> engine. A reward-to-risk imbalance caused by a target-finding function with no minimum-distance check. Order rejections caused by failing to query <code>SYMBOL_TRADE_STOPS_LEVEL</code> and failing to normalise prices to the tick grid.</td></tr>
+<tr><th>Analytical findings</th><td>An eight-year backtest showed net profit concentrated in the final two years of a gold bull run, with the preceding six years losing — identifying regime dependency rather than edge. Timeframe-alignment filtering between H4 bias and M15 entries produced no change in results, leading to the conclusion that state-based agreement between timeframes is not independent confirmation and that event-based triggers are required instead. Short trades underperform longs (21–35% versus 53–58% win rate); an event-based CHoCH confirmation is the proposed response.</td></tr>
+<tr><th>Demonstrates</th><td>This is the strongest evidence in the entire record of scientific scepticism applied to one's own work. The finding "my strategy was riding a regime, not demonstrating an edge" is the single most impressive intellectual moment on file, and it is currently invisible to anyone reading the portfolio.</td></tr>
+<tr><th>Caveat</th><td><span class="tag">Established</span> — self-described beginner-level, non-professional trader with no live trading experience. The portfolio must present this as quantitative systems engineering, never as trading expertise. Any framing that implies financial performance or invites others to trade must be avoided outright.</td></tr>
+</table>
+
+<h3>1.5.5 Shorter entries</h3>
+<ul>
+<li><strong>X-Clusive</strong> <span class="tag">Established</span> — e-commerce application in Vue 3 / Node.js / PostgreSQL, live on Render. Originated as an onboarding project during his <em>first</em> V-Groups internship stint, built specifically to learn the company's technology stack — not a CEF345 coursework project as such, though CEF345 coursework overlapped with the same period.</li>
+<li><strong>GoHighLevel work</strong> <span class="tag">Established</span> — CRM automation across three client scenarios (plumbing, gym free trial, real estate). A complete end-to-end gym free-trial system of five workflows with calendar, pipeline and custom fields. Resolved non-obvious platform behaviours including sticky-contact cookie deduplication and workflow re-entry. Separately, a one-day PHP/Laravel practice integration covering OAuth 2.0, webhooks and a custom workflow action, built against a test agency sub-account and a marketplace developer account. Also recreating the "Home Rakshak" React template as discrete custom HTML/CSS components inside the GHL builder, since GHL cannot import a React layout. This body of work also serves as his introduction to the development work of his current, second V-Groups internship stint, where GHL application-building is his main current focus.</li>
+<li><strong>QoE survey automation</strong> <span class="tag">Established</span> — Node.js/Playwright script submitting KoboToolbox/Enketo survey data from CSV, iterated through four versions handling modal dialogs, field value mapping, conditional field visibility and progress tracking, plus Selenium scripts with randomised answer pools for Google Forms. Built to help a friend in a different department who needed large volumes of mock data for a data-analysis project — a favour project, not part of the NetInsight team effort, though it draws on adjacent survey-automation skills.</li>
+<li><strong>GYGM Foundation pamphlet</strong> <span class="tag">Established</span> — produced programmatically via the Node <code>docx</code> library for the foundation's April 2026 launch.</li>
+</ul>
+
+<h2>1.6 Hackathons and Experimental Work</h2>
+<ul>
+<li><span class="tag">Established</span> — Attended the CIMFEST Hackathon 2025, a 72-hour event in November 2025 hosted by CIMFEST in partnership with NervTek. His first hackathon; his team placed 11th of 21. The Cameroon Music Industry Platform (Section 1.5.2) was his MVP for the event.</li>
+<li><span class="tag">Established</span> — Genuine experimental work also exists, under a different name: the MQL5 optimiser experiments, the four-iteration browser-automation scripts, the one-day GHL OAuth integration, and the WSL2-versus-Docker benchmark. These belong in a "Lab" or "Experiments" area rather than a hackathons section.</li>
+<li><span class="tag">Established</span> — Attended AWS Community Day Cameroon in Yaoundé in July 2026, the second consecutive year, and found Durrell Gemuh's talk on DevOps careers the most impactful session. Drafted follow-up outreach afterwards.</li>
+<li><span class="tag">Established</span> — Explores open source and Google Summer of Code. No merged external contributions are on record.</li>
+<li><span class="tag">Established</span> — No further hackathons, awards, certifications or talks beyond the above are on record as of writing.</li>
+</ul>
+
+<h2>1.7 Engineering Interests</h2>
+<ul>
+<li><span class="tag">Established</span> — Backend architecture and data correctness: transactions, locking, audit trails, concurrency, role and permission modelling. This is where the deepest work sits.</li>
+<li><span class="tag">Established</span> — Verification and validation as a discipline in its own right, extending beyond coursework into how he reasons about his own systems.</li>
+<li><span class="tag">Established</span> — Cloud and DevOps, pursued deliberately against an identified career gap rather than out of curiosity alone.</li>
+<li><span class="tag">Established</span> — Systems that must work under poor connectivity and local infrastructure constraints — offline sync, mobile-money payments, network measurement.</li>
+<li><span class="tag">Established</span> — Quantitative and algorithmic systems, including statistical scepticism about backtest results.</li>
+<li><span class="tag">Established</span> — Integration and platform engineering: OAuth, webhooks, third-party APIs, marketplace applications.</li>
+</ul>
+
+<h2>1.8 Design and UI/UX Interests</h2>
+<ul>
+<li><span class="tag">Established</span> — Formal HCI grounding: Nielsen's heuristics, user-centred and participatory design, usability testing, colour theory, modular design.</li>
+<li><span class="tag">Established</span> — Prefers custom components to component-library defaults where the design calls for it; familiar with Ant Design but avoids it by choice.</li>
+<li><span class="tag">Established</span> — Practical frontend craft: Intersection Observer scroll animation, CSS keyframes, Tailwind responsive work, and debugging the class of React state bugs that only show up in real interaction.</li>
+<li><span class="tag">Established</span> — Strong, articulated taste in documents: serif typography, justified setting, monochrome, structural discipline. This is not incidental — it is the same aesthetic instinct the portfolio brief expresses, applied to a different medium.</li>
+<li><span class="tag">Established</span> — Explicit rejection of decorative, purposeless, trend-driven interface design (this brief).</li>
+</ul>
+
+<h2>1.9 Career Direction</h2>
+<ul>
+<li><span class="tag">Established</span> — Target: international software engineering work, approached through African technology consultancies and talent marketplaces on the Andela model. A tiered target list exists: Andela, Decagon, Turing, Semicolon Africa, Flutterwave, Interswitch, and South African outsourcing firms.</li>
+<li><span class="tag">Established</span> — Self-identified gaps, in his own priority order: data structures and algorithms practice (highest), a public GitHub portfolio, system design fundamentals, visible testing and CI/CD work, and an AWS certification.</li>
+<li><span class="tag">Established</span> — Self-identified CV weaknesses: missing working GitHub and portfolio URLs, no algorithmic signal, vague bullets, and secondary school grades retained past their usefulness.</li>
+<li><span class="tag">Established</span> — A three-phase roadmap through graduation exists. The planned self-hosted cloud project is CampusDesk itself: its CI/CD pipeline, currently being mapped out with Docker and AWS services, is the vehicle for the hands-on cloud and DevOps evidence he identified as missing — not a separate project.</li>
+<li><span class="tag">Established</span> — Also exploring GHL integration work as a compatible side income stream.</li>
+</ul>
+
+<p><strong>The decisive implication for this project:</strong> the author has already diagnosed that his missing portfolio and missing public GitHub are among his top career blockers. This portfolio is not a vanity exercise. It is the remedy to a gap he identified himself, and its success should be measured against that.</p>
+
+<h2>1.10 Strengths</h2>
+<ul>
+<li>Root-cause debugging. Independently traced repeated <code>$fillable</code> silent-discard bugs, a student/user ID mix-up, gate-naming inconsistencies, a Passport client-ID misconfiguration, and a concurrency bug that survived a first attempted fix.</li>
+<li>Architectural discipline. Locks design before writing code; documents rejected alternatives and the reasons for rejecting them.</li>
+<li>Intellectual honesty. Distinguishes regime luck from edge; recognises redundant filters; flags his own documentation as unverified where it is unverified.</li>
+<li>Technical writing and modelling. IEEE 830 SRS, UML and DFD sets, database design reports, legal analysis, structured documentation as habit.</li>
+<li>Breadth without shallowness. Four distinct backend ecosystems, three frontend frameworks, three database paradigms — each with shipped artefacts behind it.</li>
+<li>Contextual engineering. Consistently designs for Cameroonian conditions rather than importing assumptions.</li>
+<li>Self-direction. Sets his own learning constraints and holds to them when a shortcut is available.</li>
+</ul>
+
+<h2>1.11 Areas of Growth</h2>
+<ul>
+<li>Algorithms and data structures — self-identified as the highest-priority gap.</li>
+<li>Public visibility. Deep work exists; almost none of it is publicly legible. This is the gap the portfolio directly addresses.</li>
+<li>Testing and CI/CD as visible practice rather than coursework knowledge.</li>
+<li>Formal system design vocabulary.</li>
+<li>Project completion under academic load — a documented pressure point, given the Njomi resignation and several projects paused mid-feature. <em>Context, not a weakness to publish.</em></li>
+<li>Open-source contribution — explored, not yet realised.</li>
+</ul>
+
+<h2>1.12 Interests Outside Technology</h2>
+<ul>
+<li><span class="tag">Established</span> — Financial markets and personal investing, including ETF and single-stock research. This connects directly to the algorithmic trading work and is a legitimate, genuinely differentiating personal thread.</li>
+<li><span class="tag">Established</span> — Education access as a cause, through the GYGM Foundation.</li>
+<li><span class="tag">Established</span> — Technical community participation, evidenced by two consecutive AWS Community Days and the CIMFEST Hackathon.</li>
+<li><span class="tag">Established</span> — <strong>Football.</strong> A committed, long-standing Manchester United supporter, through inconsistent seasons as much as good ones. Regards them as England's rightful champions on the strength of their historical top-flight trophy haul, current form notwithstanding.</li>
+<li><span class="tag">Established</span> — <strong>Film and television.</strong> A self-described movie enthusiast with a strong pull toward science-fiction thrillers — <em>Interstellar</em>, <em>Oppenheimer</em>, the <em>Back to the Future</em> trilogy — alongside procedural drama (<em>The Mentalist</em>, <em>White Collar</em>) and a considered take on superhero media: DC ahead on animation, Marvel ahead on live action, world-building and the coherence of its cinematic universe as a whole.</li>
+<li><span class="tag">Established</span> — <strong>Anime.</strong> A mix of long-running classics — <em>Naruto</em>, <em>One Piece</em>, <em>Baki</em>, <em>Vinland Saga</em>, <em>My Hero Academia</em> — and newer titles — <em>Black Clover</em>, <em>Demon Slayer</em>, <em>Jujutsu Kaisen</em>. <em>Attack on Titan</em> is named, without qualification, as the all-time favourite; Levi Ackerman is his favourite character, with Eren Yeager second.</li>
+<li><span class="tag">Established</span> — <strong>Music.</strong> Notably unconventional taste for his generation — Frank Sinatra, Louis Armstrong, Bach, Beethoven and Mozart feature heavily enough that a recent Spotify Wrapped placed his "listening age" at 75. Balanced by contemporary listening (Burna Boy, Asake, Kendrick Lamar, Imagine Dragons) and a strong, separately-held enthusiasm for gospel and worship music, with Chandler Moore, Nathaniel Bassey and Lawrence Oyor among his favourite artists.</li>
+</ul>
+<p>This section closes the largest content gap identified in an earlier pass of this document. It should be written into the About page in his own voice rather than in the register used above, which is deliberately neutral for a planning document.</p>
+
+<h2>1.13 Personal Values and Themes</h2>
+<p>Four themes are strongly enough evidenced to be stated as values rather than guesses:</p>
+<ol>
+<li><strong>Understanding over output.</strong> The CampusDesk rules are the clearest statement: he chose the slower path on purpose because the point was to understand, not to finish.</li>
+<li><strong>Local problems deserve serious engineering.</strong> University document processing, mobile network quality, the Cameroonian music economy, mobile-money payments — the problems chosen are consistently local, unglamorous and real.</li>
+<li><strong>Evidence over enthusiasm.</strong> Backtest scepticism, quantified defect impact, formal proof, rejected designs documented alongside accepted ones.</li>
+<li><strong>Giving access forward.</strong> The education nonprofit, the coursemate referral folded into his own negotiation with a CEO.</li>
+</ol>
+
+<h2>1.14 Content Gaps — Status</h2>
+<p>The gaps identified in an earlier pass of this document have mostly been closed by the author directly. Status below.</p>
+
+<table>
+<tr><th style="width:6%">#</th><th style="width:30%">Gap</th><th>Status</th></tr>
+<tr><td>1</td><td>Personal life outside technology</td><td><strong>Closed.</strong> See Section 1.12.</td></tr>
+<tr><td>2</td><td>Origin story — how computing started</td><td><strong>Closed.</strong> See Section 1.1.</td></tr>
+<tr><td>3</td><td>Current V-Groups attachment work</td><td><strong>Closed.</strong> See Section 1.4.2 — GHL application development, alongside CampusDesk and this portfolio.</td></tr>
+<tr><td>4</td><td>Landmark Software Solutions</td><td><strong>Closed by exclusion.</strong> Confirmed stale and irrelevant; removed from the portfolio and from this document entirely.</td></tr>
+<tr><td>5</td><td>Screenshots, demos, repository links</td><td><strong>Deferred, not blocking.</strong> To be gathered during Phase 0 of the roadmap; case-study prose can be finalised in parallel.</td></tr>
+<tr><td>6</td><td>Measurable outcomes</td><td><strong>Closed.</strong> At Njomi: EducLynk's onboarding changes contributed to a 30% improvement in user onboarding speed. Separately, students using the platform saw a substantial improvement in school grades, exact figure not currently known — state the onboarding figure with confidence and the grades claim qualitatively only, until a number is confirmed.</td></tr>
+<tr><td>7</td><td>Photograph</td><td><strong>Closed.</strong> A clean professional headshot already exists and is ready to use.</td></tr>
+<tr><td>8</td><td>CIMFEST relationship</td><td><strong>Closed.</strong> A hackathon hosted by CIMFEST in partnership with NervTek — see Sections 1.5.2 and 1.6.</td></tr>
+<tr><td>9</td><td>GitHub handle and repository public/private status</td><td><strong>Open.</strong> Still required before repository links can be added to any case study.</td></tr>
+<tr><td>10</td><td>Hackathons, awards, certifications, talks</td><td><strong>Closed.</strong> One real entry — CIMFEST Hackathon 2025 — and no others. Section 1.6 reflects this; no separate awards section is warranted.</td></tr>
+</table>
+<p>Item 9 — a GitHub handle and a decision on which repositories can be made public — is the only remaining blocker before Phase 1 of the roadmap (Deliverable 16) can be considered complete.</p>
+
+<h2>1.15 Potential Portfolio Storylines</h2>
+
+<table>
+<tr><th style="width:26%">Storyline</th><th style="width:10%">Strength</th><th>Evidence and recommendation</th></tr>
+<tr><td>Engineering for Cameroonian conditions</td><td>Very strong</td><td>CampusDesk, NetInsight offline sync, the music platform, mobile-money research. <strong>Recommended as the primary narrative.</strong> It is true, specific, differentiating, and impossible to fake.</td></tr>
+<tr><td>Learning as a deliberate practice</td><td>Very strong</td><td>The CampusDesk rules, concept-before-code, backtest scepticism. <strong>Recommended as the secondary narrative</strong> — this is what makes him hireable as a junior engineer.</td></tr>
+<tr><td>Student projects to production systems</td><td>Strong</td><td>X-Clusive (first V-Groups stint, learning the stack) → EducLynk → CampusDesk. A clean arc; structures the About page timeline.</td></tr>
+<tr><td>Correctness as a personal standard</td><td>Strong</td><td>V&amp;V coursework, TOCTOU fix, formal proof, broker constraint handling. Use as a cross-cutting motif, not a dedicated section.</td></tr>
+<tr><td>Breadth by necessity, depth by choice</td><td>Moderate</td><td>Honest and unusually self-aware. Use as a single About-page paragraph.</td></tr>
+<tr><td>Systems thinking across domains</td><td>Moderate</td><td>Web systems and market systems approached with the same rigour. Use to connect the trading work to everything else.</td></tr>
+<tr><td>Entrepreneurship</td><td>Weak</td><td>GHL side-income research only. Not enough to carry a narrative. Do not use.</td></tr>
+<tr><td>Accessibility</td><td>Weak</td><td>HCI coursework only, no shipped accessibility work. Do not claim it as a theme — but demonstrate it in the portfolio's own build, which is more convincing than claiming it.</td></tr>
+</table>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>2. Portfolio Goals and Audience Analysis</h1>
+
+<h2>2.1 What the portfolio must achieve</h2>
+<p>The brief is broad, so the goals must be ordered. In priority sequence:</p>
+<ol>
+<li><strong>Convert a recruiter's thirty-second scan into an interview.</strong> The author has stated that missing portfolio and GitHub URLs are among his top career blockers. Everything else on this list is subordinate to this.</li>
+<li><strong>Give a senior engineer something to respect.</strong> Not a technology list — evidence of judgement. The TOCTOU fix, the rejected reopen designs, the regime-dependency finding.</li>
+<li><strong>Show the person, not just the practitioner.</strong> The explicit central ask of the brief.</li>
+<li><strong>Make growth visible.</strong> A final-year student cannot compete on years of experience, but can compete on demonstrable trajectory.</li>
+<li><strong>Establish a writing habit with somewhere to live.</strong> The blog is not decoration; it is the mechanism by which the portfolio stays alive between projects.</li>
+<li><strong>Be the best artefact in the portfolio.</strong> A site that is fast, accessible and beautifully typeset is itself the strongest frontend evidence on offer.</li>
+</ol>
+
+<h2>2.2 Audiences</h2>
+
+<table>
+<tr><th style="width:18%">Audience</th><th style="width:12%">Time budget</th><th style="width:30%">What they need</th><th>Design implication</th></tr>
+<tr><td>Technical recruiter / talent marketplace screener</td><td>20–45 seconds</td><td>Availability, level, stack, location, one credible project, CV, contact.</td><td>Home must answer all seven above the fold or immediately below it. CV must be one click from every page.</td></tr>
+<tr><td>Hiring engineer / tech lead</td><td>3–10 minutes</td><td>Can he reason? Does he understand what he built? Can he debug something hard?</td><td>Case studies must go deep and must include the reasoning, the rejected paths and the failures.</td></tr>
+<tr><td>Consultancy assessor (Andela, Decagon, Turing model)</td><td>2–5 minutes</td><td>Breadth, communication quality, self-direction, written English.</td><td>Skills page with honest proficiency framing; blog as writing sample; explicit learning narrative.</td></tr>
+<tr><td>Prospective client (GHL / freelance)</td><td>1–2 minutes</td><td>Can he solve my problem, and has he solved one like it?</td><td>Integration and automation work needs a findable home, not burial under academic projects.</td></tr>
+<tr><td>Peer engineer arriving from a blog post</td><td>Variable</td><td>Was this useful? Who wrote it? What else is here?</td><td>Blog posts need strong author footers and related-post routing back into the site.</td></tr>
+<tr><td>Non-technical visitor</td><td>1–3 minutes</td><td>Who is this person and what do they actually do?</td><td>Plain-language summaries before technical depth on every page. No unexplained jargon in any first paragraph.</td></tr>
+</table>
+
+<h2>2.3 Design tensions to resolve deliberately</h2>
+<ul>
+<li><strong>Depth versus scannability.</strong> Resolved by progressive disclosure: every page and every case study is readable at three depths — headline, summary, full detail.</li>
+<li><strong>Student status versus professional ambition.</strong> Resolved by leading with artefacts and reasoning rather than titles. Do not hide student status; do not lead with it either.</li>
+<li><strong>Personality versus professionalism.</strong> Resolved by concentrating personality in specific, bounded places (About, Now, blog voice, footer) rather than sprinkling it thinly everywhere.</li>
+<li><strong>Trading work versus conservative employer perception.</strong> Resolved by framing it strictly as quantitative systems engineering, foregrounding the falsification finding rather than any performance claim.</li>
+</ul>
+
+<h2>2.4 Success criteria</h2>
+<ul>
+<li>A recruiter can answer "level, stack, location, availability, contact" within thirty seconds without scrolling past the first screen and a half.</li>
+<li>At least three case studies contain a genuine engineering decision with a named alternative that was rejected and the reason for rejecting it.</li>
+<li>Lighthouse accessibility 100; full keyboard operability; WCAG 2.2 AA verified.</li>
+<li>Core Web Vitals within the good band on a mid-range Android device over a throttled connection, not merely on a laptop.</li>
+<li>No page requires JavaScript to convey its content.</li>
+<li>A visitor can describe one non-technical thing about the author after reading the About page.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>3. Information Architecture and Sitemap</h1>
+
+<h2>3.1 Architectural decision</h2>
+<p><strong>Recommendation: a multi-page architecture with editorially composed landing pages, statically rendered, with client-side navigation between routes.</strong></p>
+
+<p>Three alternatives were considered.</p>
+
+<table>
+<tr><th style="width:24%">Option</th><th style="width:36%">Argument for</th><th>Reason rejected or accepted</th></tr>
+<tr><td>Single-page scrolling site</td><td>Fashionable, simple to build, one continuous narrative.</td><td><strong>Rejected.</strong> It cannot support case studies or a blog without degenerating into modals, it produces one URL for all content which destroys shareability and SEO, and it forces every visitor through the same linear path regardless of why they came. A recruiter and an engineer want different things; one scroll cannot serve both.</td></tr>
+<tr><td>Deep multi-page site (a page per section)</td><td>Clean separation, strong URLs, good SEO.</td><td><strong>Rejected in pure form.</strong> Splitting Education, Experience and Skills into three thin pages fragments a single story across three navigation clicks, and each resulting page is too slight to justify itself.</td></tr>
+<tr><td>Hybrid: few top-level routes, each internally rich</td><td>Real URLs where they matter; composed narrative where it matters.</td><td><strong>Accepted.</strong> Case studies and blog posts get their own addressable, shareable, indexable pages. Education, experience and skills are composed into one substantial About page rather than scattered. Seven primary routes total.</td></tr>
+</table>
+
+<h2>3.2 Sitemap</h2>
+
+<pre>
+/                        Home
+/about                   About — the person, the journey, education,
+                         experience timeline, skills, interests
+/work                    Work index — case studies and shorter entries
+/work/[slug]             Individual case study
+/writing                 Blog index with tag filtering
+/writing/[slug]          Individual post
+/writing/tags/[tag]      Tag archive
+/lab                     Experiments, automation scripts, small builds
+/now                     What I am currently learning and building
+/contact                 Contact
+/resume                  CV — HTML view plus PDF download
+
+Utility and machine routes
+/rss.xml                 Feed
+/sitemap.xml             Sitemap
+/robots.txt              Crawler directives
+/og/[...]                Generated social preview images
+/404, /500               Error pages
+</pre>
+
+<h3>3.2.1 Notes on specific decisions</h3>
+<ul>
+<li><strong>Experience, Education and Skills are not separate routes.</strong> They are sections within <code>/about</code>, deep-linkable by anchor (<code>/about#experience</code>) so that a CV or an email can point straight at them. Three separate thin pages would fragment one continuous story.</li>
+<li><strong><code>/lab</code> exists alongside the hackathon and case-study material.</strong> The record contains one hackathon (CIMFEST 2025, folded into the Cameroon Music Industry Platform case study) and a good deal of genuine experimentation that does not fit a "hackathons" label — MQL5 optimiser runs, browser-automation scripts, benchmarks. <code>/lab</code> is the honest home for the latter rather than a conventional, sparsely-populated achievements section.</li>
+<li><strong><code>/now</code> is a small page with a large effect.</strong> It is the cheapest possible signal that the site is maintained, and it directly answers "what are you currently learning" from the brief. It carries a visible last-updated date, which means it must actually be updated — a commitment worth making explicit before adopting it.</li>
+<li><strong><code>/resume</code> is a real HTML page, not only a PDF link.</strong> An HTML CV is indexable, linkable, readable on a phone and accessible to screen readers; the PDF sits alongside it for the ATS pipeline.</li>
+<li><strong>Contact is a page, not a modal.</strong> Modals cannot be linked to, break the back button and are harder to make accessible.</li>
+</ul>
+
+<h2>3.3 Global navigation strategy</h2>
+<ul>
+<li>A single persistent header: wordmark at left; <code>Work</code>, <code>Writing</code>, <code>Lab</code>, <code>About</code> centre or right; <code>Contact</code> as the one visually distinct action; a theme toggle at the far right. Five items is within comfortable scanning range; <code>/now</code> and <code>/resume</code> are reached from About, Home and the footer rather than crowding the header.</li>
+<li>The header does not hide on scroll. Hide-on-scroll headers are a fashion that trades a persistent orientation aid for a few reclaimed pixels; on a content site that trade is not worth making. The header may reduce in height and gain a hairline bottom rule once the page has scrolled — a state change that communicates position rather than decorating.</li>
+<li>The current section is marked with a persistent rule beneath the active item, not colour alone. Colour alone fails for colour-blind users and is disallowed by the contrast strategy in Deliverable 11.</li>
+<li>A "skip to content" link is the first focusable element on every page.</li>
+<li>The footer is a genuine secondary navigation surface: a short statement of what the site is, full route list including <code>/now</code>, <code>/resume</code> and <code>/rss.xml</code>, external links (GitHub, LinkedIn, email), location and timezone, a last-updated stamp, and a one-line colophon naming the stack. The colophon is not vanity — for this audience it is evidence.</li>
+<li>Breadcrumbs appear on case studies and blog posts only, where hierarchical position genuinely needs stating.</li>
+<li>On mobile, the header collapses to wordmark, theme toggle and a menu button opening a full-screen panel with generously spaced targets — not a cramped dropdown.</li>
+</ul>
+
+<h2>3.4 Navigation relationships</h2>
+<pre>
+Home ──► Work index ──► Case study ──► next / previous case study
+  │                          └──────► related blog posts
+  │
+  ├──► About ──► Resume ──► PDF download
+  │      └────► Now
+  │
+  ├──► Writing index ──► Post ──► tag archive ──► other posts
+  │                        └───► referenced case study
+  │
+  ├──► Lab ──► external repositories
+  │
+  └──► Contact
+</pre>
+<p>The two lateral links shown above — case study to related writing, and blog post back to the case study it discusses — are what turn a set of pages into a body of work. They should be authored deliberately in content front matter rather than generated by keyword similarity, which produces plausible-looking but meaningless relationships.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>4. Portfolio Storytelling Strategy</h1>
+
+<h2>4.1 The narrative thesis</h2>
+<p>One sentence the entire site exists to support:</p>
+<blockquote><p><em>A final-year computer engineer from Buea who builds systems for the conditions he actually lives in, and who learns on purpose rather than by accident.</em></p></blockquote>
+<p>Every page is answerable to that sentence. Content that does not support it, extend it or complicate it interestingly should be cut.</p>
+
+<h2>4.2 The time ladder</h2>
+
+<h3>At five seconds</h3>
+<p>The visitor should know: <em>who he is, what he does, where he is, and that this site was made with care.</em> Delivered by a single typographic statement at the top of Home — name, discipline, location, current status — and by the quality of the type and spacing, which communicates care before a single word is read. No hero image, no animated headline, no scroll-to-reveal. The statement is present immediately and is selectable text, not an image.</p>
+
+<h3>At thirty seconds</h3>
+<p>The visitor should know: <em>the kind of engineering he does, three concrete things he has built, and how to reach him or read further.</em> Delivered by three selected work entries directly beneath the opening statement, each with a real one-line outcome rather than a technology list, plus a visible link to the CV. A recruiter who leaves at this point should leave with enough to decide.</p>
+
+<h3>At three minutes</h3>
+<p>The visitor should understand: <em>how he thinks.</em> Delivered by one case study read at depth — problem, constraint, the decision, the alternative rejected, the thing that went wrong, what changed as a result. This is where CampusDesk's two discarded reopen designs and GoldStrat's regime-dependency finding do their work. It is the difference between "he can use Laravel" and "he can be trusted with a subsystem."</p>
+
+<h3>At ten minutes and beyond</h3>
+<p>The visitor should understand: <em>the trajectory and the person.</em> Delivered by the About timeline, the Lab, the Now page, and the blog voice. This is where the non-technical material from Section 1.14 must land. Without it, the site plateaus at three minutes.</p>
+
+<h2>4.3 How personality is allowed to emerge</h2>
+<p>Personality is placed, not scattered. Sprinkling jokes through a technical site reads as nervousness; concentrating voice in defined places reads as confidence.</p>
+<ul>
+<li><strong>About, first person, full voice.</strong> Written the way he actually speaks, including the parts that are not flattering — resigning from Njomi when the load became unsustainable, choosing the slow path on CampusDesk, discovering that eight years of backtest were really two.</li>
+<li><strong>The "lessons learned" section of every case study.</strong> The only mandatory section in the framework, because it is where judgement shows.</li>
+<li><strong>The Now page.</strong> Short, dated, plainly written, allowed to include non-technical items.</li>
+<li><strong>Blog voice.</strong> First person, specific, willing to document the failure as well as the fix.</li>
+<li><strong>The footer colophon and the 404 page.</strong> Small, dry, human. Two places where a light touch costs nothing.</li>
+</ul>
+<p>Deliberately excluded: animated avatars, "fun facts" grids, typewriter effects, emoji section headers, and anything that performs personality rather than expressing it.</p>
+
+<h2>4.4 Serving technical depth without excluding anyone</h2>
+<p>Three-layer disclosure, applied consistently:</p>
+<table>
+<tr><th style="width:14%">Layer</th><th style="width:26%">Form</th><th>Rule</th></tr>
+<tr><td>Layer 1</td><td>Plain-language summary</td><td>Every page and case study opens with two or three sentences a non-engineer can read without stumbling. No unexplained acronyms. Always visible.</td></tr>
+<tr><td>Layer 2</td><td>Structured narrative</td><td>The main body — problem, approach, decisions, outcome. Technical but explained. Always visible; never hidden behind an interaction.</td></tr>
+<tr><td>Layer 3</td><td>Deep technical detail</td><td>Code, schema fragments, trace output, benchmark tables. Presented in explicitly labelled, collapsed disclosure elements — "Show the locking implementation", "Show the backtest breakdown". Uses native <code>&lt;details&gt;</code> so it works without JavaScript and is announced correctly by screen readers.</td></tr>
+</table>
+<p>The critical rule: <strong>layer 3 is always collapsed by default and layers 1 and 2 are never collapsed.</strong> Hiding the narrative behind interaction is the most common failure mode of ambitious portfolios.</p>
+
+<h2>4.5 Recruiter fast path</h2>
+<p>A deliberate, designed path rather than an accident of layout: Home opening statement → three work entries with outcomes → prominent CV link → contact in the footer of every page. The CV page carries a plain "Download PDF" control with file size stated. Nothing on this path requires scrolling through a personal essay to reach.</p>
+
+<h2>4.6 Engineer deep path</h2>
+<p>Work index → case study → expandable technical layers → linked repository → related blog post → next case study. The "next case study" link at the foot of each study is what makes this path continuous instead of a series of dead ends.</p>
+
+<h2>4.7 Turning projects into case studies rather than screenshots</h2>
+<p>The single structural change that does this: <strong>every case study must contain at least one thing that did not work.</strong> A failure, a rejected design, a wrong assumption, a bug that took a day. Screenshots with technology badges are indistinguishable from one another; the story of a TOCTOU bug that survived its first fix is not. The framework in Deliverable 6 enforces this as a required field.</p>
+
+<h2>4.8 Suggested narrative progression</h2>
+<ol>
+<li><strong>Who</strong> — Home opening statement. Identity, discipline, place.</li>
+<li><strong>Proof</strong> — three selected works, each with an outcome, not a stack list.</li>
+<li><strong>Depth</strong> — a case study read in full.</li>
+<li><strong>Trajectory</strong> — the About timeline: foundations, breadth, production contact, deliberate depth.</li>
+<li><strong>Thinking</strong> — the blog.</li>
+<li><strong>Present tense</strong> — Now and Lab. The site is not a monument; it is in progress.</li>
+<li><strong>Person</strong> — interests, values, the nonprofit, the things outside the work.</li>
+<li><strong>Invitation</strong> — contact, with a specific statement of what he is looking for rather than a generic "get in touch".</li>
+</ol>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>5. Detailed Page-by-Page Architecture</h1>
+
+<h2>5.1 Home (<code>/</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Orient in five seconds; earn thirty more.</td></tr>
+<tr><th>Primary audience</th><td>Recruiters and first-time visitors.</td></tr>
+<tr><th>Questions answered</th><td>Who is this? What does he do? Is he any good? Is he available? Where do I go next?</td></tr>
+<tr><th>Sections, in order</th><td>(1) Opening statement — name, discipline, location, current status, in large type, as text. (2) A two-to-three sentence positioning paragraph in the plain-language register. (3) Selected work — exactly three entries with title, one-line outcome, role, year. (4) Recent writing — two most recent posts. (5) Currently — a two-line pull from <code>/now</code> with a link. (6) Contact invitation.</td></tr>
+<tr><th>Hierarchy</th><td>Opening statement dominant; selected work second; everything else clearly subordinate. The page must have exactly one focal point.</td></tr>
+<tr><th>Primary CTA</th><td>View work.</td></tr>
+<tr><th>Secondary CTAs</th><td>Read the CV; get in touch.</td></tr>
+<tr><th>Interaction</th><td>Work entries reveal a preview image on hover or focus, positioned adjacent to the entry rather than replacing it. Restrained: a short opacity and small translation, no scaling, no shadow, no tilt. Entries are links, keyboard-focusable, and the reveal triggers on focus as well as hover. Without JavaScript the entries still work as links.</td></tr>
+<tr><th>Mobile</th><td>Opening statement reflows to a smaller display size with the same line breaks preserved by design, not by accident. Work entries become a full-width stacked list with the preview image shown inline beneath the title rather than on hover, since hover does not exist. This is the clearest example in the site of adaptation rather than reduction.</td></tr>
+</table>
+
+<h2>5.2 About (<code>/about</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>The person, the journey, the credentials — in one continuous read.</td></tr>
+<tr><th>Primary audience</th><td>Anyone who has decided the work is interesting and now wants to know who made it.</td></tr>
+<tr><th>Questions answered</th><td>Where is he from and how did he get here? What has he studied? Where has he worked? What can he actually do? What is he like?</td></tr>
+<tr><th>Sections, anchored</th><td><code>#intro</code> — first-person narrative with photograph. <code>#journey</code> — the four-stage timeline from Section 1.3. <code>#experience</code> — Njomi and V-Groups (both stints), each with contributions and technologies; no named individuals from V-Groups per the privacy note in Section 1.4.2. <code>#education</code> — programme, notable coursework, significant academic work. <code>#skills</code> — grouped and honestly levelled. <code>#beyond</code> — interests outside technology, GYGM, community. <code>#values</code> — the four themes from Section 1.13, written as prose rather than a list of virtues.</td></tr>
+<tr><th>Hierarchy</th><td>Narrative first, credentials second. The opposite ordering turns the page into a CV and makes the personal material feel like an afterthought appended to it.</td></tr>
+<tr><th>Primary CTA</th><td>View the CV.</td></tr>
+<tr><th>Secondary CTAs</th><td>See the work; get in touch.</td></tr>
+<tr><th>Skills treatment</th><td>Grouped by domain (frontend, backend, data, infrastructure, quality, modelling) with a plain-language proficiency statement per group — "used in production", "used in shipped coursework", "learning now". <strong>No percentage bars, no star ratings, no radar charts.</strong> Nobody believes that TypeScript is 87%, and quantifying an unquantifiable thing costs credibility rather than adding it.</td></tr>
+<tr><th>Interaction</th><td>A sticky section index on wide screens, marking the current section as it is passed. Timeline entries expand in place to show detail.</td></tr>
+<tr><th>Mobile</th><td>Section index becomes a horizontally scrollable strip pinned below the header, or is dropped entirely in favour of clear section rules. Timeline collapses from two-column to single-column with a left rule and node markers.</td></tr>
+</table>
+
+<h2>5.3 Work index (<code>/work</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Present the body of work so that depth is obvious and breadth is available.</td></tr>
+<tr><th>Questions answered</th><td>What has he built? Which of these is serious? What was his actual role? What can I open?</td></tr>
+<tr><th>Sections</th><td>(1) One-paragraph framing of how he chooses what to build. (2) Case studies — five full entries, presented as substantial horizontal bands, each with title, one-line problem statement, role, year, primary technologies and a single representative image. (3) Other work — a compact table of shorter entries with links. (4) Lab pointer.</td></tr>
+<tr><th>Hierarchy</th><td>Deliberately unequal. Case studies get roughly six times the vertical space of short entries. A uniform grid implies uniform significance, which is a lie about the work.</td></tr>
+<tr><th>Primary CTA</th><td>Open a case study.</td></tr>
+<tr><th>Interaction</th><td>No filter chips. With five case studies and a handful of short entries, filtering is a control with nothing to control — a classic instance of an interface element added because it is expected rather than because it is needed.</td></tr>
+<tr><th>Mobile</th><td>Bands stack; image sits above text; the short-entry table becomes a definition list, because tables of three or more columns do not survive a 360px viewport.</td></tr>
+</table>
+
+<h2>5.4 Case study (<code>/work/[slug]</code>)</h2>
+<p>Structure specified in full in Deliverable 6. Architectural notes: primary CTA is the next case study; secondary CTAs are the repository and any related post; a reading-progress indicator is justified here because these pages are long and progress genuinely informs the reader's decision to continue; a table of contents appears in the margin above 1024px and as a collapsed disclosure below it.</p>
+
+<h2>5.5 Writing index (<code>/writing</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Make the thinking findable.</td></tr>
+<tr><th>Questions answered</th><td>What does he write about? Is it any good? Is this site alive?</td></tr>
+<tr><th>Sections</th><td>(1) One-line statement of what the writing is for. (2) The most recent post, given more space. (3) A reverse-chronological list — date, title, one-line summary, reading time, tags. (4) Tag index. (5) RSS link.</td></tr>
+<tr><th>Hierarchy</th><td>Editorial list, not a card grid. Cards force uniform summary lengths and image requirements; a list respects that some posts are essays and some are notes.</td></tr>
+<tr><th>Primary CTA</th><td>Read the latest post.</td></tr>
+<tr><th>Interaction</th><td>Tag filtering is genuine here — once there are fifteen or more posts it does real work. Filtering updates the URL (<code>/writing?tag=laravel</code>) so a filtered view is shareable and survives a refresh.</td></tr>
+<tr><th>Mobile</th><td>Metadata moves below the title rather than inline beside it; tags wrap; reading time remains, since it materially affects whether a reader starts.</td></tr>
+</table>
+
+<h2>5.6 Blog post (<code>/writing/[slug]</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Be genuinely readable at length.</td></tr>
+<tr><th>Sections</th><td>Title; date and reading time; optional tags; body; author note; related posts; previous and next.</td></tr>
+<tr><th>Measure</th><td>Body text constrained to 62–72 characters per line. This is the single most consequential typographic decision on the page and is treated as non-negotiable.</td></tr>
+<tr><th>Interaction</th><td>Reading progress indicator; heading anchor links revealed on hover and focus; copy-to-clipboard on code blocks with a live-region confirmation; a marginal table of contents on wide screens for posts above roughly 1,500 words.</td></tr>
+<tr><th>Mobile</th><td>Table of contents collapses into a disclosure at the top. Code blocks scroll horizontally inside their own container so the page body never scrolls sideways.</td></tr>
+</table>
+
+<h2>5.7 Lab (<code>/lab</code>)</h2>
+<p><strong>Purpose:</strong> a home for work that is real but not a product — the MQL5 optimiser experiments, the four-iteration Playwright automation, the one-day GHL OAuth integration, the WSL2 versus Docker benchmark, the document-generation tooling. <strong>Structure:</strong> a dense two-column list (single column on mobile) of title, one-sentence description, year, link. <strong>Framing:</strong> an honest opening line that these are experiments rather than products; that framing is what makes an incomplete thing an asset instead of a liability. <strong>Primary CTA:</strong> external repository links.</p>
+
+<h2>5.8 Now (<code>/now</code>)</h2>
+<p><strong>Purpose:</strong> answer "what is he doing at the moment" and prove the site is maintained. <strong>Structure:</strong> a dated heading, then three short blocks — building, learning, reading or thinking about. Under 300 words. <strong>Commitment:</strong> a visible staleness marker in development that warns if the file is more than sixty days old. A Now page that is eight months out of date actively damages the impression it exists to create.</p>
+
+<h2>5.9 Contact (<code>/contact</code>)</h2>
+<table>
+<tr><th style="width:20%">Purpose</th><td>Make the next step easy and make the right people take it.</td></tr>
+<tr><th>Sections</th><td>(1) A specific statement of what he is open to — internships, graduate roles, frontend and backend contract work, integration work — rather than a generic invitation. (2) Direct email address as visible, selectable text. (3) A short form: name, email, message, with an optional "what is this about" select. (4) GitHub and LinkedIn. (5) Location and timezone — WAT / UTC+1 — which is material information for a remote-hiring audience.</td></tr>
+<tr><th>Form design</th><td>Labels above inputs, always visible, never placeholder-only. Errors are announced in a live region and associated with their field via <code>aria-describedby</code>. Success and failure both produce a visible message; a form that silently succeeds is a form that appears broken.</td></tr>
+<tr><th>Mobile</th><td>Full-width inputs, minimum 44px target height, correct <code>inputmode</code> and <code>autocomplete</code> attributes so the right keyboard appears.</td></tr>
+</table>
+
+<h2>5.10 Resume (<code>/resume</code>)</h2>
+<p><strong>Purpose:</strong> serve the ATS pipeline and the human reader with one URL. <strong>Structure:</strong> full CV rendered as semantic HTML — summary, education, experience, projects, skills, and only the certifications and awards that actually exist. <strong>Primary CTA:</strong> download PDF, with file size stated. <strong>Content note:</strong> per Section 1.9, secondary school grades should be removed and bullets rewritten to the achievement-oriented form already derived from the Njomi PR history. <strong>Print:</strong> a dedicated print stylesheet so that browser-printing this page produces something usable. <strong>Mobile:</strong> two-column entries collapse to single column; the download control remains within reach without scrolling to the foot of the page.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>6. Project Case-Study Framework</h1>
+
+<h2>6.1 Which projects get which treatment</h2>
+
+<table>
+<tr><th style="width:24%">Project</th><th style="width:16%">Treatment</th><th>Reasoning</th></tr>
+<tr><td>CampusDesk</td><td>Full case study — lead</td><td>The richest engineering record available: a concurrency bug with a documented failed first fix, two rejected feature designs, a schema correction reasoned through in public, and an unusual self-imposed learning constraint. It is also the most relatable problem to a non-technical reader.</td></tr>
+<tr><td>GoldStrat / SMC_EA</td><td>Full case study — differentiator</td><td>Nothing else in the portfolio demonstrates statistical scepticism about one's own results. The regime-dependency finding is the most intellectually impressive item on record. Also the least like every other student portfolio.</td></tr>
+<tr><td>NetInsight</td><td>Full case study</td><td>Demonstrates requirements engineering, formal modelling, teamwork, and offline-first design for real local constraints. Has genuine artefacts — an IEEE 830 SRS and six diagrams — that most student projects lack.</td></tr>
+<tr><td>Cameroon Music Industry Platform</td><td>Full case study</td><td>Most modern stack, most ambitious domain modelling, clearest evidence of documentation and developer experience treated seriously — all the more notable given it was built as a 72-hour hackathon MVP. Present honestly as complete-and-halted rather than active.</td></tr>
+<tr><td>EducLynk</td><td>Contribution study</td><td>A variant structure — not "I built this" but "I worked on this, and here is precisely what I changed and why." The OAuth client-ID misconfiguration and the pagination stale-closure fix are exactly the kind of detail a hiring engineer recognises as real. This is the only entry with professional code review behind it and should not be demoted to a short entry.</td></tr>
+<tr><td>X-Clusive</td><td>Short entry</td><td>Real and live, built as an onboarding project during the first V-Groups stint specifically to learn the company stack. No distinctive engineering story survives in the record. Link it, describe it in three lines, move on.</td></tr>
+<tr><td>GHL integration work</td><td>Short entry plus blog post</td><td>Commercially relevant and demonstrates platform integration skill, but it is a body of client work rather than a single project. Better served by one short entry and a technical post on the OAuth and custom workflow action implementation.</td></tr>
+<tr><td>QoE survey automation</td><td>Lab entry plus blog post</td><td>The four-version iteration handling modals, conditional visibility and field mapping is a good short technical write-up — originally built to help a friend generate mock data for their own analysis project. It is not a product and should not pretend to be one.</td></tr>
+<tr><td>Coursework (V&amp;V, Cloud, Databases)</td><td>Referenced within About</td><td>Strong material, but coursework presented as portfolio projects reads as padding. The V&amp;V defect analysis and the cloud labs are better used as supporting evidence inside the education section and as blog posts.</td></tr>
+</table>
+
+<h2>6.2 The reusable case-study structure</h2>
+<p>Sections marked <strong>required</strong> appear in every case study. Optional sections appear only when there is real material; an empty section with a placeholder is worse than an absent one.</p>
+
+<table>
+<tr><th style="width:5%">#</th><th style="width:22%">Section</th><th style="width:10%">Status</th><th>Contents and rule</th></tr>
+<tr><td>1</td><td>Header</td><td>Required</td><td>Title, one-line problem statement, role, timeframe, status, primary technologies, links to live site and repository. Scannable in five seconds.</td></tr>
+<tr><td>2</td><td>Summary</td><td>Required</td><td>Three to four sentences, plain language, no acronyms. A non-engineer must be able to read this and know what the thing is.</td></tr>
+<tr><td>3</td><td>Context</td><td>Required</td><td>Why this existed. Course project, client work, self-directed, or professional. Honesty here builds trust for everything after it.</td></tr>
+<tr><td>4</td><td>The problem</td><td>Required</td><td>Stated from the user's position, not the system's. "A student has no way to know where their transcript request is" rather than "there was no tracking system."</td></tr>
+<tr><td>5</td><td>Users</td><td>Required</td><td>Who they are and what each needs. Multi-role systems must name every role.</td></tr>
+<tr><td>6</td><td>Constraints</td><td>Required</td><td>Time, team size, infrastructure, connectivity, budget, self-imposed rules. Constraints are what make decisions interesting; without them every choice looks arbitrary.</td></tr>
+<tr><td>7</td><td>My role</td><td>Required</td><td>Precise scope. For team projects, exactly which parts. Overclaiming on a team project is the fastest way to lose a technical reader.</td></tr>
+<tr><td>8</td><td>Architecture</td><td>Required</td><td>A diagram plus a paragraph. The diagram is inline SVG with a text alternative, never a raster screenshot of a diagramming tool.</td></tr>
+<tr><td>9</td><td>Key decisions</td><td><strong>Required</strong></td><td>Two to four decisions, each in a fixed shape: <em>the decision, the alternatives considered, why the alternative was rejected, what it cost.</em> This is the highest-value section in the framework.</td></tr>
+<tr><td>10</td><td>Engineering deep-dive</td><td>Required</td><td>One problem examined properly: symptom, investigation, root cause, fix, verification. Code in a collapsed layer-3 disclosure.</td></tr>
+<tr><td>11</td><td>Design process</td><td>Optional</td><td>Include only where there was real design work — sketches, ERDs, interface iterations.</td></tr>
+<tr><td>12</td><td>Key features</td><td>Optional</td><td>Prose, not a bulleted feature dump. Three to five things, each with why it mattered.</td></tr>
+<tr><td>13</td><td>What went wrong</td><td><strong>Required</strong></td><td>At least one failure, rejected design, wrong assumption or hard bug. Non-negotiable. This is what separates a case study from a screenshot.</td></tr>
+<tr><td>14</td><td>Visual evidence</td><td>Required</td><td>Screenshots, diagrams, terminal output, backtest tables. Captioned — every image explains what it shows and why it is there.</td></tr>
+<tr><td>15</td><td>Outcome</td><td>Required</td><td>What actually happened. Real numbers where they exist; an honest "not yet deployed" where they do not. Never invented metrics.</td></tr>
+<tr><td>16</td><td>Current state</td><td>Required</td><td>Live, paused, complete, in progress. Dated.</td></tr>
+<tr><td>17</td><td>What I would do differently</td><td><strong>Required</strong></td><td>Retrospective judgement. Often the most revealing paragraph in the whole study.</td></tr>
+<tr><td>18</td><td>Next steps</td><td>Optional</td><td>Only for live projects, and only if genuinely planned.</td></tr>
+<tr><td>19</td><td>Footer</td><td>Required</td><td>Related writing; previous and next case study; back to index.</td></tr>
+</table>
+
+<h2>6.3 Applied to the three strongest studies</h2>
+
+<h3>CampusDesk</h3>
+<ul>
+<li><strong>Decisions:</strong> status-flip reopen over stage regeneration (regeneration rejected for schema complexity and foreign-key conflicts with <code>status_histories</code>); <code>changed_by</code> repointed from <code>staff_profiles.id</code> to <code>users.id</code> once students could trigger history entries; a Cameroon-focused payment aggregator over direct telco integration.</li>
+<li><strong>Deep-dive:</strong> the TOCTOU bug in stage claiming — two staff members able to claim the same stage, first fix insufficient, resolved with <code>whereExists</code> inside <code>DB::transaction()</code> with <code>lockForUpdate()</code>.</li>
+<li><strong>What went wrong:</strong> two reopen designs rejected before the third was accepted; recurring <code>$fillable</code> silent discards; gate-versus-middleware naming producing silent 403s.</li>
+<li><strong>Distinctive framing:</strong> the self-imposed rule that all backend code is hand-written against documentation, with AI restricted to review. State it plainly. In 2026 this is a meaningful and unusual claim about how someone learns.</li>
+</ul>
+
+<h3>GoldStrat</h3>
+<ul>
+<li><strong>Decisions:</strong> replacing a manual tick-value calculation with the broker's <code>OrderCalcProfit()</code>; adding a minimum reward-to-risk gate; enforcing broker stop levels and tick-grid normalisation before submission.</li>
+<li><strong>Deep-dive:</strong> the position-sizing bug producing lot sizes roughly ten times too large — a case where the arithmetic was defensible and the assumption underneath it was not.</li>
+<li><strong>What went wrong:</strong> the eight-year backtest whose profit was concentrated entirely in a two-year bull run; the timeframe-alignment filter that changed nothing and thereby disproved its own premise.</li>
+<li><strong>Framing discipline:</strong> quantitative systems engineering throughout. No performance claims, no invitation to trade, explicit statement of non-professional status.</li>
+</ul>
+
+<h3>NetInsight</h3>
+<ul>
+<li><strong>Decisions:</strong> offline-first synchronisation; MongoDB over a relational store for heterogeneous measurement records; Railway and Atlas for a student-budget deployment.</li>
+<li><strong>Deep-dive:</strong> designing collection to survive exactly the network conditions being measured.</li>
+<li><strong>Role discipline:</strong> five-person team; state precisely that he owned requirements and the SRS (Task 2) and database design (Task 6).</li>
+</ul>
+
+<h2>6.4 Content front matter schema</h2>
+<pre>
+---
+title: "CampusDesk"
+slug: "campusdesk"
+tagline: "Making university document requests visible"
+role: "Sole engineer"
+timeframe: "2026 — present"
+status: "in-progress"          # live | in-progress | complete | paused
+featured: true
+order: 1
+technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL"]
+domains: ["backend", "full-stack"]
+links:
+  repository: "..."
+  live: null
+cover:
+  src: "/media/campusdesk/cover.png"
+  alt: "Student dashboard showing a request at the verification stage"
+relatedWriting: ["locking-in-laravel", "designing-reopen"]
+summary: >
+  Three to four plain-language sentences.
+---
+</pre>
+<p><code>relatedWriting</code> is authored by hand rather than computed. Hand-authored relationships are meaningful; similarity-computed ones are noise wearing the costume of intelligence.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>7. Design Research Findings</h1>
+
+<p>This section separates four categories that are usually conflated: durable principles, current trends, this document's recommendations, and matters of taste. Confusing them is precisely how portfolios end up looking like the thing this brief rejects.</p>
+
+<h2>7.1 Established principles</h2>
+<p>These are long-standing, widely evidenced, and not matters of opinion.</p>
+<ul>
+<li><strong>Measure governs readability.</strong> Sustained reading is most comfortable at roughly 45–75 characters per line. Long measures cause line-return errors; short measures break rhythm. Applies regardless of style.</li>
+<li><strong>Hierarchy is created by contrast, not by ornament.</strong> Size, weight, spacing and position establish importance. Colour, borders and shadows are weaker instruments frequently used as substitutes for the stronger ones.</li>
+<li><strong>Whitespace is grouping.</strong> Proximity communicates relationship. Generous spacing is not luxury; it is the mechanism by which a reader understands what belongs with what.</li>
+<li><strong>The interface should defer to the content.</strong> Apple's Human Interface Guidelines have long stated three principles — clarity, deference and depth — with deference meaning the interface supports content and never competes with it, and depth meaning that layers and motion convey hierarchy. The deference principle, correctly understood, is an argument <em>against</em> most decorative effects, including several that appear in Apple's own marketing pages.</li>
+<li><strong>Motion should map to spatial or state relationships.</strong> Animation that shows where something came from or what changed aids comprehension. Animation applied because an element has entered the viewport does not.</li>
+<li><strong>Consistency reduces cognitive load.</strong> The same element should look and behave the same everywhere.</li>
+<li><strong>Accessibility constraints improve design for everyone.</strong> Contrast minimums, target sizes and focus visibility make interfaces better in bright sunlight, on cheap screens, and for tired people.</li>
+</ul>
+
+<h2>7.2 What Apple actually does — and what is worth taking</h2>
+<p>Studied as principles rather than as a look, Apple's editorial product pages rely on a small number of transferable techniques:</p>
+<table>
+<tr><th style="width:30%">Technique</th><th style="width:34%">What it achieves</th><th>Verdict for this portfolio</th></tr>
+<tr><td>One idea per viewport</td><td>Each screen makes a single point; the reader is never asked to parse two arguments at once.</td><td><strong>Adopt.</strong> Applies directly to case-study sections.</td></tr>
+<tr><td>Typography as primary imagery</td><td>Large, well-set type carries the message where a lesser design would reach for a graphic.</td><td><strong>Adopt.</strong> The core move for a portfolio with limited photography.</td></tr>
+<tr><td>Extreme spacing discipline</td><td>Space between sections is roughly four to six times the space within them.</td><td><strong>Adopt.</strong> Cheap, invisible, transformative.</td></tr>
+<tr><td>Severely restricted palette</td><td>Near-monochrome, with colour reserved for meaning.</td><td><strong>Adopt.</strong> Directly supports the brief's rejection of decorative colour.</td></tr>
+<tr><td>Motion tied to scroll position</td><td>Product rotations and sequenced reveals.</td><td><strong>Adopt only where content is genuinely sequential.</strong> Apple is selling a physical object and has a genuine reason to show it turning. A case study does not.</td></tr>
+<tr><td>Full-bleed cinematic imagery</td><td>Emotional weight, product desire.</td><td><strong>Reject.</strong> Depends on a photography budget that does not exist. Attempting it with stock imagery or screenshots produces exactly the hollow result the brief warns against.</td></tr>
+<tr><td>Translucent materials ("Liquid Glass" and predecessors)</td><td>Depth and layering in a system UI.</td><td><strong>Reject.</strong> This is the single most imitated and least understood Apple technique. In a system interface it signals layered content; on a content website it is the glassmorphism the brief explicitly rejects.</td></tr>
+</table>
+
+<h2>7.3 Current trends, assessed</h2>
+<table>
+<tr><th style="width:24%">Trend</th><th style="width:12%">Verdict</th><th>Reasoning</th></tr>
+<tr><td>Bento grids</td><td>Avoid</td><td>A legitimate pattern for dashboards with genuinely heterogeneous, equally weighted modules. A portfolio's content is hierarchical, so a bento grid actively misrepresents it by implying that everything is equally important.</td></tr>
+<tr><td>Glassmorphism</td><td>Avoid</td><td>Reduces text contrast, costs compositing performance, and communicates nothing on a flat content page.</td></tr>
+<tr><td>Gradient text and gradient borders</td><td>Avoid</td><td>Weak contrast, poor print and high-contrast-mode behaviour, and by now a reliable marker of template origin.</td></tr>
+<tr><td>Glow and neon accents</td><td>Avoid</td><td>Pure decoration. Fails the brief's stated test directly.</td></tr>
+<tr><td>Large border radii everywhere</td><td>Avoid as default</td><td>Radius should indicate interactivity or containment. Applying 24px to every surface removes its meaning. Recommendation below: 2–4px, used sparingly.</td></tr>
+<tr><td>Pill-shaped tags and buttons</td><td>Restrict</td><td>Acceptable for genuine tags. Not for buttons, navigation, or section labels.</td></tr>
+<tr><td>Scroll-triggered fade-up on every element</td><td>Avoid</td><td>The definitive marker of generated design. It delays content, creates layout instability, and communicates nothing. Its ubiquity is a reason against it, not for it.</td></tr>
+<tr><td>Dark mode as default</td><td>Judgement</td><td>Both modes should be first-class and the initial value should follow the operating system. Forcing dark by default is a style preference imposed on the reader.</td></tr>
+<tr><td>Variable fonts</td><td>Adopt</td><td>Genuinely useful: one file covers the whole weight range, reducing requests and total bytes.</td></tr>
+<tr><td>Container queries</td><td>Adopt</td><td>Now broadly supported and the correct tool for components that appear in several contexts.</td></tr>
+<tr><td>View transitions</td><td>Adopt with fallback</td><td>Real value for image-to-detail continuity; must degrade cleanly where unsupported.</td></tr>
+<tr><td>Heavy scroll-hijacking libraries</td><td>Avoid</td><td>Damages interaction responsiveness, breaks keyboard and screen-reader navigation, and removes the reader's control of their own scrolling.</td></tr>
+</table>
+
+<h2>7.4 Current technical facts relevant to design decisions</h2>
+<ul>
+<li><strong>Core Web Vitals.</strong> The three metrics remain Largest Contentful Paint (good below 2.5 seconds), Interaction to Next Paint (good below 200 milliseconds) and Cumulative Layout Shift (good below 0.1), each assessed at the 75th percentile of real field data over a rolling 28-day window. INP replaced First Input Delay in March 2024 and is the most commonly failed of the three; any guidance still referring to FID is out of date. The implication for design is direct: every animation library and scroll effect is an INP liability before it is anything else.</li>
+<li><strong>WCAG 2.2.</strong> Published October 2023, backward compatible with 2.1, adding nine success criteria and removing 4.1.1 Parsing. The two that most affect visual design here are 2.5.8 Target Size (Minimum), requiring pointer targets of at least 24×24 CSS pixels at Level AA with 44×44 recommended, and the focus-visibility criteria requiring that a focused component is not fully obscured by author content. These are constraints on the design, not tasks for the end of the build.</li>
+<li><strong>Font loading.</strong> <code>font-display: swap</code> combined with preloading and a metric-matched fallback eliminates the layout shift that otherwise makes a type-led design fail CLS — the precise risk of the direction recommended here.</li>
+</ul>
+
+<h2>7.5 Matters of taste, declared as such</h2>
+<p>The following are this document's preferences, defensible but not objectively correct. They are flagged so they can be overruled without breaking anything structural: a serif or humanist-sans display face rather than a geometric sans; a warm near-black rather than pure black; ruled section dividers rather than spacing alone; left-aligned rather than centred headings; and small-caps or letterspaced uppercase for metadata labels.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>8. Visual Design Direction</h1>
+
+<h2>8.1 The organising idea</h2>
+<p><strong>Engineering documentation, set to editorial standards.</strong></p>
+<p>This is not a neutral choice. It is derived from three things already true about the author: he writes IEEE 830 specifications, UML sets and database design reports as a matter of habit; he has an articulated and unusual preference for serif, justified, structurally disciplined documents; and the strongest material in his record is written reasoning rather than visual product. A portfolio that looks like a well-made technical publication is therefore an honest expression of the work rather than a costume put on over it.</p>
+<p>It also solves the practical problem. A student portfolio has no photography budget and no brand illustration. Directions that depend on imagery will fail. A direction that depends on typography, spacing and structure can be executed to a genuinely high standard with nothing but care.</p>
+<p>And it is defensibly distinct from an Apple clone: it shares the underlying discipline — clarity, deference, hierarchy, restraint — while taking its surface vocabulary from technical publishing rather than from consumer product marketing.</p>
+
+<h2>8.2 The five governing rules</h2>
+<ol>
+<li><strong>Type does the work.</strong> Where a design problem could be solved with a graphic, a border, a shadow or a colour, try solving it with size, weight, spacing or position first.</li>
+<li><strong>Every effect must name its job.</strong> If an element cannot be described as communicating hierarchy, state, progression or spatial relationship, it is removed. This applies with equal force to a shadow and to an animation.</li>
+<li><strong>Space is structural.</strong> A rhythm of vertical spacing is designed first and adhered to; sections are separated by four to six times the space that separates paragraphs.</li>
+<li><strong>Colour means something.</strong> A near-monochrome surface with exactly one functional accent, reserved for interaction and state. No decorative colour anywhere.</li>
+<li><strong>Restraint is the differentiator.</strong> Given that generated portfolios are visually maximal by default, disciplined subtraction is now the clearest possible signal of a human designer.</li>
+</ol>
+
+<h2>8.3 Surface treatment</h2>
+<ul>
+<li><strong>Rules over boxes.</strong> Separate content with 1px hairline rules and with space, not with bordered card containers. This alone removes most of the "AI-generated" signature.</li>
+<li><strong>Borderless images.</strong> Screenshots sit on the page with a single hairline rule and a caption, not inside a rounded, shadowed frame.</li>
+<li><strong>Radius is minimal and meaningful.</strong> 2px on interactive controls and code blocks; 0px on images, sections and containers.</li>
+<li><strong>Elevation is nearly absent.</strong> No box shadows in the resting state. A single subtle shadow is permitted on the mobile navigation overlay, where it genuinely signals a layer above the page.</li>
+<li><strong>No gradients</strong> on any surface, text or border.</li>
+<li><strong>Asymmetry by intent.</strong> A twelve-column grid used asymmetrically — text at columns 1–7, marginal metadata at 9–12 — produces visual interest structurally, without ornament.</li>
+</ul>
+
+<h2>8.4 Imagery strategy</h2>
+<p>Four image types are permitted, each with a defined treatment:</p>
+<table>
+<tr><th style="width:22%">Type</th><th>Treatment</th></tr>
+<tr><td>Interface screenshots</td><td>Real, current, cropped to the relevant region. Hairline rule, no device mockup frame, mandatory caption explaining what is shown.</td></tr>
+<tr><td>System diagrams</td><td>Hand-authored inline SVG using the site's own type and colour tokens, so that they respond to theme and remain legible at any zoom. Never a raster export from a diagramming tool.</td></tr>
+<tr><td>Data and results</td><td>Tables and simple charts drawn in SVG with the site's tokens. Backtest results, defect counts, benchmark figures.</td></tr>
+<tr><td>Photography</td><td>One portrait on the About page. Optionally one or two personal images in the "beyond" section once that content exists. No stock photography under any circumstances.</td></tr>
+</table>
+
+<h2>8.5 Things this site will not have</h2>
+<p>Recorded explicitly so that they can be checked against during build and review: hero background gradients; glassmorphic panels; glowing or animated borders; cards that lift, tilt or scale on hover; bento grids; pill-shaped navigation; border radii above 4px; decorative blurred shapes; particle or mesh backgrounds; typewriter or scramble text effects; counters that animate up from zero; skill percentage bars; scroll-hijacked sections; cursor followers; unexplained emoji; and fade-up-on-scroll applied indiscriminately.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>9. Design System</h1>
+
+<h2>9.1 Typography</h2>
+
+<h3>9.1.1 Type pairing</h3>
+<table>
+<tr><th style="width:16%">Role</th><th style="width:26%">Recommendation</th><th>Reasoning</th></tr>
+<tr><td>Display and headings</td><td>A contemporary serif or transitional serif with a variable weight axis. Candidates: Instrument Serif, Newsreader, Fraunces, Source Serif 4. All open-licence and self-hostable.</td><td>A serif display face is the fastest route to distinction in a field dominated by geometric sans. It matches the editorial and documentation character of the direction, and it aligns with the author's demonstrated typographic taste.</td></tr>
+<tr><td>Body and interface</td><td>A neutral, highly legible sans with a variable axis. Candidates: Inter (with optical sizing), Public Sans, IBM Plex Sans.</td><td>Sustained on-screen reading at 17–18px is more reliable in a well-made sans, and the serif/sans contrast makes hierarchy legible without needing colour or rules.</td></tr>
+<tr><td>Code and data</td><td>JetBrains Mono, IBM Plex Mono or Berkeley Mono.</td><td>Clear zero, unambiguous <code>l</code>/<code>1</code>/<code>I</code>, comfortable at 14px. Also used for metadata labels — dates, roles, years — which visually marks them as machine-ish rather than prose.</td></tr>
+</table>
+<p>Three families is the maximum. Each must be self-hosted as a variable <code>woff2</code>, subset to Latin, and preloaded. If a face is not available as a variable font, use at most two static weights from it.</p>
+
+<h3>9.1.2 Type scale</h3>
+<p>A 1.25 modular scale, with the two display sizes using fluid <code>clamp()</code> so that the largest type adapts without discrete breakpoints.</p>
+<pre>
+--text-display : clamp(2.75rem, 1.6rem + 5.2vw, 5.5rem)   serif   1.05  -0.02em
+--text-h1      : clamp(2.25rem, 1.5rem + 3vw, 3.5rem)     serif   1.12  -0.015em
+--text-h2      : 2rem      (32px)   serif   1.20   -0.01em
+--text-h3      : 1.5rem    (24px)   serif   1.30    0
+--text-h4      : 1.25rem   (20px)   sans 600 1.40   0
+--text-lead    : 1.25rem   (20px)   sans 400 1.55   0
+--text-body    : 1.0625rem (17px)   sans 400 1.65   0
+--text-small   : 0.9375rem (15px)   sans 400 1.55   0
+--text-meta    : 0.8125rem (13px)   mono 500 1.40   0.04em  uppercase
+--text-code    : 0.875rem  (14px)   mono 400 1.60   0
+</pre>
+<ul>
+<li>Body at 17px rather than 16px. The measure is narrow and the line height generous; 17px reads noticeably better on a laptop without feeling oversized on a phone.</li>
+<li>Negative letterspacing on display sizes only. Large type sets loose by default; small type does not need it and is damaged by it.</li>
+<li>Line height falls as size rises. This is the single most common typographic failure in generated designs, which apply a uniform line height across the whole scale.</li>
+<li>Maximum reading measure: <code>68ch</code> for prose, <code>76ch</code> for lists and technical content, <code>100%</code> for code blocks within their own container.</li>
+</ul>
+
+<h2>9.2 Layout</h2>
+<pre>
+Grid            12 columns, 24px gutters at desktop
+Max content     1200px  (page frame)
+Max prose       68ch    (roughly 680px at body size)
+Max wide        920px   (images, tables, code)
+
+Breakpoints
+  --bp-sm   480px    large phone
+  --bp-md   768px    tablet portrait
+  --bp-lg   1024px   tablet landscape / small laptop
+  --bp-xl   1280px   laptop
+  --bp-2xl  1536px   large desktop
+
+Horizontal padding
+  mobile 20px | tablet 32px | desktop 48px | large 64px
+
+Vertical rhythm — 4px base unit
+  --space-1   4px     --space-6   32px
+  --space-2   8px     --space-8   48px
+  --space-3   12px    --space-12  80px
+  --space-4   16px    --space-16  128px
+  --space-5   24px    --space-24  192px
+
+Applied
+  within a paragraph block      space-4
+  between paragraphs            space-5
+  heading to following body     space-4
+  body to following heading     space-8
+  between subsections           space-12
+  between major sections        space-16 to space-24
+</pre>
+<p>The ratio between within-section and between-section spacing is where the impression of quality is actually produced. It costs nothing and is the first thing to go wrong when a design is built in a hurry.</p>
+
+<h2>9.3 Colour</h2>
+<p>Two tuned themes rather than one inverted. Inverting a light palette produces a dark theme that is too harsh; pure black with pure white text causes halation for many readers, and pure black backgrounds on OLED screens produce visible smearing during scroll.</p>
+
+<h3>9.3.1 Light</h3>
+<pre>
+--bg            #FCFCFA   warm off-white, less clinical than pure white
+--bg-subtle     #F4F4F1   code blocks, table header rows
+--text          #161614   near-black, warm  (16.8:1 on --bg)
+--text-muted    #5C5C57   metadata, captions (7.1:1)
+--text-faint    #8A8A83   timestamps only   (4.6:1)
+--rule          #DEDED8   hairline rules
+--rule-strong   #B4B4AC   section dividers
+--accent        #1A4D8F   links, focus, active state (8.2:1)
+--accent-hover  #123A6E
+--selection     #DCE6F2
+</pre>
+
+<h3>9.3.2 Dark</h3>
+<pre>
+--bg            #121212   not #000
+--bg-subtle     #1C1C1B
+--text          #E8E8E4   not #FFF                 (15.9:1)
+--text-muted    #A0A09A                            (7.4:1)
+--text-faint    #6E6E68                            (4.6:1)
+--rule          #2A2A28
+--rule-strong   #3E3E3A
+--accent        #7FB0E8   lightened for dark surfaces (8.9:1)
+--accent-hover  #A5C8F0
+--selection     #1E3550
+</pre>
+
+<h3>9.3.3 Rules of use</h3>
+<ul>
+<li>One accent, used only for links, focus rings, active navigation and form state. Never for decoration, never for backgrounds of large areas.</li>
+<li>Status colours (success, error) exist for forms only and are always paired with text and an icon shape, never carried by colour alone.</li>
+<li>Every foreground and background pair is verified: 4.5:1 for body text, 3:1 for large text and for non-text interface elements.</li>
+<li>Dark mode is not the default. The initial value follows <code>prefers-color-scheme</code>; an explicit user choice is stored and wins thereafter.</li>
+<li>Theme initialisation runs as a small blocking inline script in <code>&lt;head&gt;</code> to prevent a flash of the wrong theme. This is one of the very few justified uses of render-blocking script.</li>
+</ul>
+
+<h2>9.4 Components</h2>
+
+<table>
+<tr><th style="width:16%">Component</th><th>Philosophy</th></tr>
+<tr><td>Navigation</td><td>Text links, 15px, generously spaced. Active item marked by a 2px rule beneath, not by colour alone. Header sits on the page background with no fill and no blur; after 80px of scroll it gains a bottom hairline and reduces height by 8px. It never hides.</td></tr>
+<tr><td>Buttons</td><td>Two variants only. <em>Primary</em>: solid accent, white text, 2px radius, 12px/24px padding, minimum 44px height. <em>Secondary</em>: transparent with a 1px rule. No tertiary, no ghost, no icon-only except in the header. No transform on hover — background and border colour only.</td></tr>
+<tr><td>Links</td><td>In prose: underlined at rest with a 2px offset and a 1px thickness, thickening to 2px on hover. Underline at rest, not on hover — hiding the affordance until hover is a fashion that costs usability. Outside prose: colour and weight distinction, plus an underline on hover and focus.</td></tr>
+<tr><td>Cards</td><td>Effectively abolished. Project entries are horizontal bands separated by hairline rules, not boxes. Where a bounded container is genuinely needed, it is a 1px rule with no fill, no radius and no shadow. This is the highest-leverage single decision in the component system.</td></tr>
+<tr><td>Project previews</td><td>A row: number, title, one-line outcome, year, role. Hover and focus reveal a preview image in an adjacent column at desktop, with a 200ms opacity and 8px translate. On mobile the image is simply present inline.</td></tr>
+<tr><td>Blog previews</td><td>An editorial list row: date in mono, title in serif, one-line summary, reading time. No thumbnails on the index — forcing an image on every post makes short notes impossible to publish.</td></tr>
+<tr><td>Images</td><td>1px rule, no radius, no shadow. Caption in <code>--text-small</code> italic below, left-aligned. Explicit width and height always, to hold layout and protect CLS. AVIF with WebP fallback.</td></tr>
+<tr><td>Code blocks</td><td>1px rule, <code>--bg-subtle</code> fill, 2px radius, 16px padding, 14px mono. A two-colour syntax scheme only — comments and strings muted, everything else at body colour. Multi-colour themes are the single loudest visual element on a page of prose and contradict the direction outright. Language label in the top-right in <code>--text-meta</code>. Copy button appearing on hover and always present for keyboard users.</td></tr>
+<tr><td>Tags</td><td>The one justified use of a pill: 12px mono, uppercase, 1px rule, no fill, 4px/10px padding, 999px radius. Used on blog posts and case studies. Never for navigation or buttons.</td></tr>
+<tr><td>Timeline</td><td>A 1px vertical rule with small square nodes — squares, not circles, which reads as diagram rather than decoration. Year in mono at left, content at right. Collapses to a single column with a left rule on mobile.</td></tr>
+<tr><td>Forms</td><td>Labels above, always visible. 1px rule inputs, 2px radius, 44px minimum height, transparent fill. Focus produces a 2px accent ring at 2px offset. Errors below the field in red plus an icon shape, announced in a live region.</td></tr>
+<tr><td>Footer</td><td>Separated by a strong rule. Four columns on desktop, two on tablet, stacked on mobile. Site statement, full navigation, external links, colophon, location and timezone, last-updated date.</td></tr>
+<tr><td>Modals</td><td>One only — the mobile navigation panel. Full screen, focus trapped, <kbd>Escape</kbd> to close, focus returned to the trigger. Nothing else in the site uses a modal.</td></tr>
+</table>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>10. Interaction and Motion System</h1>
+
+<h2>10.1 Motion principles</h2>
+<ol>
+<li>Motion communicates one of four things: <strong>hierarchy</strong> (what is above what), <strong>state</strong> (what changed), <strong>progression</strong> (where I am) or <strong>spatial relationship</strong> (where this came from). Anything else is removed.</li>
+<li>Duration is proportional to distance travelled. 150ms for a colour change; 200–300ms for a small element; 400ms for a full-page transition. Nothing exceeds 400ms.</li>
+<li>Easing is directional: <code>ease-out</code> for entrances, <code>ease-in</code> for exits, <code>ease-in-out</code> for changes that begin and end on screen.</li>
+<li>Only <code>transform</code> and <code>opacity</code> are animated. Animating layout properties causes reflow and is a direct INP and CLS liability.</li>
+<li>Content is never gated behind motion. Every animated element is in its final, readable state in the server-rendered HTML; motion is applied on top and is entirely optional.</li>
+</ol>
+
+<h2>10.2 Motion tokens</h2>
+<pre>
+--dur-instant  100ms    --ease-out     cubic-bezier(0.16, 1, 0.3, 1)
+--dur-fast     150ms    --ease-in      cubic-bezier(0.7, 0, 0.84, 0)
+--dur-base     250ms    --ease-in-out  cubic-bezier(0.65, 0, 0.35, 1)
+--dur-slow     400ms
+</pre>
+
+<h2>10.3 Interaction inventory, tested against the brief's four questions</h2>
+<p>Each interaction is assessed against: <em>does it improve understanding; does it reinforce hierarchy; does it provide useful feedback; would the experience still work without it.</em></p>
+
+<table>
+<tr><th style="width:24%">Interaction</th><th style="width:11%">Verdict</th><th>Assessment</th></tr>
+<tr><td>Project preview on hover and focus</td><td>Keep</td><td>Improves understanding — shows what the project looks like before committing to a click. Works without it (the entry is a link). Must also fire on keyboard focus, or it is a mouse-only feature.</td></tr>
+<tr><td>View transition on project image into case study</td><td>Keep</td><td>Genuine spatial relationship: the image the reader clicked is the image they land on. Uses the native View Transitions API and degrades to an ordinary navigation where unsupported.</td></tr>
+<tr><td>Reading progress on long pages</td><td>Keep</td><td>Progression feedback on a genuinely long page. Case studies and posts only — never on Home or Contact.</td></tr>
+<tr><td>Sticky section index on About and case studies</td><td>Keep</td><td>Reinforces hierarchy and answers "where am I". Desktop only.</td></tr>
+<tr><td>Expandable technical detail (<code>&lt;details&gt;</code>)</td><td>Keep</td><td>The mechanism that makes the site serve both audiences. Native element, works without JavaScript, correctly announced.</td></tr>
+<tr><td>Interactive architecture diagrams</td><td>Keep, scoped</td><td>Justified only where a system has genuine layers worth revealing — CampusDesk's request lifecycle, NetInsight's offline sync. Implemented as inline SVG with focusable regions and a text alternative. Static SVG must remain fully comprehensible.</td></tr>
+<tr><td>Code block copy button</td><td>Keep</td><td>Useful feedback, real utility. Confirmation announced in a live region.</td></tr>
+<tr><td>Theme toggle transition</td><td>Keep</td><td>A 150ms colour transition prevents a jarring flip. Suppressed entirely under reduced-motion.</td></tr>
+<tr><td>Heading anchor links on hover and focus</td><td>Keep</td><td>Standard, useful, invisible until wanted.</td></tr>
+<tr><td>Staggered fade-up on every section</td><td><strong>Remove</strong></td><td>Fails all four tests. Delays content, risks layout shift, communicates nothing, and is the single clearest marker of generated design.</td></tr>
+<tr><td>Counters animating up from zero</td><td><strong>Remove</strong></td><td>Decorative. Also the site has no real metrics to animate.</td></tr>
+<tr><td>Cursor follower / magnetic buttons</td><td><strong>Remove</strong></td><td>Mouse-only, decorative, and actively harms pointing accuracy.</td></tr>
+<tr><td>Scroll-hijacked horizontal sections</td><td><strong>Remove</strong></td><td>Removes the reader's control of their own scrolling and breaks keyboard navigation.</td></tr>
+<tr><td>Text scramble and typewriter effects</td><td><strong>Remove</strong></td><td>Delays the most important content on the page for an effect.</td></tr>
+<tr><td>Parallax backgrounds</td><td><strong>Remove</strong></td><td>Decorative, a performance cost, and a motion-sickness trigger.</td></tr>
+</table>
+
+<h2>10.4 Reduced motion</h2>
+<pre>
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</pre>
+<p>Beyond the blanket rule: view transitions are disabled at the API level rather than merely shortened; the reading progress bar remains, since it updates position rather than animating; and all content that would otherwise animate in is rendered visible immediately. Reduced motion must produce a complete site, not a degraded one.</p>
+
+<h2>10.5 Keyboard interaction</h2>
+<ul>
+<li>Every interactive element reachable by <kbd>Tab</kbd> in a logical order matching visual order.</li>
+<li>Visible focus on every focusable element: 2px accent ring at 2px offset, meeting the 3:1 contrast requirement against adjacent colours.</li>
+<li><kbd>Escape</kbd> closes the mobile navigation and returns focus to its trigger.</li>
+<li>Skip-to-content as the first focusable element on every page.</li>
+<li>Optional and low-cost: <kbd>/</kbd> to focus search if search is ever added; <kbd>g</kbd> then <kbd>w</kbd> or <kbd>b</kbd> as section jumps, documented in the footer. Implement only if they can be tested properly; an undiscoverable shortcut that intercepts typing is worse than no shortcut.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>11. Accessibility Strategy</h1>
+
+<p><strong>Target: WCAG 2.2 Level AA, verified rather than assumed.</strong> Accessibility is also, for this particular portfolio, a demonstration: a site built by a computer engineering student that passes AA cleanly is an argument that does not need to be made in words.</p>
+
+<h2>11.1 Semantic structure</h2>
+<ul>
+<li>One <code>&lt;h1&gt;</code> per page. No level skipped. Headings chosen for structure, never for size — size comes from the type scale.</li>
+<li>Landmarks: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>. Multiple navigation landmarks distinguished by <code>aria-label</code>.</li>
+<li>Native elements before ARIA in every case: <code>&lt;button&gt;</code> for actions, <code>&lt;a&gt;</code> for navigation, <code>&lt;details&gt;</code> for disclosure, <code>&lt;time&gt;</code> for dates, <code>&lt;table&gt;</code> with proper headers for tabular data.</li>
+<li>Lists marked up as lists. Case study sections as <code>&lt;section&gt;</code> with an <code>aria-labelledby</code> pointing at their heading.</li>
+</ul>
+
+<h2>11.2 Contrast and colour</h2>
+<ul>
+<li>4.5:1 minimum for body text, 3:1 for large text and non-text interface components — verified in both themes, with the computed ratios recorded in the token file as comments so regressions are visible in review.</li>
+<li>No information carried by colour alone: active navigation uses a rule, form errors use icon and text, tags use rules and letterforms.</li>
+<li>Tested at 200% zoom and under forced-colors mode.</li>
+</ul>
+
+<h2>11.3 Keyboard and focus</h2>
+<ul>
+<li>Full operability with no keyboard trap anywhere.</li>
+<li><code>:focus-visible</code> for the visible ring so mouse users are not shown rings unnecessarily, with a <code>:focus</code> fallback.</li>
+<li>WCAG 2.2 2.4.11 satisfied: because the header never hides or overlays content on scroll, a focused element is never obscured by it. This is a case where a design decision made for other reasons also removes an accessibility risk.</li>
+<li>Focus returned to the triggering element when the mobile navigation closes.</li>
+</ul>
+
+<h2>11.4 Target size — WCAG 2.2 SC 2.5.8</h2>
+<p>All pointer targets at least 24×24 CSS pixels, with 44×44 as the working standard for anything reached on a touch device. Inline prose links are exempt under the criterion, but list-item links, tags and navigation are not and are sized accordingly. Adjacent targets are spaced at least 8px apart.</p>
+
+<h2>11.5 Images and diagrams</h2>
+<table>
+<tr><th style="width:26%">Image type</th><th>Alt text rule</th></tr>
+<tr><td>Interface screenshot</td><td>Describe what the interface shows and why it matters: "Staff dashboard listing four pending transcript requests, one flagged as reopened" — not "screenshot of dashboard".</td></tr>
+<tr><td>System diagram</td><td>Short <code>alt</code>, plus a full text description in an adjacent <code>&lt;details&gt;</code> element. For inline SVG: <code>role="img"</code>, <code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code>.</td></tr>
+<tr><td>Chart or table image</td><td>Provide the underlying data as an accessible table. Preferred: do not use an image at all — render the table.</td></tr>
+<tr><td>Portrait</td><td>Name and context.</td></tr>
+<tr><td>Decorative</td><td>There are none. If an image is decorative it should not be in this design.</td></tr>
+</table>
+
+<h2>11.6 Forms and dynamic content</h2>
+<ul>
+<li>Every input has a programmatically associated <code>&lt;label&gt;</code>. Required fields marked in text, not by an asterisk alone.</li>
+<li>Errors: <code>aria-invalid</code>, <code>aria-describedby</code> to the message, and an <code>aria-live="polite"</code> summary region. Focus moves to the first error on submit failure.</li>
+<li>Correct <code>autocomplete</code> tokens on name and email (WCAG 1.3.5).</li>
+<li>Client-side route changes announce the new page title in a live region and reset focus to the top of <code>&lt;main&gt;</code> — the most commonly missed requirement in client-routed sites.</li>
+</ul>
+
+<h2>11.7 Text and language</h2>
+<ul>
+<li><code>lang="en"</code> on the document; <code>lang</code> attributes on any French or other passages.</li>
+<li>All sizing in <code>rem</code> so that browser text-size preferences are respected. No <code>maximum-scale</code> or <code>user-scalable=no</code> in the viewport meta.</li>
+<li>Text reflows without horizontal scrolling at 320px width and 400% zoom (WCAG 1.4.10).</li>
+<li>Descriptive link text throughout: "Read the CampusDesk case study", never "click here" or a bare "read more" repeated down a list.</li>
+</ul>
+
+<h2>11.8 Verification</h2>
+<ul>
+<li><strong>Automated:</strong> <code>axe-core</code> in CI on every route; <code>eslint-plugin-jsx-a11y</code> at lint time; Lighthouse accessibility budget set at 100.</li>
+<li><strong>Manual, per release:</strong> full keyboard pass; NVDA or VoiceOver pass on Home, one case study and one post; 200% zoom; forced-colors; reduced-motion; both themes.</li>
+<li><strong>Recorded:</strong> an accessibility statement at <code>/about#accessibility</code> or in the footer, stating the conformance target and any known gaps. Honest, specific, and itself a professional signal.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>12. Responsive Design Strategy</h1>
+
+<p>The governing rule: <strong>layouts are re-composed, not shrunk.</strong> Where a desktop layout depends on hover, on marginal columns or on horizontal space, the mobile equivalent is designed separately rather than derived by scaling.</p>
+
+<h2>12.1 Behaviour by breakpoint</h2>
+
+<table>
+<tr><th style="width:12%">Element</th><th style="width:22%">Large desktop (1536px+)</th><th style="width:22%">Laptop (1024–1440px)</th><th style="width:22%">Tablet (768–1023px)</th><th>Mobile (&lt;768px)</th></tr>
+<tr><td>Grid</td><td>12 col, 1200px frame, wide margins</td><td>12 col, 1200px frame</td><td>8 col, 32px padding</td><td>4 col, 20px padding</td></tr>
+<tr><td>Navigation</td><td>Full horizontal, rule under active</td><td>Same</td><td>Same, tighter spacing</td><td>Wordmark + theme + menu; full-screen panel</td></tr>
+<tr><td>Display type</td><td>88px</td><td>64px</td><td>48px</td><td>40px, with designed line breaks preserved</td></tr>
+<tr><td>Body type</td><td>17px / 1.65</td><td>17px / 1.65</td><td>17px / 1.6</td><td>17px / 1.6 — <em>not</em> reduced; smaller body text on small screens is a common and unnecessary mistake</td></tr>
+<tr><td>Work index</td><td>Row + adjacent hover preview</td><td>Same</td><td>Row, image below title</td><td>Stacked; image always visible; no hover dependency</td></tr>
+<tr><td>Case study</td><td>Text col 1–7, sticky TOC 9–12</td><td>Same</td><td>TOC becomes a collapsed disclosure at top</td><td>Single column; TOC collapsed; progress bar retained</td></tr>
+<tr><td>Timeline</td><td>Alternating two-column</td><td>Two-column</td><td>Single column, left rule</td><td>Single column, left rule, tighter nodes</td></tr>
+<tr><td>Images</td><td>May break the text column to the wide measure</td><td>Same</td><td>Full content width</td><td>Full-bleed to viewport edges, with the caption inset</td></tr>
+<tr><td>Tables</td><td>Full grid</td><td>Full grid</td><td>Horizontal scroll in own container</td><td>Definition-list transformation for &gt;3 columns</td></tr>
+<tr><td>Code</td><td>Wide measure</td><td>Wide measure</td><td>Full width, horizontal scroll</td><td>Full-bleed, horizontal scroll, 13px</td></tr>
+<tr><td>Footer</td><td>4 columns</td><td>4 columns</td><td>2 columns</td><td>Stacked, generous spacing</td></tr>
+<tr><td>Diagrams</td><td>Inline SVG, full detail</td><td>Same</td><td>Simplified variant, scrollable</td><td>Vertical-flow variant, or a linked full-screen view</td></tr>
+</table>
+
+<h2>12.2 Mobile as a designed experience</h2>
+<ul>
+<li><strong>Full-bleed images.</strong> On mobile the image extends to the viewport edges while text keeps its padding. This produces a deliberate editorial rhythm rather than a narrowed desktop page.</li>
+<li><strong>No hover dependencies anywhere.</strong> Every hover-revealed thing is either always visible on touch or replaced by an explicit control. Verified by auditing the site with hover disabled.</li>
+<li><strong>Touch targets.</strong> 44px minimum with 8px separation.</li>
+<li><strong>Thumb reach.</strong> Primary actions in the lower two-thirds. The mobile menu button is bottom-right-reachable in the open panel, not only top-right.</li>
+<li><strong>Header behaviour.</strong> The header is static, not sticky, on mobile — a sticky header consumes scarce vertical space, and the panel is one scroll-to-top away regardless.</li>
+<li><strong>Table strategy.</strong> Tables of three or fewer columns keep their grid. Wider tables become a definition-list per row, because horizontally scrolling a comparison table on a phone makes comparison impossible.</li>
+<li><strong>Diagrams.</strong> Complex architecture diagrams get a vertical-flow variant authored for mobile rather than a scaled-down desktop SVG. This is real extra work and it is the difference between a diagram that informs and one that is merely present.</li>
+</ul>
+
+<h2>12.3 Implementation approach</h2>
+<ul>
+<li>Mobile-first CSS, with <code>min-width</code> media queries.</li>
+<li>Fluid type via <code>clamp()</code> for display sizes only; body sizes fixed, because fluid body text produces unpredictable measure.</li>
+<li>Container queries for components used in more than one context.</li>
+<li>Tested on a real low-to-mid-range Android device, not only in a desktop browser's device emulator. Given the intended audience and the author's own context, this is not optional.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>13. Technical Architecture</h1>
+
+<h2>13.1 Recommended stack</h2>
+
+<table>
+<tr><th style="width:20%">Layer</th><th style="width:22%">Choice</th><th>Justification</th></tr>
+<tr><td>Framework</td><td>Next.js (App Router), current LTS line</td><td>Static generation for every route, first-class image optimisation, file-based routing that matches the sitemap directly, built-in metadata and sitemap generation, and mature MDX support. Next.js 16.3 is the current Active LTS line, with 15.5 on maintenance; pin to the LTS and follow the security releases, which have been frequent. The author already knows Next.js from the music platform, so the framework is not a new cost.</td></tr>
+<tr><td>Language</td><td>TypeScript, strict</td><td>Already his default. Types on content front matter catch a missing <code>alt</code> or a malformed date at build time rather than in production.</td></tr>
+<tr><td>Styling</td><td>Tailwind CSS with a strict token layer, or CSS Modules with custom properties</td><td><strong>A real decision, not a default.</strong> Tailwind is justified <em>only</em> if the theme is locked down to the design tokens and arbitrary values are disallowed by lint rule — an unconstrained Tailwind config is exactly the mechanism by which sites drift into generic appearance. Recommendation: Tailwind for layout and spacing, with typography, colour and motion as CSS custom properties in a single tokens file. Both are already familiar to the author.</td></tr>
+<tr><td>Content</td><td>MDX files in the repository</td><td>Content lives in Git beside the code: versioned, reviewable, diffable, no external service, no runtime cost, no vendor risk. For a single-author portfolio this is strictly better than a CMS.</td></tr>
+<tr><td>Content pipeline</td><td>Velite or Content Collections with Zod schemas</td><td>Contentlayer, the long-standing default, is effectively unmaintained after its sponsorship lapsed — the project's own issue tracker documents maintainers and users migrating away. Velite is the actively developed successor with the same model (Markdown/MDX in, typed data out, Zod-validated). Alternative: <code>next-mdx-remote</code> with a hand-written front-matter loader, which is more work but has no framework dependency at all.</td></tr>
+<tr><td>Syntax highlighting</td><td>Shiki, at build time</td><td>Build-time highlighting ships zero JavaScript to the client. This matters: a client-side highlighter is often the largest script on a technical blog, and it is a direct INP cost on the pages that most need to be fast.</td></tr>
+<tr><td>Animation</td><td>CSS transitions plus the View Transitions API. Motion (formerly Framer Motion) only if needed.</td><td>Given the motion inventory in Deliverable 10, almost everything is a CSS transition. Adding a ~30KB animation library to deliver colour changes and 8px translations is an unjustified cost. Add it only if a specific interaction genuinely requires orchestration.</td></tr>
+<tr><td>Forms</td><td>Next.js Server Actions plus Resend or Formspree</td><td>Progressive enhancement is native: the form submits without JavaScript. No backend to maintain.</td></tr>
+<tr><td>Analytics</td><td>Vercel Analytics or Plausible</td><td>Cookieless, no consent banner required, negligible payload. Google Analytics is rejected on payload and privacy grounds for a site of this size.</td></tr>
+<tr><td>Hosting</td><td>Vercel</td><td>Static output on a global edge network — which matters specifically for an audience in Europe and North America viewing a site authored in Cameroon. Free tier is sufficient. Cloudflare Pages is an equally valid alternative.</td></tr>
+<tr><td>Fonts</td><td>Self-hosted variable <code>woff2</code> via <code>next/font/local</code></td><td>No third-party request, automatic preloading, and automatic fallback metric matching, which is what actually prevents font-swap layout shift.</td></tr>
+</table>
+
+<h3>13.1.1 Technologies deliberately excluded</h3>
+<ul>
+<li><strong>A headless CMS</strong> (Sanity, Contentful, Payload). Solves a collaboration problem that does not exist for a single author, and introduces a runtime dependency, an API key and a monthly quota.</li>
+<li><strong>A database.</strong> Nothing on the site requires persistent state. View counters and comments are not worth a database, an origin region and an operational surface.</li>
+<li><strong>Three.js or WebGL.</strong> No content requires it; it would contradict the visual direction and cost hundreds of kilobytes.</li>
+<li><strong>GSAP with ScrollTrigger.</strong> Its principal use case here would be the scroll-triggered animation the design explicitly rejects.</li>
+<li><strong>A component library</strong> (shadcn/ui, MUI, Chakra). The component set is small and specific; a library would fight the design system rather than serve it. The author already prefers custom components.</li>
+<li><strong>Astro.</strong> Genuinely excellent for exactly this kind of site and would ship less JavaScript. Not recommended <em>here</em> because Next.js is already familiar, and the fluency gained is directly reusable on the music platform and in employment. This is a deliberate trade of a marginal technical advantage for a compounding practical one — and it is stated rather than hidden.</li>
+</ul>
+
+<h2>13.2 Folder architecture</h2>
+<pre>
+portfolio/
+├── app/
+│   ├── layout.tsx                 root layout, fonts, theme script
+│   ├── page.tsx                   Home
+│   ├── about/page.tsx
+│   ├── work/
+│   │   ├── page.tsx               index
+│   │   └── [slug]/page.tsx        case study
+│   ├── writing/
+│   │   ├── page.tsx
+│   │   ├── [slug]/page.tsx
+│   │   └── tags/[tag]/page.tsx
+│   ├── lab/page.tsx
+│   ├── now/page.tsx
+│   ├── contact/page.tsx
+│   ├── resume/page.tsx
+│   ├── og/[...slug]/route.tsx     generated social images
+│   ├── rss.xml/route.ts
+│   ├── sitemap.ts
+│   ├── robots.ts
+│   ├── not-found.tsx
+│   └── error.tsx
+│
+├── components/
+│   ├── layout/     Header Footer SkipLink ThemeToggle MobileNav
+│   ├── content/    Prose Figure CodeBlock Callout Details
+│   │               Diagram TableWrapper
+│   ├── work/       ProjectRow ProjectPreview CaseStudyHeader
+│   │               DecisionBlock TechList NextProject
+│   ├── writing/    PostRow PostHeader ReadingProgress
+│   │               TableOfContents RelatedPosts TagList
+│   ├── about/      Timeline TimelineEntry SkillGroup
+│   │               ExperienceEntry SectionIndex
+│   └── ui/         Button Link Tag Input Field
+│
+├── content/
+│   ├── work/       campusdesk.mdx  goldstrat.mdx
+│   │               netinsight.mdx  cmip.mdx  educlynk.mdx
+│   ├── writing/    YYYY-MM-DD-slug.mdx
+│   ├── lab/        experiments.json
+│   └── data/       skills.ts  experience.ts  education.ts  now.mdx
+│
+├── lib/
+│   ├── content.ts       typed content queries
+│   ├── reading-time.ts
+│   ├── metadata.ts      per-route metadata builders
+│   └── schema.ts        JSON-LD builders
+│
+├── styles/
+│   ├── tokens.css       colour, type, space, motion — single source
+│   ├── globals.css
+│   └── prose.css        MDX typographic styles
+│
+├── public/
+│   ├── fonts/           self-hosted variable woff2
+│   ├── media/           project images, organised by slug
+│   └── resume.pdf
+│
+├── tests/
+│   ├── a11y/            axe-core route sweep
+│   └── e2e/             Playwright: nav, theme, form, keyboard
+│
+├── velite.config.ts
+├── tailwind.config.ts
+├── next.config.mjs
+└── tsconfig.json
+</pre>
+<p>Two structural principles: content is separated from presentation so that writing a post never requires touching a component; and <code>styles/tokens.css</code> is the single source of design truth, so that a token changed there changes everywhere and nowhere else.</p>
+
+<h2>13.3 Rendering strategy</h2>
+<ul>
+<li>Every route statically generated at build time. Nothing on this site is personalised or time-sensitive at request time.</li>
+<li>Case studies and posts generated via <code>generateStaticParams</code> from the content layer.</li>
+<li>Server Components by default; <code>"use client"</code> only for the theme toggle, mobile navigation, reading progress, table-of-contents highlighting, copy button and contact form.</li>
+<li>Deployment triggered by push to <code>main</code>; publishing a post is a commit.</li>
+</ul>
+
+<h2>13.4 SEO and metadata</h2>
+<ul>
+<li>Per-route <code>generateMetadata</code>: unique title and description, canonical URL, Open Graph and Twitter card data.</li>
+<li>JSON-LD: <code>Person</code> on Home and About, <code>BlogPosting</code> on posts, <code>CreativeWork</code> on case studies, <code>BreadcrumbList</code> where breadcrumbs appear.</li>
+<li>Social preview images generated at build from a typographic template — title, section label, wordmark — using the site's own fonts. No photography, consistent with the visual direction.</li>
+<li>Generated <code>sitemap.xml</code> and <code>robots.txt</code>.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>14. Blog Architecture</h1>
+
+<h2>14.1 Recommendation</h2>
+<p><strong>MDX in the repository, typed and validated by a Zod-schema content layer.</strong> The reasoning is given in Deliverable 13. The decisive points for a single author: content is versioned alongside code, drafts are branches, publishing is a commit, there is no runtime dependency and no monthly cost, and a schema violation fails the build rather than reaching production. A CMS would be the right answer if there were non-technical authors or a mobile publishing requirement. There are neither.</p>
+
+<h2>14.2 Post types</h2>
+<table>
+<tr><th style="width:20%">Type</th><th style="width:12%">Length</th><th>Purpose and examples from the record</th></tr>
+<tr><td>Technical article</td><td>1,500–3,000</td><td>A problem explained properly. <em>Fixing a TOCTOU race in Laravel with</em> <code>lockForUpdate</code>; <em>why manual tick-value arithmetic produced ten-times lot sizes</em>.</td></tr>
+<tr><td>Project retrospective</td><td>1,000–2,000</td><td>What was learned after finishing. <em>Two reopen designs I rejected and the third I shipped.</em></td></tr>
+<tr><td>Learning note</td><td>400–1,000</td><td>Something understood this week. <em>WAL recovery, finally; what serializability actually means.</em></td></tr>
+<tr><td>Career reflection</td><td>800–1,500</td><td><em>Resigning from an internship I wanted to keep; what a DevOps talk changed about my plan.</em></td></tr>
+<tr><td>Short thought</td><td>200–500</td><td>A single observation. The type that keeps the blog alive between long pieces — and the reason the index must not require a thumbnail per post.</td></tr>
+<tr><td>Experiment</td><td>500–1,500</td><td><em>Benchmarking WSL2 against Docker with sysbench; four versions of a Playwright form filler.</em></td></tr>
+<tr><td>Tutorial</td><td>1,500–3,000</td><td>Reproducible instructions. <em>A GoHighLevel custom workflow action in Laravel, end to end.</em></td></tr>
+</table>
+<p>Post type is metadata, not a separate layout. Seven post templates would be six too many.</p>
+
+<h2>14.3 Front matter schema</h2>
+<pre>
+---
+title: "Fixing a TOCTOU race in Laravel"
+slug: "toctou-laravel-lockforupdate"
+date: 2026-10-14
+updated: null
+type: "technical"
+tags: ["laravel", "concurrency", "mysql"]
+summary: "Two staff members could claim the same request stage.
+          The first fix did not work; here is why."
+draft: false
+featured: false
+relatedWork: ["campusdesk"]
+relatedPosts: []
+cover: null
+---
+</pre>
+<ul>
+<li><code>draft: true</code> excludes a post from the build in production while remaining visible in development. Drafts therefore live in <code>main</code> safely.</li>
+<li><code>updated</code> displayed only when present, as "Updated 4 March 2027" beneath the original date — honest, and useful for technical posts that age.</li>
+<li><code>summary</code> is required and is reused for the index, the meta description and the RSS feed. Making it required prevents the pattern of an index that truncates the first paragraph mid-sentence.</li>
+<li><code>relatedWork</code> and <code>relatedPosts</code> are hand-authored, for the reason stated in Section 6.4.</li>
+</ul>
+
+<h2>14.4 Taxonomy</h2>
+<ul>
+<li><strong>Types</strong> are a fixed enumeration of the seven above, enforced by schema.</li>
+<li><strong>Tags</strong> are free-form but governed by a curated list in <code>content/data/tags.ts</code>; a tag outside the list fails the build. Without this discipline a blog accumulates <code>js</code>, <code>javascript</code> and <code>JavaScript</code> as three distinct tags within a year.</li>
+<li>Tag archives are generated at <code>/writing/tags/[tag]</code> and are indexable.</li>
+<li><strong>No categories.</strong> Types and tags are already two axes; a third is organisation for its own sake.</li>
+</ul>
+
+<h2>14.5 Reading experience</h2>
+<ul>
+<li>Reading time computed at build from word count at 200 words per minute, with code blocks counted at a reduced rate — code is scanned, not read, and counting it at prose rate inflates every technical post.</li>
+<li>Measure held at 62–72 characters. Code and images may break out to the wide measure.</li>
+<li>Headings receive generated <code>id</code>s and anchor links revealed on hover and focus.</li>
+<li>Footnotes supported via <code>remark-gfm</code>, rendered at the foot with bidirectional links.</li>
+<li>A custom <code>Callout</code> component with three variants — note, warning, aside — rendered as a left rule plus a label, never as a coloured filled box.</li>
+<li>Related posts: hand-authored first, falling back to shared tags, capped at three.</li>
+</ul>
+
+<h2>14.6 Feed and distribution</h2>
+<ul>
+<li><code>/rss.xml</code> with full content, not summaries. RSS readers are disproportionately used by exactly the engineering audience this site is for.</li>
+<li>Feed link in the footer and as <code>&lt;link rel="alternate"&gt;</code> in the head.</li>
+<li>Per-post generated social preview image using the typographic template.</li>
+<li>Canonical URLs set correctly on any post cross-published to Dev.to, Hashnode or Medium, so that the portfolio retains the search authority.</li>
+</ul>
+
+<h2>14.7 Publishing workflow</h2>
+<pre>
+1.  Create content/writing/YYYY-MM-DD-slug.mdx with draft: true
+2.  Write locally; hot reload shows the post rendered
+3.  Build validates front matter against the Zod schema
+4.  Set draft: false, commit, push to main
+5.  Deployment builds, regenerates the index, RSS, sitemap
+    and social image
+6.  No CMS, no dashboard, no deploy hook to remember
+</pre>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>15. Performance Strategy</h1>
+
+<h2>15.1 Budgets</h2>
+<table>
+<tr><th style="width:34%">Metric</th><th style="width:22%">Budget</th><th>Note</th></tr>
+<tr><td>Largest Contentful Paint</td><td>&lt; 1.8s</td><td>Tightened below the 2.5s "good" threshold to leave headroom for slow networks.</td></tr>
+<tr><td>Interaction to Next Paint</td><td>&lt; 150ms</td><td>Below the 200ms threshold. INP is the most commonly failed vital and the one the design decisions in this document most directly protect.</td></tr>
+<tr><td>Cumulative Layout Shift</td><td>&lt; 0.05</td><td>Half the threshold. Achievable because every image is dimensioned and fonts are metric-matched.</td></tr>
+<tr><td>Time to First Byte</td><td>&lt; 400ms</td><td>Static edge delivery.</td></tr>
+<tr><td>JavaScript, initial route</td><td>&lt; 90KB compressed</td><td>The single most protected number in this list.</td></tr>
+<tr><td>CSS, initial route</td><td>&lt; 20KB compressed</td><td></td></tr>
+<tr><td>Fonts, total</td><td>&lt; 120KB</td><td>Three subset variable files.</td></tr>
+<tr><td>Largest page total</td><td>&lt; 600KB</td><td>Including images, on the heaviest case study.</td></tr>
+<tr><td>Lighthouse</td><td>≥ 98 / 100 / 100 / 100</td><td>Performance, accessibility, best practices, SEO.</td></tr>
+</table>
+<p>These are measured at the 75th percentile of field data on a mid-range Android device over a throttled connection — the condition Google actually grades against, and the condition much of the intended audience actually browses under.</p>
+
+<h2>15.2 Images</h2>
+<ul>
+<li>AVIF primary, WebP fallback, generated at build by <code>next/image</code>.</li>
+<li>Explicit width and height on every image without exception — the largest single CLS risk on a screenshot-heavy site.</li>
+<li>Above-the-fold images eager with <code>fetchpriority="high"</code>; everything else lazy with a native <code>loading="lazy"</code>.</li>
+<li><code>sizes</code> accurately reflecting layout so no device downloads a larger file than it displays.</li>
+<li>Low-quality blurred placeholders generated at build.</li>
+<li>Screenshots capped at 1600px wide before processing. Source images are compressed before they enter the repository.</li>
+</ul>
+
+<h2>15.3 Fonts</h2>
+<ul>
+<li>Self-hosted variable <code>woff2</code>, subset to Latin plus the punctuation actually used.</li>
+<li><code>font-display: swap</code> with <code>next/font/local</code>, which generates a metric-matched fallback so the swap does not move the layout.</li>
+<li>Preload only the two faces used above the fold — display serif and body sans. The mono face loads normally, since no code appears in any first viewport.</li>
+<li>Variable fonts mean one file per family rather than four static weights: fewer requests and fewer bytes for more typographic range.</li>
+</ul>
+
+<h2>15.4 JavaScript</h2>
+<ul>
+<li>Server Components by default. Six client components in total, named in Section 13.3.</li>
+<li>Syntax highlighting at build time — zero client cost.</li>
+<li>No animation library unless a specific interaction proves it necessary.</li>
+<li>Dynamic import with <code>next/dynamic</code> for anything below the fold, such as interactive diagrams.</li>
+<li><code>@next/bundle-analyzer</code> run before each release; any dependency above 10KB must be justified in the pull request description.</li>
+</ul>
+
+<h2>15.5 Delivery and caching</h2>
+<ul>
+<li>Fully static output on an edge network. Immutable hashed asset filenames with a one-year cache lifetime; HTML revalidated.</li>
+<li><code>next/link</code> prefetching on viewport entry for internal routes — a real advantage of client-side routing, and the reason navigation between case studies feels instant.</li>
+<li>Third-party requests: zero, apart from the analytics beacon. No external fonts, no icon CDN, no embedded widgets.</li>
+</ul>
+
+<h2>15.6 Progressive enhancement</h2>
+<p>A working baseline without JavaScript, verified by testing with scripts disabled: all content readable; all navigation functional; the contact form submits via a Server Action; disclosure elements open and close natively; the theme falls back to the operating system preference. What is lost: the theme toggle, the reading progress bar, the copy button, view transitions and the hover preview. Every one of those is an enhancement, and none of them carries content.</p>
+
+<h2>15.7 Monitoring</h2>
+<ul>
+<li>Lighthouse CI on every pull request with the budgets above enforced as hard failures.</li>
+<li>Real-user vitals collected through the analytics provider.</li>
+<li>A quarterly manual check on an actual mid-range device over mobile data.</li>
+</ul>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>16. Implementation Roadmap</h1>
+
+<p>Eleven phases, sequenced so that content precedes design and design precedes implementation. No durations or target dates are attached to any phase; the work proceeds alongside the current V-Groups internship attachment and academic commitments at whatever pace those allow, and each phase's exit condition — not a calendar — determines when the next one starts.</p>
+
+<table>
+<tr><th style="width:5%">#</th><th style="width:26%">Phase</th><th>Output and exit condition</th></tr>
+<tr><td>0</td><td><strong>Close the content gaps</strong></td><td>Resolve the one open item in Section 1.14 (a GitHub handle and a public/private decision on repositories). Gather screenshots, demos and repository links as they become available. <em>Exit: no open item remains that blocks a page.</em> <strong>Do not skip this phase.</strong> Building first and writing later is how portfolios end up with lorem ipsum in production.</td></tr>
+<tr><td>1</td><td>Write the content</td><td>Five case studies and the About page written in full, in Markdown, in a plain text editor with no styling. Two or three blog posts drafted. <em>Exit: the site could be published as plain text and still be worth reading.</em></td></tr>
+<tr><td>2</td><td>Design system in code</td><td><code>tokens.css</code> complete; type scale, colour in both themes, spacing, motion tokens. A specimen page rendering every token and every component state. Contrast ratios verified and recorded. <em>Exit: the specimen page is approved before any page layout exists.</em></td></tr>
+<tr><td>3</td><td>Mockups</td><td>Run the master prompt in Deliverable 17. Review against the rejected-patterns list in Section 8.5. Iterate. <em>Exit: desktop, tablet and mobile mockups approved for every page.</em></td></tr>
+<tr><td>4</td><td>Project setup</td><td>Next.js, TypeScript strict, Tailwind bound to tokens, content layer with schemas, fonts, ESLint with the a11y plugin, Prettier, Git, Vercel preview deployments. <em>Exit: a deployed blank site passing lint and type checks.</em></td></tr>
+<tr><td>5</td><td>Core layout and content pipeline</td><td>Root layout, header, footer, theme toggle, skip link, MDX rendering, Shiki highlighting, prose styles. <em>Exit: a case study renders correctly from its MDX file.</em></td></tr>
+<tr><td>6</td><td>Pages</td><td>Home, Work index, case study template, About, Writing index, post template, Lab, Now, Contact, Resume, error pages. <em>Exit: every route in the sitemap resolves with real content.</em></td></tr>
+<tr><td>7</td><td>Interaction and motion</td><td>Only the interactions marked Keep in Section 10.3. Reduced-motion handling. Full keyboard pass. <em>Exit: every interaction works by keyboard and the site is complete with motion disabled.</em></td></tr>
+<tr><td>8</td><td>Accessibility and performance</td><td><code>axe-core</code> sweep, screen-reader pass, zoom and forced-colors testing, image optimisation, bundle analysis, Lighthouse CI budgets. <em>Exit: all budgets in Deliverable 15 met on a real mid-range device.</em></td></tr>
+<tr><td>9</td><td>SEO, feed and launch</td><td>Metadata, JSON-LD, sitemap, robots, RSS, generated social images, analytics, domain, redirects from the old portfolio. <em>Exit: live, indexed, with old URLs redirecting.</em></td></tr>
+<tr><td>10</td><td>Maintenance rhythm</td><td>Ongoing, no end state. Periodically: update <code>/now</code>, publish a post when there is something worth writing. After finishing anything: write the retrospective while it is fresh, rather than letting it wait for a dedicated writing session that may not come.</td></tr>
+</table>
+
+<h2>16.1 A note on sequencing</h2>
+<p>All eleven phases run during the current V-Groups internship attachment and the final year of study, worked in alongside both rather than deferred until either finishes. This portfolio is itself one of the projects being built during the attachment, alongside the GoHighLevel application work described in Section 1.4.2. That has one direct consequence for phase 0 and phase 1: the attachment is actively generating the professional material this document draws on, so the discipline that matters most is documenting the V-Groups and GHL work as it happens rather than reconstructing it from memory once the attachment has ended.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h1>17. Complete Mockup-Generation Master Prompt</h1>
+
+<p>Everything from this point to the end of the document is the prompt. It is written to stand alone: a mockup agent needs no access to this conversation or to any other part of this document. Copy it in full.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<h2>17.1 Brief</h2>
+
+<p>Design a complete set of high-fidelity mockups for a personal portfolio website. Produce desktop, tablet and mobile layouts for every page listed, plus the specified component states. This is a design exercise, not an implementation exercise — deliver mockups, not code.</p>
+
+<h2>17.2 Who the site is for</h2>
+
+<p>The subject is Mokom — full name Nkeng Sama Mokom — a final-year (Level 400) B.Eng. Computer Engineering student at the University of Buea, Cameroon, based in Buea within the Silicon Mountain technology cluster, expecting to graduate in 2027. He is currently partway through a six-month industrial attachment at a software company in Yaoundé.</p>
+
+<p>He is a full-stack engineer whose deepest work is on the backend: Laravel and PHP, NestJS, Node.js, PostgreSQL and MySQL, with React, Next.js, Vue 3 and TypeScript on the frontend, plus Docker, AWS and MQL5 algorithmic trading systems. He has interned as a junior developer on a production React and Laravel platform, and he builds systems aimed at problems he can see around him: university document processing, mobile network quality measurement in Cameroon, digital infrastructure for the local music industry.</p>
+
+<p>Two things define him and must be legible in the design. First, he engineers for local conditions — offline-capable data collection, mobile-money payments, systems that work on poor connections. Second, he learns deliberately: on his main project he imposed a rule on himself that all backend code must be hand-written against official documentation, with AI restricted to review only. He is also intellectually honest to an unusual degree — his algorithmic trading work includes the finding that an eight-year backtest's apparent profitability came from riding a two-year market regime rather than from any real edge.</p>
+
+<p>He is aiming at international software engineering roles, principally through African technology consultancies and talent marketplaces.</p>
+
+<h2>17.3 What the portfolio is for</h2>
+
+<p>It must, in priority order: convert a recruiter's thirty-second scan into an interview; give a senior engineer evidence of judgement rather than a list of technologies; show the person and not only the practitioner; make growth over time visible; house a blog; and — because the subject is a frontend engineer — be itself the strongest piece of frontend craft on display.</p>
+
+<h2>17.4 Audiences</h2>
+<ul>
+<li><strong>Technical recruiters</strong> — 20 to 45 seconds. Need level, stack, location, availability, one credible project, and the CV.</li>
+<li><strong>Hiring engineers</strong> — 3 to 10 minutes. Need evidence of reasoning and debugging ability.</li>
+<li><strong>Consultancy assessors</strong> — 2 to 5 minutes. Need breadth, communication quality and self-direction.</li>
+<li><strong>Prospective freelance clients</strong> — 1 to 2 minutes. Need to see comparable problems solved.</li>
+<li><strong>Peer engineers arriving from a blog post</strong> — need to know who wrote it and what else is here.</li>
+<li><strong>Non-technical visitors</strong> — need plain language before technical depth on every page.</li>
+</ul>
+
+<h2>17.5 Site architecture</h2>
+<pre>
+/                    Home
+/about               About — person, journey, experience,
+                     education, skills, interests, values
+/work                Work index
+/work/[slug]         Case study
+/writing             Blog index
+/writing/[slug]      Blog post
+/lab                 Experiments
+/now                 Currently building and learning
+/contact             Contact
+/resume              CV, with PDF download
+</pre>
+
+<h2>17.6 The design direction</h2>
+
+<p><strong>Engineering documentation, set to editorial standards.</strong></p>
+
+<p>The reference point for quality is Apple's digital design work — clean layouts, strong typography, generous whitespace, restrained effects, excellent hierarchy, purposeful animation, content foregrounded above everything. <strong>Do not produce an Apple clone.</strong> Take the underlying discipline, not the surface vocabulary. Specifically: adopt one idea per viewport, typography as primary imagery, extreme spacing discipline, and a severely restricted palette. Do not adopt full-bleed cinematic photography or translucent glass materials.</p>
+
+<p>The surface vocabulary should come instead from technical publishing and editorial design: serif display type, hairline rules, captioned figures, marginal metadata, asymmetric grids, and a structural rather than decorative use of space. The subject writes formal technical specifications as a matter of habit and has strong typographic taste, so this direction is an honest expression of him rather than a costume.</p>
+
+<h3>Five governing rules</h3>
+<ol>
+<li><strong>Type does the work.</strong> Before reaching for a graphic, a border, a shadow or a colour, try solving the problem with size, weight, spacing or position.</li>
+<li><strong>Every effect must name its job.</strong> If an element cannot be described as communicating hierarchy, state, progression or spatial relationship, remove it.</li>
+<li><strong>Space is structural.</strong> Separation between sections should be four to six times the separation within them.</li>
+<li><strong>Colour means something.</strong> Near-monochrome, with one functional accent reserved for links, focus and active state.</li>
+<li><strong>Restraint is the differentiator.</strong> Disciplined subtraction is the clearest signal of human design.</li>
+</ol>
+
+<h2>17.7 Typography</h2>
+<ul>
+<li><strong>Display and headings:</strong> a contemporary or transitional serif with a variable weight axis — Instrument Serif, Newsreader, Fraunces or Source Serif 4.</li>
+<li><strong>Body and interface:</strong> a neutral, highly legible sans — Inter, Public Sans or IBM Plex Sans.</li>
+<li><strong>Code, data and metadata labels:</strong> a monospace with a clear zero and unambiguous <code>l</code>, <code>1</code>, <code>I</code> — JetBrains Mono or IBM Plex Mono.</li>
+<li>Three families maximum.</li>
+</ul>
+
+<p>Scale (1.25 modular; the two display sizes are fluid):</p>
+<pre>
+Display  44–88px   serif      line-height 1.05   tracking -0.02em
+H1       36–56px   serif      1.12   -0.015em
+H2       32px      serif      1.20   -0.01em
+H3       24px      serif      1.30    0
+H4       20px      sans 600   1.40    0
+Lead     20px      sans 400   1.55    0
+Body     17px      sans 400   1.65    0
+Small    15px      sans 400   1.55    0
+Meta     13px      mono 500   1.40    0.04em, uppercase
+Code     14px      mono 400   1.60    0
+</pre>
+<ul>
+<li>Line height must fall as size rises. Do not apply one line height across the scale.</li>
+<li>Negative tracking on display sizes only.</li>
+<li>Prose measure 62–72 characters. This is not negotiable.</li>
+<li>Body text stays at 17px on mobile. Do not reduce it.</li>
+</ul>
+
+<h2>17.8 Layout</h2>
+<pre>
+Grid          12 columns, 24px gutters
+Content frame 1200px maximum
+Prose         68ch maximum
+Wide          920px (images, tables, code)
+Padding       mobile 20px | tablet 32px | desktop 48px | large 64px
+Spacing unit  4px base: 4 8 12 16 24 32 48 80 128 192
+
+Between paragraphs        24px
+Heading to body           16px
+Body to next heading      48px
+Between subsections       80px
+Between major sections    128–192px
+</pre>
+<p>Use the twelve-column grid asymmetrically: body text at columns 1–7 with marginal metadata at 9–12 produces visual interest structurally, without ornament.</p>
+
+<h2>17.9 Colour</h2>
+<p>Two separately tuned themes. Do not derive the dark theme by inverting the light one.</p>
+<pre>
+LIGHT                          DARK
+bg           #FCFCFA           bg           #121212
+bg-subtle    #F4F4F1           bg-subtle    #1C1C1B
+text         #161614           text         #E8E8E4
+text-muted   #5C5C57           text-muted   #A0A09A
+text-faint   #8A8A83           text-faint   #6E6E68
+rule         #DEDED8           rule         #2A2A28
+rule-strong  #B4B4AC           rule-strong  #3E3E3A
+accent       #1A4D8F           accent       #7FB0E8
+</pre>
+<ul>
+<li>One accent only, used solely for links, focus rings, active navigation and form state. Never decorative, never as a large background fill.</li>
+<li>No pure black and no pure white. No gradients anywhere — not on surfaces, not on text, not on borders.</li>
+<li>Both themes are first-class. Neither is the default; the initial value follows the operating system.</li>
+</ul>
+
+<h2>17.10 Components</h2>
+<ul>
+<li><strong>Navigation:</strong> text links, 15px, generously spaced. Active item marked by a 2px rule beneath, never by colour alone. No background fill, no blur. After 80px of scroll the header gains a bottom hairline and loses 8px of height. It never hides on scroll.</li>
+<li><strong>Buttons:</strong> two variants only — solid accent with white text, and transparent with a 1px rule. 2px radius, 12px/24px padding, 44px minimum height. No transform on hover; colour change only.</li>
+<li><strong>Links in prose:</strong> underlined at rest, 2px offset, 1px thickness, thickening to 2px on hover. Underline at rest, not on hover.</li>
+<li><strong>Cards: do not use them.</strong> Project entries are horizontal bands separated by hairline rules. Where a container is genuinely required, it is a 1px rule with no fill, no radius and no shadow. This is the most important single instruction in this section.</li>
+<li><strong>Project previews:</strong> a row of number, title, one-line outcome, year, role. On desktop, hover and focus reveal a preview image in an adjacent column. On mobile the image is simply present inline.</li>
+<li><strong>Blog previews:</strong> an editorial list row — date in mono, title in serif, one-line summary, reading time. No thumbnails on the index.</li>
+<li><strong>Images:</strong> 1px rule, no radius, no shadow, no device mockup frames. Italic caption below, left-aligned.</li>
+<li><strong>Code blocks:</strong> 1px rule, subtle fill, 2px radius, 16px padding, 14px mono. Two-colour syntax only — muted comments and strings, everything else at body colour. Language label top-right in mono meta. No multi-colour syntax themes.</li>
+<li><strong>Tags:</strong> the only permitted pill. 12px mono uppercase, 1px rule, no fill, fully rounded. Never used for navigation or buttons.</li>
+<li><strong>Timeline:</strong> a 1px vertical rule with small <em>square</em> nodes. Year in mono at left, content at right.</li>
+<li><strong>Forms:</strong> labels above inputs, always visible, never placeholder-only. 1px rule, 2px radius, transparent fill, 44px minimum height. Focus produces a 2px accent ring at 2px offset.</li>
+<li><strong>Footer:</strong> separated by a strong rule. Four columns on desktop, two on tablet, stacked on mobile: site statement, full navigation, external links, colophon with location, timezone and last-updated date.</li>
+<li><strong>Modals:</strong> exactly one — the mobile navigation panel, full screen.</li>
+</ul>
+
+<h2>17.11 Page requirements</h2>
+
+<h3>Home</h3>
+<p>In order: a large typographic opening statement (name, discipline, location, current status) as real text, no hero image; a two-to-three sentence positioning paragraph; exactly three selected work entries, each showing an outcome rather than a technology list; two recent blog posts; a two-line "currently" pull; a contact invitation. One focal point only. Show both the resting state and the hovered work-entry state.</p>
+
+<h3>About</h3>
+<p>First-person narrative with a portrait; a four-stage journey timeline (foundations, breadth, first production work, deliberate depth); professional experience entries; education; skills grouped by domain with plain-language proficiency statements; interests outside technology; values. Narrative comes first and credentials second. A sticky section index on desktop. <strong>No skill percentage bars, no star ratings, no radar charts.</strong></p>
+
+<h3>Work index</h3>
+<p>Five case studies as substantial horizontal bands — title, one-line problem statement, role, year, technologies, one representative image. Below them, a compact table of shorter entries. Case studies must occupy roughly six times the vertical space of short entries; the visual hierarchy between them is the point. No filter chips.</p>
+
+<h3>Case study</h3>
+<p>A long editorial page. Header with title, one-line problem, role, timeframe, status, technologies, links; plain-language summary; context; the problem stated from the user's position; users; constraints; the subject's role; an architecture diagram; two to four key decisions each showing the alternative rejected and why; one engineering problem examined in depth; a section describing what went wrong; captioned visual evidence; outcome; current state; what the subject would do differently; footer with related writing and the next case study. Include a marginal table of contents on desktop, a reading progress indicator, and collapsed disclosure elements for deep technical detail. Show one disclosure element in both its collapsed and expanded states.</p>
+
+<h3>Writing index</h3>
+<p>An editorial list: date in mono, title in serif, one-line summary, reading time, tags. The most recent post given more space. Tag index. RSS link. No card grid.</p>
+
+<h3>Blog post</h3>
+<p>Title, date, reading time, tags, body at 62–72 characters, author note, related posts, previous and next. Reading progress indicator. Marginal table of contents on desktop. Show at least one code block and one image with caption.</p>
+
+<h3>Lab</h3>
+<p>A dense two-column list of experiments: title, one-sentence description, year, link. Framed honestly as experiments rather than products.</p>
+
+<h3>Now</h3>
+<p>A dated heading and three short blocks — building, learning, thinking about. Under 300 words. Deliberately plain.</p>
+
+<h3>Contact</h3>
+<p>A specific statement of what the subject is open to; the email address as visible selectable text; a short form (name, email, subject select, message); GitHub and LinkedIn; location and timezone. Show the form in its default, focused and error states.</p>
+
+<h3>Resume</h3>
+<p>The full CV as a readable HTML page with a prominent PDF download control stating the file size.</p>
+
+<h2>17.12 Interaction expectations</h2>
+<p>Show these in the mockups where relevant. Every one must work by keyboard as well as by mouse:</p>
+<ul>
+<li>Project preview revealed on hover <em>and on keyboard focus</em>.</li>
+<li>A view transition carrying the project image into the case study.</li>
+<li>Reading progress on long pages only.</li>
+<li>A sticky section index on About and case studies (desktop only).</li>
+<li>Collapsed disclosure elements for deep technical detail.</li>
+<li>Copy-to-clipboard on code blocks.</li>
+<li>Heading anchor links revealed on hover and focus.</li>
+<li>A 150ms colour transition on the theme toggle.</li>
+</ul>
+<p>Motion rules: animate only <code>transform</code> and <code>opacity</code>; nothing exceeds 400ms; <code>ease-out</code> for entrances and <code>ease-in</code> for exits; no content is ever gated behind an animation.</p>
+
+<h2>17.13 Accessibility expectations</h2>
+<p>Design to WCAG 2.2 Level AA. Specifically: 4.5:1 contrast for body text and 3:1 for large text and interface components, verified in both themes; a visible 2px focus ring at 2px offset on every interactive element, shown in the mockups; pointer targets of at least 24×24 CSS pixels, with 44×44 on touch; no information carried by colour alone; a skip-to-content link as the first focusable element; visible form labels with errors shown in text and shape as well as colour; a logical heading hierarchy with no level skipped. Include a focus-state mockup for the navigation, a button and a form field.</p>
+
+<h2>17.14 Responsive expectations</h2>
+<p>Deliver every page at four widths: 1440px, 1024px, 768px and 375px. Layouts must be <strong>re-composed, not shrunk</strong>. Required transformations:</p>
+<ul>
+<li>Header collapses to wordmark, theme toggle and menu button; the menu opens a full-screen panel with generously spaced targets — not a cramped dropdown.</li>
+<li>Work entries lose the hover preview entirely and show the image inline instead.</li>
+<li>Images go full-bleed to the viewport edges on mobile while text keeps its padding.</li>
+<li>The case study's marginal table of contents becomes a collapsed disclosure at the top.</li>
+<li>Tables of more than three columns become definition lists.</li>
+<li>Code blocks go full-bleed with horizontal scroll inside their own container, so the page body never scrolls sideways.</li>
+<li>The alternating timeline becomes a single column with a left rule.</li>
+<li>Display type reduces to 40px but keeps its designed line breaks.</li>
+<li>Body text stays at 17px.</li>
+</ul>
+
+<h2>17.15 Prohibited — do not produce generic AI or "vibecoded" UI</h2>
+<p>None of the following may appear anywhere in the mockups:</p>
+<ul>
+<li>Gradients of any kind — background, text or border.</li>
+<li>Glassmorphism, frosted panels, backdrop blur.</li>
+<li>Glowing, neon or animated borders.</li>
+<li>Cards that float, lift, tilt or scale on hover.</li>
+<li>Bento grids.</li>
+<li>Border radii above 4px on any container.</li>
+<li>Pill-shaped navigation or buttons (tags only).</li>
+<li>Box shadows in any resting state.</li>
+<li>Blurred decorative shapes, mesh backgrounds, particle effects, grid overlays.</li>
+<li>Skill percentage bars, star ratings, radar charts.</li>
+<li>Animated counters, typewriter effects, text scramble.</li>
+<li>Emoji as iconography or in section headings.</li>
+<li>Stock photography or illustrated avatars.</li>
+<li>Generic SaaS landing-page patterns — feature grids of three icon-heading-paragraph units, testimonial carousels, pricing-style comparison blocks.</li>
+<li>Multi-colour syntax highlighting themes.</li>
+<li>Fade-up-on-scroll applied indiscriminately to every section.</li>
+<li>Full-width coloured banners or alert bars.</li>
+<li>Device mockup frames around screenshots.</li>
+</ul>
+
+<h2>17.16 Prioritise</h2>
+<p>Typography above all. Then: composition, hierarchy, storytelling, whitespace, detail, usability, consistency, restraint, accessibility, responsive behaviour, professional craftsmanship. The result should look like the output of a serious professional product-design process — something that could plausibly have come from a designer who thought carefully about every rule and every space, and who removed more than they added.</p>
+
+<h2>17.17 Deliverables</h2>
+<ol>
+<li>All ten pages at 1440px, 1024px, 768px and 375px — forty screens.</li>
+<li>Home and one case study in <strong>both light and dark themes</strong>.</li>
+<li>Component states: navigation default, hovered, focused and active; buttons in both variants across default, hover, focus and disabled; form fields in default, focused, filled and error; a work entry in default and hovered; a disclosure element collapsed and expanded; the mobile navigation panel open.</li>
+<li>A type specimen sheet showing every level of the scale in both serif and sans.</li>
+<li>A colour specimen sheet showing both themes with contrast ratios annotated.</li>
+<li>A spacing specimen showing the vertical rhythm applied to a real section.</li>
+</ol>
+<p>Deliver at high resolution. Use real, plausible content throughout — real project names (CampusDesk, GoldStrat, NetInsight, Cameroon Music Industry Platform, EducLynk), real technologies, real-sounding headlines. Do not use lorem ipsum, and do not use placeholder blocks where an image belongs.</p>
+
+<hr style="border: 1px solid #000000;">
+
+<p style="text-align:center; font-size:10pt; margin-top:2em;">END OF DOCUMENT</p>
+
+</body>
+</html>

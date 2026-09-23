@@ -1,0 +1,12 @@
+# robots.txt for portfolio website
+# Allows all search engine bots to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://sama-mokom.github.io/portfolio/sitemap.xml
+
+# Disallow crawling of any future admin or private areas
+# Disallow: /admin/
+# Disallow: /private/

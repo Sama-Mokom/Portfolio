@@ -2,7 +2,8 @@ import Link from "@/components/link";
 import { projects } from "@/content/projects";
 import { otherWork } from "@/content/profile";
 import { PageIntro, Arrow, Tags, SectionHeading } from "@/components/ui";
-import { ProjectArt } from "@/components/project-art";
+import { ProjectMedia } from "@/components/project-media";
+import { ProjectLinks } from "@/components/project-links";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Work",
@@ -22,9 +23,14 @@ export default function Work() {
           <article className="work-band" key={p.slug}>
             <Link
               href={`/work/${p.slug}`}
-              aria-label={`Explore the ${p.title} architecture`}
+              aria-label={`Read the ${p.title} case study`}
             >
-              <ProjectArt slug={p.slug} />
+              <ProjectMedia
+                project={p}
+                className="work-project-media"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                decorative
+              />
             </Link>
             <div>
               <span className="eyebrow">
@@ -39,6 +45,7 @@ export default function Work() {
               <Link href={`/work/${p.slug}`} className="text-link">
                 Read the {p.title} study <Arrow />
               </Link>
+              <ProjectLinks project={p} />
             </div>
           </article>
         ))}
@@ -58,7 +65,23 @@ export default function Work() {
                     </span>
                   ))}
                 </div>
-                {item.href && <a href={item.href}>Visit {item.title} ↗</a>}
+                <div className="project-links">
+                  {item.repository && (
+                    <a href={item.repository} target="_blank" rel="noreferrer">
+                      View code <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                  {item.href &&
+                    (item.href.startsWith("http") ? (
+                      <a href={item.href} target="_blank" rel="noreferrer">
+                        Visit live site <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <Link href={item.href}>
+                        Explore the work <Arrow />
+                      </Link>
+                    ))}
+                </div>
               </dd>
             </div>
           ))}

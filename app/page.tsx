@@ -39,13 +39,17 @@ export default function Home() {
       />
       <section className="container hero">
         <div className="hero-copy">
-          <span className="eyebrow">Engineering for the world around me</span>
+          <p className="eyebrow">Engineering for the world around me</p>
           <h1>
-            I’m Nkeng Sama <span>Mokom.</span>
+            <span className="hero-title-line">
+              <span className="hero-title-prefix">I’m </span>
+              Nkeng Sama
+            </span>{" "}
+            <span className="hero-title-line hero-title-accent">Mokom.</span>
           </h1>
           <p className="discipline">
-            Computer engineer. Full-stack developer.
-            <br />A deliberate learner.
+            <span>Computer engineer.</span> <span>Full-stack developer.</span>{" "}
+            <span className="discipline-break">A deliberate learner.</span>
           </p>
           <p className="lead">
             I build web and mobile systems for real problems in Cameroon — from
@@ -75,11 +79,12 @@ export default function Home() {
         <figure className="hero-portrait">
           <Image
             src="/media/mokom-portrait.webp"
-            alt="Nkeng Sama Mokom, wearing a black shirt with his arms folded"
+            alt="Portrait of Nkeng Sama Mokom"
             width={1200}
             height={1444}
-            sizes="(max-width: 900px) 90vw, 45vw"
-            preload
+            quality={80}
+            sizes="(max-width: 599px) 100vw, (max-width: 640px) 25vw, (max-width: 900px) 90vw, 45vw"
+            priority
           />
           <figcaption className="portrait-caption">
             <span>Build. Understand. Improve.</span>

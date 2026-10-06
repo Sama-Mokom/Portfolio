@@ -2,7 +2,7 @@ import Link from "@/components/link";
 import { projects } from "@/content/projects";
 import { otherWork } from "@/content/profile";
 import { PageIntro, Arrow, Tags, SectionHeading } from "@/components/ui";
-import { ProjectArt } from "@/components/project-art";
+import { ProjectMedia } from "@/components/project-media";
 import { ProjectLinks } from "@/components/project-links";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
@@ -23,9 +23,14 @@ export default function Work() {
           <article className="work-band" key={p.slug}>
             <Link
               href={`/work/${p.slug}`}
-              aria-label={`Explore the ${p.title} architecture`}
+              aria-label={`Read the ${p.title} case study`}
             >
-              <ProjectArt slug={p.slug} />
+              <ProjectMedia
+                project={p}
+                className="work-project-media"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                decorative
+              />
             </Link>
             <div>
               <span className="eyebrow">

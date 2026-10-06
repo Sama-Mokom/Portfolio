@@ -19,6 +19,17 @@ export interface Project {
   slug: string;
   title: string;
   tagline: string;
+  /**
+   * Optional local project screenshot or mockup, relative to `public`.
+   * For example: "/media/projects/campusdesk.webp".
+   * Cards without an image keep the explanatory artwork instead.
+   */
+  image?: string;
+  /**
+   * Optional CSS focal point for the card image, such as "center top".
+   * The default is "center".
+   */
+  imagePosition?: string;
   summary: string;
   role: string;
   year: string;
@@ -36,6 +47,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    image: "/media/CampusDesk2.png",
+    imagePosition: "left top",
     slug: "campusdesk",
     title: "CampusDesk",
     tagline: "Making university document requests visible.",
@@ -191,6 +204,7 @@ export const projects: Project[] = [
     relatedWriting: ["a-claim-is-more-than-a-check"],
   },
   {
+    image: "/media/GoldStrat.webp",
     slug: "goldstrat",
     title: "GoldStrat / SMC_EA",
     tagline: "Testing the assumptions behind a convincing backtest.",

@@ -5,11 +5,18 @@ import { articles } from "@/content/articles";
 import { ProjectCard } from "@/components/project-card";
 import { WritingRow } from "@/components/writing-row";
 import { Arrow, SectionHeading } from "@/components/ui";
-import { pageMetadata, siteUrl } from "@/lib/metadata";
+import {
+  pageMetadata,
+  siteDescription,
+  siteName,
+  siteUrl,
+} from "@/lib/metadata";
+import { profile } from "@/content/profile";
 export const metadata = pageMetadata(
-  "Computer engineer & full-stack developer",
-  "I'm Nkeng Sama Mokom. I build thoughtful web and mobile systems for real-world conditions in Cameroon.",
+  "Nkeng Sama Mokom | Software Engineer in Cameroon",
+  siteDescription,
   "/",
+  { absoluteTitle: true },
 );
 export default function Home() {
   const selected = ["campusdesk", "goldstrat", "netinsight"].map((slug) =>
@@ -22,19 +29,57 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Nkeng Sama Mokom",
-            url: siteUrl,
-            jobTitle: "Computer engineering student and full-stack developer",
-            sameAs: [
-              "https://github.com/Sama-Mokom",
-              "https://www.linkedin.com/in/sama-mokom-784161283",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`,
+                url: siteUrl,
+                name: siteName,
+                description: siteDescription,
+                inLanguage: "en",
+                publisher: { "@id": `${siteUrl}/#person` },
+              },
+              {
+                "@type": "ProfilePage",
+                "@id": `${siteUrl}/#profile-page`,
+                url: siteUrl,
+                name: `${siteName} — Software Engineer in Cameroon`,
+                description: siteDescription,
+                dateModified: profile.lastUpdated,
+                isPartOf: { "@id": `${siteUrl}/#website` },
+                mainEntity: { "@id": `${siteUrl}/#person` },
+              },
+              {
+                "@type": "Person",
+                "@id": `${siteUrl}/#person`,
+                name: siteName,
+                alternateName: ["Sama Mokom", "Mokom"],
+                url: siteUrl,
+                image: `${siteUrl}/media/mokom-portrait.webp`,
+                description: siteDescription,
+                jobTitle: "Software engineer and full-stack developer",
+                sameAs: [profile.github, profile.linkedin],
+                homeLocation: {
+                  "@type": "Place",
+                  name: "Buea, Cameroon",
+                },
+                affiliation: {
+                  "@type": "CollegeOrUniversity",
+                  name: "University of Buea",
+                },
+                knowsAbout: [
+                  "Software engineering",
+                  "Full-stack web development",
+                  "Backend development",
+                  "Cloud computing",
+                  "DevOps",
+                  "Mobile application development",
+                  "Database design",
+                  "API design",
+                ],
+              },
             ],
-            affiliation: {
-              "@type": "CollegeOrUniversity",
-              name: "University of Buea",
-            },
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
       <section className="container hero">
@@ -48,13 +93,15 @@ export default function Home() {
             <span className="hero-title-line hero-title-accent">Mokom.</span>
           </h1>
           <p className="discipline">
-            <span>Computer engineer.</span> <span>Full-stack developer.</span>{" "}
-            <span className="discipline-break">A deliberate learner.</span>
+            <span>Software engineer.</span> <span>Full-stack developer.</span>{" "}
+            <span className="discipline-break">
+              Computer Engineering student.
+            </span>
           </p>
           <p className="lead">
-            I build web and mobile systems for real problems in Cameroon — from
-            making university document requests traceable to measuring the
-            networks we rely on.
+            I build full-stack web and mobile systems for real problems in
+            Cameroon — from making university document requests traceable to
+            measuring the networks we rely on.
           </p>
           <div className="actions">
             <Link href="/work" className="button">
@@ -137,8 +184,9 @@ export default function Home() {
           </Link>
         </div>
         <p className="lead">
-          Learning what it takes to move a tested application into production —
-          and giving the infrastructure as much care as the code.
+          Learning what it takes to move a tested application into production
+          with Docker and AWS — and giving cloud infrastructure and DevOps as
+          much care as the code.
         </p>
       </section>
       <section className="section container contact-invitation">

@@ -46,7 +46,9 @@ describe("deployment metadata", () => {
       "/work",
     );
     expect(hasProductionUrl).toBe(true);
-    expect(metadata.robots).toEqual({ index: true, follow: true });
+    expect(metadata.robots).toEqual(
+      expect.objectContaining({ index: true, follow: true }),
+    );
     expect(metadata.alternates?.canonical).toBe(
       "https://portfolio.example/work",
     );

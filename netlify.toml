@@ -3,8 +3,8 @@
   command = "npm run build"
   publish = ".next"
 
+# Keep NODE_ENV unset so Netlify installs the devDependencies required to build.
 [context.production.environment]
-  NODE_ENV = "production"
   SITE_URL = "https://samomokom.netlify.app"
 
 # Preview and branch builds intentionally omit SITE_URL so they emit noindex.

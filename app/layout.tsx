@@ -24,7 +24,7 @@ const inter = localFont({
   adjustFontFallback: "Arial",
 });
 const mono = localFont({
-  src: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2",
+  src: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff",
   variable: "--font-mono",
   display: "optional",
   weight: "400",

@@ -60,8 +60,15 @@ export default async function Post({
       </nav>
       <header className="article-header">
         <span className="eyebrow">
-          <time dateTime={article.date}>21 September 2026</time> ·{" "}
-          {articleReadingTime(article)} min read
+          <time dateTime={article.date}>
+            {new Date(article.date).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              timeZone: "UTC",
+            })}
+          </time>{" "}
+          · {articleReadingTime(article)} min read
         </span>
         <h1>{article.title}</h1>
         <p className="lead">{article.summary}</p>
@@ -93,27 +100,14 @@ export default async function Post({
                   language={article.code.language}
                 />
               )}
-              {i === 2 && (
+              {i === 2 && article.diagram && (
                 <figure className="diagram">
                   <ol>
-                    {(article.relatedWork.includes("campusdesk")
-                      ? [
-                          "Check eligibility",
-                          "Claim within a transaction",
-                          "Preserve ownership history",
-                        ]
-                      : [
-                          "Verify the calculation",
-                          "Inspect results by period",
-                          "Reconsider the claim",
-                        ]
-                    ).map((step) => (
+                    {article.diagram.steps.map((step) => (
                       <li key={step}>{step}</li>
                     ))}
                   </ol>
-                  <figcaption>
-                    An explanatory view of the reasoning described in this note.
-                  </figcaption>
+                  <figcaption>{article.diagram.caption}</figcaption>
                 </figure>
               )}
             </section>

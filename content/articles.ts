@@ -10,6 +10,7 @@ export interface Article {
   relatedWork: string[];
   relatedPosts: string[];
   code?: { label: string; language: string; value: string };
+  diagram?: { steps: string[]; caption: string };
 }
 
 /** Newly authored notes derived from the supplied work record.
@@ -17,6 +18,113 @@ export interface Article {
  * The optional sequence is explicitly illustrative, never claimed as repository code.
  */
 export const articles: Article[] = [
+  {
+    slug: "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
+    title: "From CI/CD theory to a working AWS deployment pipeline",
+    summary:
+      "How CampusDesk moved from local Docker containers to immutable images, controlled AWS deployments and tested off-site recovery—and what building the pipeline taught me that tutorials could not.",
+    date: "2026-10-08",
+    tags: ["ci-cd", "docker", "aws", "github-actions"],
+    relatedWork: ["campusdesk"],
+    relatedPosts: ["a-claim-is-more-than-a-check"],
+    diagram: {
+      steps: [
+        "Test changes in GitHub Actions",
+        "Publish immutable images to Amazon ECR",
+        "Approve a commit for staging",
+        "Deploy exact image digests to Amazon EC2",
+        "Run health and API checks",
+      ],
+      caption:
+        "The controlled path from a tested commit to the private CampusDesk staging environment.",
+    },
+    sections: [
+      {
+        id: "from-theory-to-practice",
+        title:
+          "Understanding the terms was not the same as building the system",
+        paragraphs: [
+          "I had always understood what continuous integration and continuous delivery meant in theory, but I had little hands-on experience with them. I knew what a Dockerfile was, for example, without ever having written one myself.",
+          "Most of that understanding came from documentation and short explanations of virtual machines, containerization, images and containers. Fireship videos such as Docker in 100 Seconds and 100+ Docker Concepts You Need to Know helped give me the vocabulary. At least, I thought I understood the ideas—until it was time to implement them myself.",
+          "CampusDesk would eventually need to leave my computer and become available to other users. That made it the right opportunity to turn the theory into practical experience.",
+        ],
+      },
+      {
+        id: "containerizing-campusdesk",
+        title: "Containerizing CampusDesk",
+        paragraphs: [
+          "My first step was to package the application and its dependencies into consistent, portable containers. CampusDesk now runs as four primary services: a frontend that serves the interface, a backend that handles the application logic and API, a worker that processes background tasks, and a MySQL database that stores the application data.",
+          "The backend and worker are separate containers that use the same custom backend image and run different processes. The frontend has its own custom image, while the database uses the official MySQL image.",
+          "Getting the services to communicate correctly exposed problems involving networking, file permissions, startup order, data persistence and container shutdown behaviour. Eventually, the complete application was running locally through Docker Compose. That was a major milestone, but it also raised an obvious question: was the application going to remain on my computer, running through Docker Desktop forever?",
+        ],
+      },
+      {
+        id: "moving-to-aws",
+        title: "Moving to AWS",
+        paragraphs: [
+          "To make CampusDesk available outside my computer, I needed a server that could remain online and run the application. I considered Microsoft Azure and Google Cloud, but AWS was the provider with which I had the most experience. I had attended several AWS events and knew people with practical AWS experience whom I could approach for guidance, so AWS was the most sensible choice for this project.",
+          "I decided to run CampusDesk on an Amazon EC2 instance—essentially a virtual computer hosted in AWS. The application is now running in a private staging environment on that instance.",
+          "It is not publicly accessible yet. Access is deliberately restricted through an SSH tunnel while I complete the remaining security work.",
+        ],
+      },
+      {
+        id: "continuous-integration",
+        title: "Building the continuous integration pipeline",
+        paragraphs: [
+          "Before deploying new versions, I needed a consistent way to check that they were suitable release candidates. This is where GitHub Actions and the continuous integration part of the pipeline came in. The CI workflow runs whenever code is pushed to the development branch or a pull request targets that branch.",
+          "For the backend, it installs the PHP dependencies and runs the PHPUnit test suite. For the frontend, it installs the Node.js dependencies, checks the code style, validates the TypeScript types, runs the tests and confirms that the production build succeeds. It also validates the staging Docker Compose configuration.",
+          "These checks do not guarantee that the application has no bugs or is production-ready. They do provide an automatic quality gate that catches many problems before a change progresses further.",
+        ],
+      },
+      {
+        id: "immutable-images",
+        title: "Building an identifiable release once",
+        paragraphs: [
+          "Pull requests confirm that the backend and frontend Docker images can be built successfully. When changes are pushed to development and all checks pass, GitHub Actions builds the two custom images and publishes them to Amazon Elastic Container Registry, or ECR.",
+          "I considered Docker Hub, but ECR was a natural fit because the application was already being hosted on AWS and the registry integrates with AWS identity and access controls. Each image is tagged with the full Git commit SHA, a unique identifier for that exact version of the code. The ECR repositories use immutable tags, so an existing release tag cannot later be replaced with different contents.",
+          "GitHub authenticates with AWS using short-lived credentials through OpenID Connect. I therefore do not need to store permanent AWS access keys in GitHub.",
+        ],
+      },
+      {
+        id: "controlled-delivery",
+        title: "From manual deployments to controlled delivery",
+        paragraphs: [
+          "Initially, deploying a new version meant connecting to the EC2 instance through SSH, pulling the images and starting the containers manually. It worked, but it was repetitive, slow and easy to get wrong. That experience led me to build the continuous delivery part of the pipeline.",
+          "The deployment workflow is intentionally not triggered by every push. I start it manually, provide the full commit SHA I want to deploy and approve the deployment through a protected GitHub environment. The workflow verifies that the selected commit belongs to the development branch and that both corresponding images exist in ECR. It then resolves those images to their exact digests—their unique content identities—and sends a restricted deployment command to the EC2 instance through AWS Systems Manager.",
+          "A fixed deployment script on the server pulls the exact images, runs database migrations, recreates the required application containers and performs health and API checks. The workflow waits for the command to finish and reports whether the deployment succeeded.",
+          "The images are not rebuilt on EC2. GitHub Actions builds them once, ECR stores them, and the server pulls them. This makes deployments more predictable because the version tested and published by CI is the same version that runs in staging.",
+          "This is continuous delivery rather than fully automatic continuous deployment. Releasing a version still requires a deliberate human decision, but everything after that decision follows a controlled and repeatable process.",
+        ],
+      },
+      {
+        id: "protecting-persistent-data",
+        title: "Protecting persistent data",
+        paragraphs: [
+          "CampusDesk currently runs on a single EC2 instance. That keeps the project affordable, but it also makes the instance a single point of failure. The database and uploaded attachments contain information that cannot be recreated by rebuilding a container, so I added an off-site recovery system for both.",
+          "CampusDesk creates a recovery set twice a day containing a database backup, the uploaded attachments, integrity checks and references to the exact container images that were running at the time. These recovery sets are encrypted and stored in a private, versioned Amazon S3 bucket.",
+          "A monitoring process checks the freshness of the latest successful backup every 15 minutes. I have also completed an isolated restore test, confirming that the database, attachments and application image can be recovered without modifying the live staging data.",
+          "This is not automatic failover or high availability. If the server failed, recovery would still require a controlled manual process. Nevertheless, it is a significant improvement over keeping the only copy of the data on one virtual server.",
+        ],
+      },
+      {
+        id: "what-comes-next",
+        title: "What comes next",
+        paragraphs: [
+          "CampusDesk now has a working CI and controlled delivery pipeline. A code change can be tested, built into immutable images, stored in ECR and deployed to EC2 through a repeatable workflow.",
+          "The application is still private. Before exposing it to the public, I need to remove or replace the shared demonstration credentials, establish a stable address and DNS configuration, add HTTPS, review which network ports are exposed and complete another security-focused test.",
+          "CampusDesk is not yet a highly available production system, but it has moved far beyond an application that runs only on my laptop. I now have practical experience with the engineering decisions behind containerization, continuous integration, controlled delivery, cloud deployment and disaster recovery.",
+        ],
+      },
+      {
+        id: "the-real-value",
+        title: "The learning happened in the failures",
+        paragraphs: [
+          "Understanding CI/CD in theory is very different from building a real pipeline. Diagrams and short tutorials gave me the vocabulary, but the actual learning happened while diagnosing failed builds, correcting permissions, configuring cloud roles, designing safe deployment boundaries and testing whether the system could recover from failure.",
+          "That has been the real value of building this pipeline.",
+        ],
+      },
+    ],
+  },
   {
     slug: "a-claim-is-more-than-a-check",
     title: "A claim is more than a check",
@@ -31,6 +139,14 @@ export const articles: Article[] = [
       language: "text",
       value:
         "Begin transaction\n  Evaluate the stage's eligibility in the claim path\n  Apply the documented existence condition and locking\n  Change ownership only if the conditions still hold\nComplete transaction\n\nThe exact query and lock scope belong to the implementation.",
+    },
+    diagram: {
+      steps: [
+        "Check eligibility",
+        "Claim within a transaction",
+        "Preserve ownership history",
+      ],
+      caption: "An explanatory view of the reasoning described in this note.",
     },
     sections: [
       {
@@ -96,6 +212,14 @@ export const articles: Article[] = [
     tags: ["testing", "mql5", "experiments"],
     relatedWork: ["goldstrat"],
     relatedPosts: [],
+    diagram: {
+      steps: [
+        "Verify the calculation",
+        "Inspect results by period",
+        "Reconsider the claim",
+      ],
+      caption: "An explanatory view of the reasoning described in this note.",
+    },
     sections: [
       {
         id: "question",

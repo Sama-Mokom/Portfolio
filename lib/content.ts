@@ -224,6 +224,12 @@ export function validateContent(
       assertText(article.code.language, `${article.slug} code language`);
       assertText(article.code.value, `${article.slug} code value`);
     }
+    if (article.diagram !== undefined) {
+      if (!article.diagram || typeof article.diagram !== "object")
+        fail(`${article.slug} has malformed diagram`);
+      assertTextArray(article.diagram.steps, `${article.slug} diagram steps`);
+      assertText(article.diagram.caption, `${article.slug} diagram caption`);
+    }
   }
 
   for (const project of projectCollection) {

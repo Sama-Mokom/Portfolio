@@ -27,7 +27,15 @@ export default function Writing() {
       </div>
       <article className="featured-article">
         <span className="eyebrow">
-          Latest note · <time dateTime={latest.date}>21 September 2026</time>
+          Latest note ·{" "}
+          <time dateTime={latest.date}>
+            {new Date(latest.date).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+              timeZone: "UTC",
+            })}
+          </time>
         </span>
         <h2>
           <Link href={`/writing/${latest.slug}`}>{latest.title}</Link>

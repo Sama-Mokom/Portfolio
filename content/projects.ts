@@ -53,12 +53,12 @@ export const projects: Project[] = [
     title: "CampusDesk",
     tagline: "Making university document requests visible.",
     summary:
-      "A university document request and tracking system built around a simple question: where is my request now? Students can submit requests, staff can move them through defined stages, and the system keeps a record of who changed what. All four role dashboards are wired and tested; I am now planning the CI/CD and deployment pipeline with Docker and AWS.",
+      "A university document request and tracking system built around a simple question: where is my request now? Students can submit requests, staff can move them through defined stages, and the system keeps a record of who changed what. All four role dashboards are wired and tested, and a controlled CI/CD pipeline now deploys the application to a private AWS staging environment.",
     role: "Sole engineer",
     year: "2026",
     timeframe: "2026 — present",
-    status: "Active · deployment planning",
-    technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL"],
+    status: "Active · private staging",
+    technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL", "Docker", "AWS"],
     featured: true,
     repository: "https://github.com/Sama-Mokom/CampusDesk",
     live: null,
@@ -135,7 +135,7 @@ export const projects: Project[] = [
         title: "What I own",
         paragraphs: [
           "I own the application design and implementation, from the database model and Laravel API to the Vue 3 interfaces. That includes authentication, permissions, state transitions, audit history, queued mail and the four dashboard surfaces.",
-          "The project uses PHPUnit, Pest, Vitest and Vue Test Utils, with linting as a quality gate. Student, Staff, Department Admin and Super Admin dashboards are fully wired and tested. Planning the release pipeline is the current phase of the work.",
+          "The project uses PHPUnit, Pest, Vitest and Vue Test Utils, with linting as a quality gate. Student, Staff, Department Admin and Super Admin dashboards are fully wired and tested. GitHub Actions now tests and builds immutable images for controlled deployment to a private AWS staging environment.",
         ],
       },
       {
@@ -174,7 +174,7 @@ export const projects: Project[] = [
         id: "outcome",
         title: "Four working role surfaces",
         paragraphs: [
-          "All four dashboards are wired and tested, and the project has moved into CI/CD and deployment planning. The work has produced concrete experience with concurrency, ownership rules, history modelling and revising designs after finding their weaknesses.",
+          "All four dashboards are wired and tested, and the project now has a working CI and controlled delivery pipeline. The work has produced concrete experience with concurrency, ownership rules, history modelling, containerization, cloud deployment and revising designs after finding their weaknesses.",
           "CampusDesk is not presented here as a deployed university service. There are no adoption figures or processing-time improvements to report yet.",
         ],
       },
@@ -182,7 +182,7 @@ export const projects: Project[] = [
         id: "current-state",
         title: "Current state",
         paragraphs: [
-          "As of 21 September 2026, CampusDesk is my flagship active project. I am mapping the delivery pipeline around Docker and AWS services. This is also the practical vehicle for developing my cloud and DevOps skills.",
+          "As of 8 October 2026, CampusDesk is my flagship active project. It runs in a private staging environment on Amazon EC2, with GitHub Actions, ECR and Systems Manager providing a controlled delivery path. Public access remains disabled while I complete the remaining security work.",
         ],
       },
       {
@@ -197,11 +197,14 @@ export const projects: Project[] = [
         id: "next-steps",
         title: "What comes next",
         paragraphs: [
-          "The next delivery work is the Docker and AWS pipeline. Planned application work includes a mark-as-collected endpoint, in-app notifications and payment integration for document-processing fees. The payment decision remains open while I evaluate local aggregator options.",
+          "Before public access, the remaining delivery work includes replacing shared demonstration credentials, configuring a stable address and DNS, adding HTTPS, reviewing exposed ports and completing another security-focused test. Planned application work includes a mark-as-collected endpoint, in-app notifications and payment integration for document-processing fees.",
         ],
       },
     ],
-    relatedWriting: ["a-claim-is-more-than-a-check"],
+    relatedWriting: [
+      "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
+      "a-claim-is-more-than-a-check",
+    ],
   },
   {
     image: "/media/GoldStrat.webp",

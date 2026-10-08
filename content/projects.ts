@@ -197,11 +197,12 @@ export const projects: Project[] = [
         id: "next-steps",
         title: "What comes next",
         paragraphs: [
-          "Before public access, the remaining delivery work includes replacing shared demonstration credentials, configuring a stable address and DNS, adding HTTPS, reviewing exposed ports and completing another security-focused test. Planned application work includes a mark-as-collected endpoint, in-app notifications and payment integration for document-processing fees.",
+          "Before public access, the remaining delivery work includes replacing shared demonstration credentials, configuring a stable address and DNS, adding HTTPS, reviewing exposed ports and completing another security-focused test. Product work includes validating the model with university staff and researching payment integration for document-processing fees.",
         ],
       },
     ],
     relatedWriting: [
+      "why-i-built-campusdesk",
       "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
       "a-claim-is-more-than-a-check",
     ],

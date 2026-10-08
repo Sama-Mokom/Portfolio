@@ -19,6 +19,98 @@ export interface Article {
  */
 export const articles: Article[] = [
   {
+    slug: "why-i-built-campusdesk",
+    title: "Why I built CampusDesk",
+    summary:
+      "A frustrating university document-request experience became a practical question: what if students could see where their requests were, what needed attention and what would happen next?",
+    date: "2026-10-08",
+    tags: ["campusdesk", "product-design", "workflow", "learning"],
+    relatedWork: ["campusdesk"],
+    relatedPosts: [
+      "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
+      "a-claim-is-more-than-a-check",
+    ],
+    diagram: {
+      steps: [
+        "Submit a document request",
+        "Follow its route through the relevant offices",
+        "Receive reasons when action is required",
+        "Track approval and collection status",
+      ],
+      caption:
+        "The visibility CampusDesk is designed to add to a university document request.",
+    },
+    sections: [
+      {
+        id: "the-invisible-process",
+        title: "A process students could not see",
+        paragraphs: [
+          "My first year at university was quite a wild ride. There were new experiences, unfamiliar procedures and plenty of challenges to overcome. One of the most frustrating was requesting official documents from my faculty.",
+          "From my experience at the University of Buea, requesting something as important as a transcript could feel like taking part in a process whose rules and progress were mostly invisible to the student. You would provide the required information, attach the necessary documents and submit your request. After that, you often had little visibility into what was happening. To find out whether the document was ready, you might have to visit the faculty records office repeatedly and ask for an update.",
+          "Sometimes, a request could be delayed or rejected because information was missing or incorrect. The bigger problem was that you might not discover this immediately. Without a clear update, you could spend days waiting without knowing that some action was required from you.",
+          "That uncertainty becomes much more serious when the requested document is needed for a scholarship, university application, internship or job opportunity. These opportunities usually have deadlines. Waiting for a transcript or attestation while an admissions board or employer expects a response can be extremely stressful.",
+          "This was not an experience unique to me. Several friends encountered similar problems during their time at the university. Those experiences prompted me to ask a simple question: what if students could actually see what was happening to their document requests?",
+        ],
+      },
+      {
+        id: "the-idea-behind-campusdesk",
+        title: "The idea behind CampusDesk",
+        paragraphs: [
+          "That question led me to build CampusDesk, a university document request and tracking platform. Imagine submitting a transcript request online and then following it as it moves through the relevant offices. Instead of repeatedly visiting the university to ask for an update, you could open the platform and see whether your request was waiting for review, being processed, forwarded to another office, rejected or ready for collection.",
+          "If a request were rejected, the staff member handling it would have to provide a reason. The student could read that explanation, address the problem and reopen the request instead of remaining unaware that something had gone wrong. Once the final office approved the request, the student would receive an update that the document was ready for collection.",
+          "CampusDesk does not currently predict the exact date on which a document will be ready. Its purpose is to remove the information gap by showing where a request is in the process and notifying the student when its status changes.",
+        ],
+      },
+      {
+        id: "a-workflow-for-staff",
+        title: "CampusDesk is also for university staff",
+        paragraphs: [
+          "The problem does not affect only students. Staff members also need an organised way to receive, process and forward requests. In CampusDesk, each office has a queue containing the requests that are ready for its attention. An authorised staff member can claim a request, review its information and attachments, and then approve or reject that stage.",
+          "The platform routes requests in a defined sequence. The next office cannot begin processing a request until the previous office has approved it, and the system prevents two staff members from accidentally claiming the same piece of work at the same time.",
+          "Department administrators can monitor requests passing through their departments and reassign active work when necessary. System administrators can manage users, departments, request types and the routes that different documents must follow.",
+          "Every status change is recorded, creating a history of what happened to a request. This gives students greater visibility while giving staff a more structured and accountable workflow.",
+        ],
+      },
+      {
+        id: "what-has-been-built",
+        title: "What has been built so far",
+        paragraphs: [
+          "CampusDesk is still in development, but it has progressed beyond being only an idea or interface design. Students can register, authenticate, submit transcript or attestation requests with private attachments, follow their ordered route through multiple departments, and inspect their status history.",
+          "Staff have queues for the work ready for their attention. They can claim a request, approve or reject its current stage, and must explain a rejection. Students can address the issue and reopen a rejected request. In-app and queued email notifications communicate changes, including when a document is ready or has been collected.",
+          "Department administrators can oversee and reassign active work within their departments, while system administrators can manage the wider set of users, departments, request types and routes.",
+          "Under the hood, CampusDesk has a Vue frontend, a Laravel backend, a MySQL database and a background worker for tasks such as notifications. Uploaded documents are stored privately and can be opened only by authorised users connected to the request.",
+        ],
+      },
+      {
+        id: "technical-foundations",
+        title: "The technical foundations",
+        paragraphs: [
+          "The application is packaged into containers and deployed to a private staging environment on AWS. Automated checks test the frontend and backend whenever changes are proposed, while a controlled deployment pipeline publishes and deploys approved versions.",
+          "Database records and uploaded attachments are included in encrypted off-site backups that have been restore-tested. These foundations matter because a platform handling student information and official documents must be designed with reliability, privacy and accountability in mind.",
+        ],
+      },
+      {
+        id: "real-world-adoption",
+        title: "The challenge of real-world adoption",
+        paragraphs: [
+          "One of the biggest challenges ahead is not technical. It is ensuring that CampusDesk reflects how the university actually works. I built the current workflow from my experience and understanding of the university's document-request process, but that understanding may not cover every internal rule, exception, approval step or staff responsibility.",
+          "The routes currently represented in the application should therefore be treated as a working model, not an official representation of every University of Buea procedure. For CampusDesk to become genuinely useful to the university, I would need to work with staff members who understand these processes in detail. Their knowledge would show where the current model is accurate, where it needs to change and what additional controls would be required.",
+          "Adopting a new system involves more than demonstrating that the software works. It requires institutional support, staff training, data-protection reviews, operational planning and confidence that the platform will remain reliable.",
+          "I hope the university and its staff will eventually be willing to support the idea and offer the insight needed to shape CampusDesk into something that can serve both students and employees effectively.",
+        ],
+      },
+      {
+        id: "turning-frustration-into-learning",
+        title: "Turning frustration into a learning opportunity",
+        paragraphs: [
+          "CampusDesk has not been publicly launched or officially adopted by the university. It currently runs in a private staging environment while I continue improving its security, infrastructure and understanding of the real administrative process. Until an opportunity for adoption arises, I will continue developing it as both a potential solution and a learning platform.",
+          "Building CampusDesk has allowed me to turn a frustrating personal experience into a practical engineering challenge. It has taught me about application development, workflow design, security, testing, cloud infrastructure, containerization, continuous delivery and disaster recovery.",
+          "Most importantly, it has encouraged me to think beyond whether software simply works. I now also have to consider whether it solves the right problem, represents the people and processes involved accurately, and can earn the trust of the people expected to use it.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
     title: "From CI/CD theory to a working AWS deployment pipeline",
     summary:

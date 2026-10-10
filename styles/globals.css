@@ -519,47 +519,6 @@ a.tag {
   display: inline-flex;
   align-items: center;
 }
-.project-art {
-  width: 100%;
-  min-width: 0;
-  background: var(--surface);
-  padding: 1.5rem;
-  aspect-ratio: 1.75;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  color: var(--text);
-  position: relative;
-  border-bottom: 1px solid var(--rule);
-}
-.project-art .eyebrow {
-  font-size: 0.55rem;
-  letter-spacing: 0.08em;
-}
-.art-flow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-}
-.art-node {
-  border: 1px solid var(--control);
-  padding: 0.65rem 0.45rem;
-  font: 400 0.7rem/1.4 var(--mono);
-  text-align: center;
-  flex: 1;
-  min-width: 0;
-}
-.art-node:first-child {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.art-note {
-  font: 400 0.6rem/1.5 var(--mono);
-  text-align: center;
-  color: var(--muted);
-}
 .work-list {
   display: flex;
   flex-direction: column;
@@ -582,11 +541,6 @@ a.tag {
   color: inherit;
   text-decoration: none;
 }
-.art-note,
-.art-node {
-  overflow-wrap: anywhere;
-}
-.work-band .project-art,
 .work-band .work-project-media {
   min-height: 270px;
   border: 1px solid var(--rule);
@@ -758,7 +712,6 @@ a.tag {
 .study-hero h1 {
   margin-block: 1rem;
 }
-.study-hero .project-art,
 .study-hero .study-project-media {
   min-height: 330px;
   border: 1px solid var(--rule);
@@ -1034,16 +987,6 @@ pre {
   .project-card-links {
     padding-inline: 1rem;
   }
-  .project-art {
-    padding: 1rem;
-  }
-  .art-flow {
-    gap: 0.25rem;
-  }
-  .art-node {
-    font-size: 0.58rem;
-    padding: 0.5rem 0.25rem;
-  }
   .footer-grid {
     grid-template-columns: 1.5fr 1fr;
   }
@@ -1073,9 +1016,6 @@ pre {
   }
   .study-hero {
     gap: 2rem;
-  }
-  .study-hero .project-art {
-    min-height: 240px;
   }
   .work-band {
     gap: 2rem;
@@ -1167,24 +1107,9 @@ pre {
   .project-card-links {
     padding-inline: 1.5rem;
   }
-  .project-art {
-    padding: 1.5rem;
-  }
-  .art-node {
-    font-size: 0.75rem;
-  }
-  .art-flow {
-    gap: 0.5rem;
-  }
-  .art-note {
-    font-size: 0.65rem;
-  }
   .work-band {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-  .work-band .project-art {
-    min-height: 200px;
   }
   .writing-row {
     grid-template-columns: 1fr;
@@ -1225,9 +1150,6 @@ pre {
   }
   .study-hero {
     grid-template-columns: 1fr;
-  }
-  .study-hero .project-art {
-    min-height: 230px;
   }
   .study-metadata {
     gap: 1.5rem;

@@ -69,7 +69,7 @@ Next App Router maps this folder structure directly to URLs. A `page.tsx` serves
 
 - `app/work/page.tsx` is `/work`. It lists **all** project records from `content/projects.ts`, then `otherWork` from `content/profile.ts`. The route controls the list layout; the content file controls what appears in it.
 - `app/work/[slug]/page.tsx` is the case-study template for `/work/<project-slug>`. It statically generates one route for each project record and rejects unknown project paths (`dynamicParams = false` plus `notFound()`). It builds the table of contents, structured data, architecture illustration, decision blocks, links to related articles, and “next project” navigation from the project object.
-  - To add a project, add a valid record to `projects`. The route, work index, sitemap, and static parameters follow automatically. Add a matching item to `components/project-art.tsx` if the card needs a project-specific diagram rather than the fallback diagram.
+  - To add a project, add a valid record to `projects`. The route, work index, sitemap, and static parameters follow automatically. Its generated `thumbnail` artwork is reused by the listing card and case-study hero.
 
 ### Writing routes
 
@@ -100,8 +100,8 @@ Next App Router maps this folder structure directly to URLs. A `page.tsx` serves
 | `site-header.tsx` | Primary nav, route highlighting, theme switcher, mobile dialog/menu, focus handling, no-JS nav fallback. | Update its `links` array for main navigation. Theme preference is stored under `localStorage.theme`. Its dialog locks scroll, restores focus on close, and traps Tab at the ends. |
 | `site-footer.tsx` | Shared navigation, external profiles, location, build/updated text, RSS and accessibility links. | Update the footer’s explicit “Updated” date when appropriate; it does not derive it from content. |
 | `ui.tsx` | `Arrow`, `PageIntro`, `SectionHeading`, and `Tags`. | Use these first for common headings/tags/icons, so visual markup stays consistent. |
-| `project-card.tsx` | Project preview used on the home page. | Combines project art, title/tagline, first three technologies and external project links. |
-| `project-art.tsx` | Accessible explanatory project diagrams. | The `graphics` map has exact visuals for five project slugs; unknown slugs fall back to the CMIP graphic. Add a key whenever adding a project. |
+| `project-card.tsx` | Project preview used on the home and work pages. | Combines generated thumbnail artwork, title/tagline, first three technologies and external project links. |
+| `project-media.tsx` | Shared case-study hero media. | Reuses each project's generated `thumbnail` and `thumbnailAlt` fields so cards and detail pages cannot drift to different media. |
 | `project-links.tsx` | Optional repository/live external links. | Treat `null` as intentionally unavailable; it renders nothing when both links are absent. |
 | `writing-row.tsx` | Compact article listing. | Formats a UTC date and calculates reading time using the shared helper. |
 | `reading-tools.tsx` | Article/case-study scroll progress plus desktop/mobile contents navigation. | Client-side `IntersectionObserver` marks the visible heading. Supply stable, unique section IDs. |
@@ -220,8 +220,8 @@ These files are not imported by the active Next application and should not be ch
 
 1. Add one `Project` object to `content/projects.ts`, using a unique lowercase hyphenated `slug`.
 2. Include all 12 required section IDs: `context`, `problem`, `users`, `constraints`, `my-role`, `architecture`, `engineering-deep-dive`, `hard-problem`, `visual-evidence`, `outcome`, `current-state`, and `retrospective`.
-3. Provide architecture nodes, at least two decisions, and `null` (not a fake URL) for unavailable repository/live links.
-4. Add a corresponding key in `components/project-art.tsx`.
+3. Provide generated `thumbnail` artwork and accurate `thumbnailAlt` text.
+4. Provide architecture nodes, at least two decisions, and `null` (not a fake URL) for unavailable repository/live links.
 5. If it belongs on Home, add its slug to the `selected` array in `app/page.tsx`.
 6. Run `npm run typecheck`, `npm test`, and `npm run build`. The listing, route, sitemap and static params should derive automatically.
 

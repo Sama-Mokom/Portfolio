@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { Project } from "@/content/projects";
-import { ProjectArt } from "./project-art";
 
 export function ProjectMedia({
   project,
@@ -15,22 +14,15 @@ export function ProjectMedia({
   priority?: boolean;
   decorative?: boolean;
 }) {
-  if (!project.image) {
-    return <ProjectArt slug={project.slug} />;
-  }
-
   return (
     <div className={`project-media ${className}`}>
       <Image
-        src={project.image}
-        alt={decorative ? "" : `${project.title} project preview`}
+        src={project.thumbnail}
+        alt={decorative ? "" : project.thumbnailAlt}
         fill
         priority={priority}
         sizes={sizes}
-        style={{
-          objectFit: "cover",
-          objectPosition: project.imagePosition ?? "center",
-        }}
+        style={{ objectFit: "cover" }}
       />
     </div>
   );

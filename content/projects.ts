@@ -19,20 +19,10 @@ export interface Project {
   slug: string;
   title: string;
   tagline: string;
-  /** Short card-only summary and generated artwork, kept separate from case-study media. */
+  /** Short card summary and generated artwork shared by cards and case-study heroes. */
   cardDescription: string;
   thumbnail: string;
   thumbnailAlt: string;
-  /**
-   * Optional case-study screenshot or mockup, relative to `public`.
-   * Projects without one keep the explanatory artwork on their detail page.
-   */
-  image?: string;
-  /**
-   * Optional CSS focal point for the card image, such as "center top".
-   * The default is "center".
-   */
-  imagePosition?: string;
   summary: string;
   role: string;
   year: string;
@@ -50,8 +40,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    image: "/media/CampusDesk2.png",
-    imagePosition: "left top",
     slug: "campusdesk",
     title: "CampusDesk",
     tagline: "Making university document requests visible.",
@@ -216,7 +204,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    image: "/media/GoldStrat.webp",
     slug: "goldstrat",
     title: "GoldStrat / SMC_EA",
     tagline: "Testing the assumptions behind a convincing backtest.",

@@ -52,8 +52,8 @@ export default function ResumePage() {
           Vue and TypeScript. Experience contributing to a production education
           platform through reviewed pull requests.
           Interested in data correctness, understandable interfaces and systems
-          designed for local infrastructure constraints. Currently developing
-          cloud and delivery skills through CampusDesk.
+          designed for local infrastructure constraints. Currently taking
+          CampusDesk toward production with Docker and AWS.
         </p>
       </section>
       <section className="resume-section" aria-labelledby="resume-experience">

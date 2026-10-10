@@ -171,9 +171,9 @@ export default function Home() {
           </Link>
         </div>
         <p className="lead">
-          Learning what it takes to move a tested application into production
-          with Docker and AWS — and giving cloud infrastructure and DevOps as
-          much care as the code.
+          Taking CampusDesk from a tested application to a production
+          deployment on Docker and AWS, with cloud infrastructure and DevOps
+          given as much care as the code.
         </p>
       </section>
       <section className="section container contact-invitation">

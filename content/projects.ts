@@ -655,7 +655,7 @@ export const projects: Project[] = [
         id: "current-state",
         title: "Current state",
         paragraphs: [
-          "As of 21 September 2026, development is halted. This is a completed chapter in my learning journey, not an active product or an announced relaunch.",
+          "As of 21 September 2026, development is halted. This is a completed chapter in my project work, not an active product or an announced relaunch.",
         ],
       },
       {

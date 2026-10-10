@@ -11,7 +11,7 @@ export function SiteFooter() {
             <p>
               Thoughtful software.
               <br />
-              Real problems. Always learning.
+              Built for real problems.
             </p>
           </div>
           <nav className="footer-nav" aria-label="Footer">

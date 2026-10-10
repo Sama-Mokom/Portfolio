@@ -8,7 +8,7 @@ import "../secondary.css";
 
 export const metadata = pageMetadata(
   "About",
-  "The person behind the work: my journey from repairing computers to building software, studying computer engineering, and learning deliberately.",
+  "The person behind the work: my journey from repairing computers to building software, studying computer engineering, and solving problems deliberately.",
   "/about",
 );
 
@@ -119,7 +119,7 @@ export default function AboutPage() {
       >
         <div className="secondary-section-heading">
           <p className="eyebrow">02 / Experience</p>
-          <h2 id="experience-title">Learning in real codebases.</h2>
+          <h2 id="experience-title">Solving problems in real codebases.</h2>
         </div>
         <div className="experience-list">
           {experience.map((entry) => (

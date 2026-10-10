@@ -119,7 +119,7 @@ export const skillGroups = [
   },
   {
     title: "Infrastructure & integration",
-    level: "Practical labs, integration work and current learning",
+    level: "Practical labs, integration work and active deployment work",
     technologies: [
       "Docker",
       "AWS EC2 / S3",
@@ -149,7 +149,7 @@ export const journey = [
   },
   {
     period: "2025 — early 2026",
-    title: "Learning to build across the stack",
+    title: "Building across the stack",
     description:
       "X-Clusive, team coursework and my first hackathon connected individual technologies to applications other people could run.",
   },
@@ -226,7 +226,7 @@ export const labEntries = [
       "A one-day PHP and Laravel practice integration in a GoHighLevel test environment, exploring OAuth 2.0, webhooks and a custom workflow action during my second V-Groups stint.",
     year: "2026",
     technologies: ["Laravel", "OAuth 2.0", "GoHighLevel"],
-    status: "Learning experiment",
+    status: "Integration experiment",
   },
   {
     slug: "ghl-workflows",
@@ -276,7 +276,7 @@ export const currentActivities = [
     ],
   },
   {
-    title: "Learning",
+    title: "Deploying",
     paragraphs: [
       "Cloud and delivery fundamentals are the practical focus, alongside data structures, algorithms and system design. I want the deployment work to explain how the application reaches users, not simply produce a running server.",
     ],

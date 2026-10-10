@@ -2,7 +2,7 @@ export const journey = [
   {
     period: "Foundations",
     time: "Levels 200–300",
-    title: "Learning how things work.",
+    title: "Understanding how things work.",
     summary:
       "C, circuits, operating systems and the foundations of computer engineering.",
     detail:

@@ -105,9 +105,6 @@ export default function Home() {
             <Link href="/work" className="button button-secondary">
               View my work <Arrow />
             </Link>
-            <Link href="/resume" className="button button-secondary">
-              Read my résumé <Arrow direction="down" />
-            </Link>
           </div>
         </div>
         <figure className="hero-portrait">

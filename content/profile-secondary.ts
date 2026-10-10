@@ -19,7 +19,7 @@ export const journey = [
   },
   {
     period: "Production contact",
-    time: "Through March 2026",
+    time: "August 2025 — March 2026",
     title: "Real users, real consequences.",
     summary:
       "Working on EducLynk at Njomi Tech Solutions through issues and reviewed pull requests.",
@@ -28,7 +28,7 @@ export const journey = [
   },
   {
     period: "Deliberate depth",
-    time: "Mid 2026 – present",
+    time: "May 2026 — Present",
     title: "Choosing depth on purpose.",
     summary:
       "CampusDesk, quantitative experiments, and a deliberate move toward cloud and delivery work.",

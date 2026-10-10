@@ -53,7 +53,7 @@ export const experience = [
   {
     company: "Njomi Tech Solutions",
     role: "Junior developer",
-    period: "Approximately six months · ended March 2026",
+    period: "August 2025 — March 2026",
     location: "Remote · Douala, Cameroon",
     description:
       "Contributed reviewed changes to EducLynk, a tutor-finding platform built with React, TypeScript and Laravel.",
@@ -67,7 +67,7 @@ export const experience = [
   {
     company: "V-Groups",
     role: "Software development intern · first stint",
-    period: "Earlier internship · onboarding",
+    period: "June 2025 — August 2025",
     location: "Yaoundé, Cameroon",
     description:
       "An onboarding-focused introduction to the company's technology stack through X-Clusive, an e-commerce learning project.",
@@ -154,7 +154,7 @@ export const journey = [
       "X-Clusive, team coursework and my first hackathon connected individual technologies to applications other people could run.",
   },
   {
-    period: "Early 2026",
+    period: "August 2025 — March 2026",
     title: "Working in a real codebase",
     description:
       "EducLynk brought reviewed changes, state bugs, search behaviour and the responsibility of maintaining an existing product.",

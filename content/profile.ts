@@ -16,7 +16,7 @@ export const profile = {
 };
 
 export const introduction = [
-  "I’m Mokom, a final-year Computer Engineering student at the University of Buea. I build across the stack, with my deepest work in backend behaviour: who can change a record, what happens when two requests arrive together, and whether the history still tells the truth afterwards.",
+  "I’m Mokom, a Software Engineer. I build across the stack, with my deepest work in backend behaviour: who can change a record, what happens when two requests arrive together, and whether the history still tells the truth afterwards.",
   "My interest in computing started with an old desktop that broke often enough to make opening it feel normal. I learned to diagnose hardware, and I still enjoy repairing devices. After my Advanced Levels, software videos from ThePrimeAgen helped turn that curiosity toward programming and a Computer Engineering degree.",
   "The projects I return to tend to be close to home: university document requests, mobile-network measurement and the small integrations that make a workflow less frustrating. I want to understand the systems I build, including the parts that did not work the first time.",
 ];

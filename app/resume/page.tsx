@@ -10,7 +10,7 @@ import "../secondary.css";
 
 export const metadata = pageMetadata(
   "Résumé",
-  "Nkeng Sama Mokom — software engineer and final-year Computer Engineering student. Experience, education, selected projects and technical skills.",
+  "Nkeng Sama Mokom — Software Engineer. Experience, education, selected projects and technical skills.",
   "/resume",
 );
 
@@ -35,9 +35,7 @@ export default function ResumePage() {
       </div>
       <header className="resume-header">
         <h1>Nkeng Sama Mokom</h1>
-        <p className="lead">
-          Software engineer · B.Eng. Computer Engineering student
-        </p>
+        <p className="lead">Software Engineer</p>
         <p>Buea, Cameroon · WAT / UTC+1</p>
         <div className="resume-contact">
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
@@ -50,9 +48,9 @@ export default function ResumePage() {
       <section className="resume-section" aria-labelledby="resume-summary">
         <h2 id="resume-summary">Profile</h2>
         <p>
-          Final-year Computer Engineering student building full-stack software
-          with Laravel, React, Vue and TypeScript. Experience contributing to a
-          production education platform through reviewed pull requests.
+          Software Engineer building full-stack software with Laravel, React,
+          Vue and TypeScript. Experience contributing to a production education
+          platform through reviewed pull requests.
           Interested in data correctness, understandable interfaces and systems
           designed for local infrastructure constraints. Currently developing
           cloud and delivery skills through CampusDesk.

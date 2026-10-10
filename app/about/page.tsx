@@ -28,9 +28,8 @@ export default function AboutPage() {
             just code.
           </h1>
           <p className="lead">
-            I’m Mokom, a final-year Computer Engineering student at the
-            University of Buea. I build software for problems I can see around
-            me, and I care about understanding how it works.
+            I’m Mokom, a Software Engineer. I build software for problems I can
+            see around me, and I care about understanding how it works.
           </p>
           <div className="secondary-actions">
             <Link className="button button-secondary" href="/resume">

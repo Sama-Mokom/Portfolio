@@ -1,9 +1,8 @@
 import Link from "@/components/link";
 import { projects } from "@/content/projects";
 import { otherWork } from "@/content/profile";
-import { PageIntro, Arrow, Tags, SectionHeading } from "@/components/ui";
-import { ProjectMedia } from "@/components/project-media";
-import { ProjectLinks } from "@/components/project-links";
+import { PageIntro, Arrow, SectionHeading } from "@/components/ui";
+import { ProjectCard } from "@/components/project-card";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Work",
@@ -18,36 +17,14 @@ export default function Work() {
         title="Projects that create real impact."
         description="University systems, mobile network measurement, production contributions and experiments that challenged my assumptions. Here is what I built — and what I learned."
       />
-      <div className="work-list">
+      <div className="project-grid project-grid--work">
         {projects.map((p, i) => (
-          <article className="work-band" key={p.slug}>
-            <Link
-              href={`/work/${p.slug}`}
-              aria-label={`Read the ${p.title} case study`}
-            >
-              <ProjectMedia
-                project={p}
-                className="work-project-media"
-                sizes="(max-width: 640px) 100vw, 50vw"
-                decorative
-              />
-            </Link>
-            <div>
-              <span className="eyebrow">
-                0{i + 1} / {p.status}
-              </span>
-              <h2>{p.title}</h2>
-              <p>{p.tagline}</p>
-              <Tags values={p.technologies} />
-              <p className="work-meta">
-                {p.role} · {p.timeframe}
-              </p>
-              <Link href={`/work/${p.slug}`} className="text-link">
-                Read the {p.title} study <Arrow />
-              </Link>
-              <ProjectLinks project={p} />
-            </div>
-          </article>
+          <ProjectCard
+            project={p}
+            priority={i === 0}
+            headingLevel="h2"
+            key={p.slug}
+          />
         ))}
       </div>
       <section className="section">

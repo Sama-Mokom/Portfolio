@@ -133,12 +133,9 @@ export const articles: Article[] = [
     sections: [
       {
         id: "from-theory-to-practice",
-        title:
-          "Understanding the terms was not the same as building the system",
+        title: "Why CampusDesk needed a pipeline",
         paragraphs: [
-          "I had always understood what continuous integration and continuous delivery meant in theory, but I had little hands-on experience with them. I knew what a Dockerfile was, for example, without ever having written one myself.",
-          "Most of that understanding came from documentation and short explanations of virtual machines, containerization, images and containers. Fireship videos such as Docker in 100 Seconds and 100+ Docker Concepts You Need to Know helped give me the vocabulary. At least, I thought I understood the ideas—until it was time to implement them myself.",
-          "CampusDesk would eventually need to leave my computer and become available to other users. That made it the right opportunity to turn the theory into practical experience.",
+          "CampusDesk needed a dependable way to get every change tested and in front of users without me doing it by hand. I started out deploying over SSH: connect to the server, pull the images, restart the containers. It worked, but it was slow, repetitive and easy to get wrong, and it gave me no automatic check that a change was safe to ship. CI/CD was the natural fix, and it was new territory for me, so I learned it by building it for this project. This post walks through the pipeline I ended up with and the decisions behind it.",
         ],
       },
       {

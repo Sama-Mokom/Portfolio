@@ -6,7 +6,7 @@ import { WritingRow } from "@/components/writing-row";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Writing",
-  "Notes on engineering decisions, debugging and learning deliberately, drawn from my own projects.",
+  "Notes on engineering decisions, debugging and technical trade-offs, drawn from my own projects.",
   "/writing",
 );
 export default function Writing() {
@@ -15,7 +15,7 @@ export default function Writing() {
     <div className="container">
       <PageIntro
         eyebrow="All posts"
-        title="Thoughts, learnings and ideas."
+        title="Engineering notes and ideas."
         description="Notes on the decisions behind the code. What worked, what failed, and what changed my understanding."
       />
       <div className="tags" aria-label="Browse by topic">

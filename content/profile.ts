@@ -16,7 +16,7 @@ export const profile = {
 };
 
 export const introduction = [
-  "I’m Mokom, a final-year Computer Engineering student at the University of Buea. I build across the stack, with my deepest work in backend behaviour: who can change a record, what happens when two requests arrive together, and whether the history still tells the truth afterwards.",
+  "I’m Mokom, a Software Engineer. I build across the stack, with my deepest work in backend behaviour: who can change a record, what happens when two requests arrive together, and whether the history still tells the truth afterwards.",
   "My interest in computing started with an old desktop that broke often enough to make opening it feel normal. I learned to diagnose hardware, and I still enjoy repairing devices. After my Advanced Levels, software videos from ThePrimeAgen helped turn that curiosity toward programming and a Computer Engineering degree.",
   "The projects I return to tend to be close to home: university document requests, mobile-network measurement and the small integrations that make a workflow less frustrating. I want to understand the systems I build, including the parts that did not work the first time.",
 ];
@@ -53,7 +53,7 @@ export const experience = [
   {
     company: "Njomi Tech Solutions",
     role: "Junior developer",
-    period: "Approximately six months · ended March 2026",
+    period: "August 2025 — March 2026",
     location: "Remote · Douala, Cameroon",
     description:
       "Contributed reviewed changes to EducLynk, a tutor-finding platform built with React, TypeScript and Laravel.",
@@ -67,7 +67,7 @@ export const experience = [
   {
     company: "V-Groups",
     role: "Software development intern · first stint",
-    period: "Earlier internship · onboarding",
+    period: "June 2025 — August 2025",
     location: "Yaoundé, Cameroon",
     description:
       "An onboarding-focused introduction to the company's technology stack through X-Clusive, an e-commerce learning project.",
@@ -119,7 +119,7 @@ export const skillGroups = [
   },
   {
     title: "Infrastructure & integration",
-    level: "Practical labs, integration work and current learning",
+    level: "Practical labs, integration work and active deployment work",
     technologies: [
       "Docker",
       "AWS EC2 / S3",
@@ -149,12 +149,12 @@ export const journey = [
   },
   {
     period: "2025 — early 2026",
-    title: "Learning to build across the stack",
+    title: "Building across the stack",
     description:
       "X-Clusive, team coursework and my first hackathon connected individual technologies to applications other people could run.",
   },
   {
-    period: "Early 2026",
+    period: "August 2025 — March 2026",
     title: "Working in a real codebase",
     description:
       "EducLynk brought reviewed changes, state bugs, search behaviour and the responsibility of maintaining an existing product.",
@@ -226,7 +226,7 @@ export const labEntries = [
       "A one-day PHP and Laravel practice integration in a GoHighLevel test environment, exploring OAuth 2.0, webhooks and a custom workflow action during my second V-Groups stint.",
     year: "2026",
     technologies: ["Laravel", "OAuth 2.0", "GoHighLevel"],
-    status: "Learning experiment",
+    status: "Integration experiment",
   },
   {
     slug: "ghl-workflows",
@@ -276,7 +276,7 @@ export const currentActivities = [
     ],
   },
   {
-    title: "Learning",
+    title: "Deploying",
     paragraphs: [
       "Cloud and delivery fundamentals are the practical focus, alongside data structures, algorithms and system design. I want the deployment work to explain how the application reaches users, not simply produce a running server.",
     ],

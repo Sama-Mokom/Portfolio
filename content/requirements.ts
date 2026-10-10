@@ -60,8 +60,8 @@ export const contentRequirements: ContentRequirement[] = [
     id: "first-internship-dates",
     area: "Experience",
     requirement:
-      "Exact dates for the first V-Groups internship are not supplied. Use an undated earlier onboarding stint until confirmed; do not infer a date range.",
-    status: "needed",
+      "The first V-Groups internship is confirmed as June 2025 — August 2025.",
+    status: "configured",
   },
   {
     id: "portrait",

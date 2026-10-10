@@ -14,3 +14,5 @@ next-env.d.ts
 .headshot-review.jpg
 .tools/
 artifacts/
+
+.vercel

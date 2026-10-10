@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteName = "Nkeng Sama Mokom";
 export const siteDescription =
-  "Portfolio of Nkeng Sama Mokom, a software engineer and full-stack developer in Cameroon. Explore web and mobile projects, backend engineering, cloud deployment, DevOps learning and technical writing.";
+  "Portfolio of Nkeng Sama Mokom, a software engineer and full-stack developer in Cameroon. Explore web and mobile projects, backend engineering, cloud deployment, DevOps delivery and technical writing.";
 
 const raw = process.env.SITE_URL?.trim();
 

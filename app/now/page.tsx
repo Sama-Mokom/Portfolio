@@ -5,7 +5,7 @@ import "../secondary.css";
 
 export const metadata = pageMetadata(
   "Now",
-  "What I am building, learning and thinking about in September 2026: CampusDesk, GoHighLevel integrations, Docker and AWS.",
+  "What I am building, deploying and thinking about in September 2026: CampusDesk, GoHighLevel integrations, Docker and AWS.",
   "/now",
 );
 const updated = "2026-09-18";
@@ -18,7 +18,7 @@ export default function NowPage() {
     <div className="container secondary-page now-page">
       <PageIntro
         eyebrow="Now"
-        title="Currently building and learning."
+        title="Currently building and deploying."
         description="A small snapshot of where my attention is."
       />
       <p className="now-date eyebrow">
@@ -47,13 +47,14 @@ export default function NowPage() {
             </p>
           </section>
           <section aria-labelledby="now-learning">
-            <p className="eyebrow">02 / Learning</p>
+            <p className="eyebrow">02 / Deployment</p>
             <h2 id="now-learning">Beyond a working application.</h2>
             <p>
-              I’m studying cloud infrastructure and delivery: how to package,
-              deploy and operate what I build. CampusDesk is the practical
-              setting for that work. Data structures, algorithms and
-              system-design fundamentals are also part of the longer plan.
+              Taking CampusDesk from a tested application to a production
+              deployment on Docker and AWS, with cloud infrastructure and
+              DevOps given as much care as the code. Data structures,
+              algorithms and system-design fundamentals are also part of the
+              longer plan.
             </p>
           </section>
           <section aria-labelledby="now-thinking">

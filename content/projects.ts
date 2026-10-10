@@ -19,10 +19,13 @@ export interface Project {
   slug: string;
   title: string;
   tagline: string;
+  /** Short card-only summary and generated artwork, kept separate from case-study media. */
+  cardDescription: string;
+  thumbnail: string;
+  thumbnailAlt: string;
   /**
-   * Optional local project screenshot or mockup, relative to `public`.
-   * For example: "/media/projects/campusdesk.webp".
-   * Cards without an image keep the explanatory artwork instead.
+   * Optional case-study screenshot or mockup, relative to `public`.
+   * Projects without one keep the explanatory artwork on their detail page.
    */
   image?: string;
   /**
@@ -52,11 +55,16 @@ export const projects: Project[] = [
     slug: "campusdesk",
     title: "CampusDesk",
     tagline: "Making university document requests visible.",
+    cardDescription:
+      "Tracks university document requests through every accountable stage.",
+    thumbnail: "/media/work/campusdesk-thumb.webp",
+    thumbnailAlt:
+      "CampusDesk artwork of document stacks moving through connected workflow nodes",
     summary:
       "A university document request and tracking system built around a simple question: where is my request now? Students can submit requests, staff can move them through defined stages, and the system keeps a record of who changed what. All four role dashboards are wired and tested, and a controlled CI/CD pipeline now deploys the application to a private AWS staging environment.",
     role: "Sole engineer",
     year: "2026",
-    timeframe: "2026 — present",
+    timeframe: "May 2026 — Present",
     status: "Active · private staging",
     technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL", "Docker", "AWS"],
     featured: true,
@@ -212,6 +220,11 @@ export const projects: Project[] = [
     slug: "goldstrat",
     title: "GoldStrat / SMC_EA",
     tagline: "Testing the assumptions behind a convincing backtest.",
+    cardDescription:
+      "Tests trading-system assumptions against backtests and broker constraints.",
+    thumbnail: "/media/work/goldstrat-thumb.webp",
+    thumbnailAlt:
+      "GoldStrat artwork of gold market geometry dissolving across an analytical grid",
     summary:
       "A series of correctness and backtesting experiments on MetaTrader 5 trading software. The most useful result was a reason to be sceptical: an eight-year test concentrated its gains in the final two years of a gold bull run. I treat this work as quantitative systems engineering, with no claim of trading expertise or live performance.",
     role: "Correctness engineering and experiments",
@@ -363,6 +376,11 @@ export const projects: Project[] = [
     slug: "netinsight",
     title: "NetInsight",
     tagline: "Measuring a network even when it lets you down.",
+    cardDescription:
+      "Measures mobile network quality offline, then syncs when connected.",
+    thumbnail: "/media/work/netinsight-thumb.webp",
+    thumbnailAlt:
+      "NetInsight artwork of signal arcs breaking and reconnecting across network nodes",
     summary:
       "A five-person university project collecting mobile-network quality-of-experience data in Cameroon. I owned requirements work and database design, including the survey instrument, an IEEE 830 specification and the offline synchronisation architecture. The central constraint was straightforward: an app that measures poor connectivity must be able to work through it.",
     role: "Requirements and database design · team of five",
@@ -507,6 +525,11 @@ export const projects: Project[] = [
     slug: "cameroon-music-industry-platform",
     title: "Cameroon Music Industry Platform",
     tagline: "A first hackathon, an ambitious domain, a bounded MVP.",
+    cardDescription:
+      "Connects music-industry identities and discovery in a focused MVP.",
+    thumbnail: "/media/work/cameroon-music-industry-platform-thumb.webp",
+    thumbnailAlt:
+      "Cameroon Music Industry Platform artwork of sound-wave rings connecting creative nodes",
     summary:
       "A halted MVP for CIMFEST Hackathon 2025, built around the needs of Cameroonian artists, fans and promoters. It was my first hackathon: a 72-hour event hosted by CIMFEST in partnership with NervTek, where our team ranked 11th out of 21. Development stopped after the foundational architecture and authentication milestones.",
     role: "Hackathon team contributor",
@@ -632,7 +655,7 @@ export const projects: Project[] = [
         id: "current-state",
         title: "Current state",
         paragraphs: [
-          "As of 21 September 2026, development is halted. This is a completed chapter in my learning journey, not an active product or an announced relaunch.",
+          "As of 21 September 2026, development is halted. This is a completed chapter in my project work, not an active product or an announced relaunch.",
         ],
       },
       {
@@ -650,11 +673,16 @@ export const projects: Project[] = [
     slug: "educlynk",
     title: "EducLynk",
     tagline: "Small, reviewed changes in a platform people use.",
+    cardDescription:
+      "Improves tutor discovery and onboarding through reviewed product changes.",
+    thumbnail: "/media/work/educlynk-thumb.webp",
+    thumbnailAlt:
+      "EducLynk artwork of scattered shapes becoming filtered and connected",
     summary:
       "My contribution to a tutor-finding platform at Njomi Tech Solutions: filter state, server-side search, pagination, responsive layouts and an authentication configuration issue. The work happened through issues and pull requests reviewed by the team. My onboarding contributions helped improve user-onboarding speed by 30%.",
     role: "Junior developer · team contribution",
     year: "2026",
-    timeframe: "Approximately six months · ended March 2026",
+    timeframe: "August 2025 — March 2026",
     status: "Contribution ended",
     technologies: ["React", "TypeScript", "Laravel", "Tailwind CSS"],
     featured: false,

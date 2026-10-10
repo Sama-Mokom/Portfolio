@@ -115,8 +115,8 @@ export default async function Post({
           <aside className="author-note">
             <h2>Written from the work.</h2>
             <p>
-              I’m Mokom, a computer engineering student in Buea. These notes
-              draw on my project record and the questions it left me with.
+              I’m Mokom, a software engineer. These notes draw on my project
+              record and the questions it left me with.
             </p>
             <Link className="text-link" href="/about">
               More about me <Arrow />

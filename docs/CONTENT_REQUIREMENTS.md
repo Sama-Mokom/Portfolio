@@ -21,7 +21,7 @@ The professional portrait, public email, GitHub profile and LinkedIn profile alr
 - **GoHighLevel:** present the work in the development journey of the second V-Groups stint. Do not manufacture commercial outcomes for practice integrations or workflow exercises.
 - **QoE automation:** mock survey data produced to help a friend with a data-analysis project. It is separate from NetInsight's team work and is not collected research evidence.
 - **EducLynk:** the verified result is a 30% improvement in onboarding speed. Attribute contributions within the team; omit unverifiable academic-improvement figures.
-- **Employment timing:** the stated August 2026–January 2027 second attachment conflicts with a September description of being halfway through it. Publish the date range, not the relative progress claim.
+- **Employment timing:** the stated August 2026 — January 2027 second attachment conflicts with a September description of being halfway through it. Publish the date range, not the relative progress claim.
 - **Existing links:** GitHub and LinkedIn profiles are supplied by the original index, despite the blueprint's older open item. Individual repositories remain unknown. Uncorroborated older project entries and placeholder social links are omitted.
 - **Writing:** the two articles are newly authored notes dated 21 September 2026, derived from documented work. Suggested titles and dates in the blueprint are not a publication history. The CampusDesk sequence is clearly labelled illustrative pseudocode.
 

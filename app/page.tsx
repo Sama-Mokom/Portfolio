@@ -92,35 +92,22 @@ export default function Home() {
             </span>{" "}
             <span className="hero-title-line hero-title-accent">Mokom.</span>
           </h1>
-          <p className="discipline">
-            <span>Software engineer.</span> <span>Full-stack developer.</span>{" "}
-            <span className="discipline-break">
-              Computer Engineering student.
-            </span>
-          </p>
+          <p className="discipline">Software Engineer</p>
           <p className="lead">
             I build full-stack web and mobile systems for real problems in
             Cameroon — from making university document requests traceable to
             measuring the networks we rely on.
           </p>
           <div className="actions">
-            <Link href="/work" className="button">
+            <Link href="/contact" className="button">
+              Work with me <Arrow />
+            </Link>
+            <Link href="/work" className="button button-secondary">
               View my work <Arrow />
             </Link>
             <Link href="/resume" className="button button-secondary">
               Read my résumé <Arrow direction="down" />
             </Link>
-          </div>
-          <div className="hero-facts">
-            <div>
-              <strong>Buea, Cameroon</strong>WAT / UTC+1
-            </div>
-            <div>
-              <strong>Computer Engineering</strong>University of Buea · 2027
-            </div>
-            <div>
-              <strong>Open to opportunities</strong>Software & integration work
-            </div>
           </div>
         </div>
         <figure className="hero-portrait">

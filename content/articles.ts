@@ -75,7 +75,7 @@ export const articles: Article[] = [
         id: "what-has-been-built",
         title: "What has been built so far",
         paragraphs: [
-          "CampusDesk is still in development, but it has progressed beyond being only an idea or interface design. Students can register, authenticate, submit transcript or attestation requests with private attachments, follow their ordered route through multiple departments, and inspect their status history.",
+          "CampusDesk is nearing completion. It has already progressed well beyond an idea or interface design. Students can register, authenticate, submit transcript or attestation requests with private attachments, follow their ordered route through multiple departments, and inspect their status history.",
           "Staff have queues for the work ready for their attention. They can claim a request, approve or reject its current stage, and must explain a rejection. Students can address the issue and reopen a rejected request. In-app and queued email notifications communicate changes, including when a document is ready or has been collected.",
           "Department administrators can oversee and reassign active work within their departments, while system administrators can manage the wider set of users, departments, request types and routes.",
           "Under the hood, CampusDesk has a Vue frontend, a Laravel backend, a MySQL database and a background worker for tasks such as notifications. Uploaded documents are stored privately and can be opened only by authorised users connected to the request.",

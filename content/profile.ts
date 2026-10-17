@@ -11,12 +11,12 @@ export const profile = {
   github: "https://github.com/Sama-Mokom",
   linkedin: "https://www.linkedin.com/in/sama-mokom-784161283",
   availability:
-    "Open to conversations about graduate engineering roles, frontend and backend projects, and integration work.",
-  lastUpdated: "2026-09-21",
+    "Open to conversations about graduate engineering roles, software engineering, Cloud Engineering, and DevOps opportunities.",
+  lastUpdated: "2026-10-17",
 };
 
 export const introduction = [
-  "I’m Mokom, a Software Engineer. I build across the stack, with my deepest work in backend behaviour: who can change a record, what happens when two requests arrive together, and whether the history still tells the truth afterwards.",
+  "I’m Mokom, a Software Engineer. I build across the stack, with focused work in backend systems, cloud infrastructure, and DevOps: enforcing workflow rules, orchestrating immutable container delivery, and ensuring state durability and recoverability.",
   "My interest in computing started with an old desktop that broke often enough to make opening it feel normal. I learned to diagnose hardware, and I still enjoy repairing devices. After my Advanced Levels, software videos from ThePrimeAgen helped turn that curiosity toward programming and a Computer Engineering degree.",
   "The projects I return to tend to be close to home: university document requests, mobile-network measurement and the small integrations that make a workflow less frustrating. I want to understand the systems I build, including the parts that did not work the first time.",
 ];
@@ -46,7 +46,7 @@ export const experience = [
     contributions: [
       "Building familiarity with the development workflow through GoHighLevel applications, CRM automation and platform integrations.",
       "Working with workflows, OAuth 2.0, webhooks and custom workflow actions.",
-      "Studying cloud concepts independently, with CampusDesk's Docker and AWS deployment planning as a practical next step.",
+      "Engineering cloud infrastructure and delivery pipelines independently on CampusDesk, implementing Docker containerization, AWS OIDC CI/CD, and disaster recovery automation.",
     ],
     technologies: ["GoHighLevel", "PHP", "Laravel", "OAuth 2.0", "Webhooks"],
   },
@@ -81,12 +81,36 @@ export const experience = [
 
 export const skillGroups = [
   {
+    title: "Cloud & DevOps",
+    level: "Implemented & verified on staging",
+    technologies: [
+      "AWS (EC2, IAM, ECR, S3, KMS, SSM, CloudWatch, SNS)",
+      "Docker & Multi-stage builds",
+      "Docker Compose orchestration",
+      "GitHub Actions CI/CD (OIDC)",
+      "AWS CloudFormation",
+      "SSM Session Manager & Run Command",
+    ],
+  },
+  {
+    title: "Linux & Systems",
+    level: "Hands-on systems administration",
+    technologies: [
+      "Linux (Ubuntu 24.04)",
+      "Bash scripting (flock, POSIX traps)",
+      "Systemd units & persistent timers",
+      "Systemd security sandboxing",
+      "Nginx reverse proxy & dynamic DNS",
+      "Host privilege auditing (sudoers)",
+    ],
+  },
+  {
     title: "Backend & data",
     level: "My deepest hands-on work",
     technologies: [
       "Laravel / PHP",
       "Node.js / Express",
-      "MySQL",
+      "MySQL (transactional dumps & locking)",
       "PostgreSQL",
       "MongoDB",
       "API design",
@@ -105,37 +129,27 @@ export const skillGroups = [
     ],
   },
   {
-    title: "Quality & modelling",
-    level: "Project work and formal coursework",
+    title: "Quality & reliability",
+    level: "Project work, DR automation and formal coursework",
     technologies: [
       "PHPUnit / Pest",
       "Vitest",
       "Vue Test Utils",
       "Playwright",
-      "SQL modelling",
-      "UML / DFD",
-      "IEEE 830 specifications",
+      "Automated restore testing (SQL CHECK TABLE)",
+      "Proactive heartbeat alerting (Dead-Man's Snitch)",
+      "UML / DFD / IEEE 830",
     ],
   },
   {
-    title: "Infrastructure & integration",
-    level: "Practical labs, integration work and active deployment work",
+    title: "Integration & exploration",
+    level: "Platforms, protocols and experimental systems",
     technologies: [
-      "Docker",
-      "AWS EC2 / S3",
-      "Git",
-      "OAuth 2.0",
-      "Webhooks",
+      "OAuth 2.0 & Webhooks",
       "GoHighLevel",
-    ],
-  },
-  {
-    title: "Exploration",
-    level: "Limited or domain-specific experience",
-    technologies: [
-      "NestJS / Prisma — exploratory",
       "MQL5 — experimental systems",
-      "Python — coursework and tooling",
+      "Python — tooling & archive validation",
+      "NestJS / Prisma — exploratory",
     ],
   },
 ];
@@ -163,7 +177,7 @@ export const journey = [
     period: "Now",
     title: "Choosing depth deliberately",
     description:
-      "CampusDesk is where I work through concurrency, audit history and permissions. Cloud and delivery pipelines are the next practical layer.",
+      "CampusDesk is where I work through concurrency, audit history and permissions. Cloud infrastructure, keyless delivery pipelines and disaster recovery on AWS are fully verified on staging.",
   },
 ];
 
@@ -272,13 +286,13 @@ export const currentActivities = [
   {
     title: "Building",
     paragraphs: [
-      "CampusDesk's four dashboards are wired and tested. I’m now planning its CI/CD and deployment pipeline with Docker and AWS. During my second V-Groups internship stint in Yaoundé, I’m also working through GoHighLevel applications and integrations.",
+      "CampusDesk's four role dashboards are wired and tested, backed by 71 backend tests and 132 frontend tests. During my second V-Groups internship stint in Yaoundé, I’m also working through GoHighLevel applications and integrations.",
     ],
   },
   {
     title: "Deploying",
     paragraphs: [
-      "Cloud and delivery fundamentals are the practical focus, alongside data structures, algorithms and system design. I want the deployment work to explain how the application reaches users, not simply produce a running server.",
+      "CampusDesk is deployed to AWS EC2 staging with keyless GitHub Actions OIDC, approval-gated Systems Manager releases, CloudFormation disaster recovery, and automated isolated restore drills. Planning a declarative Terraform migration next.",
     ],
   },
   {

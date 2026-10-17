@@ -31,48 +31,56 @@ export const journey = [
     time: "May 2026 — Present",
     title: "Choosing depth on purpose.",
     summary:
-      "CampusDesk, quantitative experiments, and a deliberate move toward cloud and delivery work.",
+      "CampusDesk, quantitative systems experiments, and production-disciplined cloud and delivery engineering.",
     detail:
-      "For CampusDesk, I write the backend by hand against documentation, with AI limited to mentoring and review. Its four dashboards are wired and tested; Docker, AWS and the delivery pipeline are the next focus.",
+      "For CampusDesk, I built a containerized workflow platform with four tested role dashboards. On AWS, I engineered keyless GitHub Actions CI/CD with OIDC, approval-gated SSM deployments, CloudFormation disaster recovery, and automated isolated restore testing.",
   },
 ] as const;
 
 export const skillGroups = [
   {
-    title: "Frontend",
-    tools: "TypeScript · JavaScript · React · Vue 3 · Next.js",
+    title: "Cloud & DevOps",
+    tools:
+      "AWS (EC2 · IAM · ECR · S3 · KMS · SSM · CloudWatch · SNS) · Docker · GitHub Actions · CloudFormation",
     context:
-      "React in a production team; Vue and TypeScript across personal projects. React Native in team coursework.",
+      "Keyless OIDC CI/CD, approval-gated SSM deployments, digest-pinned containers, declarative CloudFormation DR, and CloudWatch heartbeat monitoring on staging.",
+  },
+  {
+    title: "Linux & Systems",
+    tools:
+      "Linux (Ubuntu) · Bash · Systemd · Nginx · SSH / SSM Port Forwarding",
+    context:
+      "Systemd sandboxing and persistent timers, defensive shell scripting with flock concurrency locks, OS privilege auditing, and Nginx dynamic container DNS reverse proxying.",
   },
   {
     title: "Backend",
     tools: "Laravel · PHP · Node.js / Express · Flask",
     context:
-      "Laravel in production contributions and CampusDesk. Node.js and Flask in project and coursework settings. NestJS is exploratory experience.",
+      "Laravel in production contributions and CampusDesk (queues, Sanctum auth, pessimistic locking). Node.js and Flask in project and coursework settings. NestJS is exploratory.",
   },
   {
-    title: "Data",
+    title: "Frontend",
+    tools: "TypeScript · JavaScript · React · Vue 3 · Next.js",
+    context:
+      "React in a production team; Vue 3 and TypeScript across personal projects. React Native in team coursework.",
+  },
+  {
+    title: "Data & Storage",
     tools: "MySQL · PostgreSQL · MongoDB · SQL",
     context:
-      "Relational modelling, transactions and audit trails in project work; PostgreSQL triggers and roles in advanced database coursework.",
+      "Relational modelling, transactional point-in-time dumps (mysqldump), isolated restore verification, and audit trails in project work; PostgreSQL triggers and roles in coursework.",
   },
   {
-    title: "Infrastructure",
-    tools: "Docker · AWS EC2 / S3 · Linux · Git",
+    title: "Quality & Reliability",
+    tools: "PHPUnit · Pest · Vitest · Playwright · SQL CHECK TABLE",
     context:
-      "Hands-on cloud coursework. Applying that learning to CampusDesk’s CI/CD and deployment planning now.",
-  },
-  {
-    title: "Quality",
-    tools: "PHPUnit · Pest · Vitest · Playwright · Cppcheck",
-    context:
-      "Testing on CampusDesk, browser automation experiments, and unit, integration and security testing in verification coursework.",
+      "Automated unit and integration test gates in CI, automated disaster recovery restore verification in ephemeral Docker environments, and browser automation.",
   },
   {
     title: "Modelling & communication",
     tools: "ERDs · UML · State diagrams · Technical specifications",
     context:
-      "I use diagrams and written decisions to make a system understandable before and after implementation.",
+      "I use architecture diagrams, written design decisions, and threat/invariant reasoning to make systems understandable before and after implementation.",
   },
 ] as const;
 

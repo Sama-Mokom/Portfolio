@@ -49,24 +49,37 @@ export const projects: Project[] = [
     thumbnailAlt:
       "CampusDesk artwork of document stacks moving through connected workflow nodes",
     summary:
-      "A university document request and tracking system built around a simple question: where is my request now? Students can submit requests, staff can move them through defined stages, and the system keeps a record of who changed what. All four role dashboards are wired and tested, and a controlled CI/CD pipeline now deploys the application to a private AWS staging environment.",
+      "A university document request and tracking platform built to eliminate administrative opacity. Features four role-specific dashboards with sequential routing, transactional claim guards, coordinated storage rollbacks, and private document streaming. Packaged into multi-stage containers and deployed to an AWS EC2 staging host via a keyless GitHub Actions OIDC pipeline and approval-gated AWS Systems Manager Run Command, supported by declarative CloudFormation disaster recovery and automated isolated restore testing.",
     role: "Sole engineer",
     year: "2026",
     timeframe: "May 2026 — Present",
     status: "Active · private staging",
-    technologies: ["Laravel", "Vue 3", "TypeScript", "MySQL", "Docker", "AWS"],
+    technologies: [
+      "Laravel",
+      "Vue 3",
+      "TypeScript",
+      "MySQL",
+      "Docker",
+      "AWS",
+      "GitHub Actions",
+      "CloudFormation",
+      "Linux",
+      "Nginx",
+    ],
     featured: true,
     repository: "https://github.com/Sama-Mokom/CampusDesk",
     live: null,
     architecture: {
       nodes: [
-        "Four role dashboards · Vue 3",
-        "Authenticated API · Laravel",
-        "Request stages + audit history · MySQL",
-        "Queued email",
+        "Vue 3 SPA · Vite",
+        "Nginx reverse proxy · dynamic Docker DNS",
+        "Laravel 12 API & queue worker",
+        "One-shot init container · permission hardening",
+        "MySQL 8.4 · transactional persistence",
+        "AWS staging · EC2, SSM, S3, KMS, CloudWatch",
       ],
       description:
-        "Students, staff, department administrators and super administrators use distinct Vue 3 dashboards. An authenticated Laravel API applies role and ownership rules, persists requests and their history in MySQL, and dispatches queued email. This is an explanatory reconstruction of the documented architecture, not a production deployment diagram.",
+        "Students, staff, department administrators, and super administrators interact through guarded Vue 3 SPA dashboards. Nginx handles dynamic DNS re-resolution and reverse proxies API and WebSocket requests. Laravel 12 enforces role boundaries, transactional state claiming, and asynchronous queue workers. A dedicated init container hardens volume permissions before startup. Deliveries are orchestrated via keyless GitHub Actions OIDC to Amazon ECR and AWS Systems Manager, with disaster recovery managed by CloudFormation, systemd timers, and encrypted S3 replication.",
     },
     decisions: [
       {
@@ -93,6 +106,22 @@ export const projects: Project[] = [
           "Keeping the reference at staff_profiles.id no longer matched the domain once a student could trigger a history entry.",
         cost: "The relationship and the code that writes history must agree on the same identity model.",
       },
+      {
+        title: "Approval-gated SSM dispatch over direct SSH in CI",
+        choice:
+          "Use GitHub Actions OIDC federation with short-lived STS tokens to trigger an approval-gated AWS Systems Manager SendCommand against a restricted document and locked host deployment script.",
+        rejected:
+          "Storing long-lived AWS IAM access keys or static SSH private keys in GitHub repository secrets and opening inbound port 22 on the staging security group.",
+        cost: "Requires SSM agent connectivity, polling command invocation status during delivery, and maintaining separate federated IAM roles.",
+      },
+      {
+        title: "Automate isolated restore drills over unverified backup storage",
+        choice:
+          "Run scheduled restore drills inside an ephemeral Docker container on an isolated internal network, verifying SQL CHECK TABLE integrity and row counts against captured metadata.",
+        rejected:
+          "Relying solely on successful S3 upload exit codes as proof of system recoverability or attempting destructive restoration against live staging.",
+        cost: "Requires writing and maintaining automated verification scripts and ephemeral container test harnesses.",
+      },
     ],
     sections: [
       {
@@ -100,7 +129,7 @@ export const projects: Project[] = [
         title: "A familiar problem, treated seriously",
         paragraphs: [
           "University document requests can involve physical handoffs with little visibility between them. A student may know that a request was submitted without knowing which stage it has reached or who is responsible for the next step. CampusDesk is my attempt to make that process legible.",
-          "I chose to build it as a deliberate learning project. All backend implementation is handwritten against documentation. I use AI for Socratic mentoring, design review before implementation and code review afterwards, rather than for generating the backend code. The point is to understand the decisions well enough to defend them.",
+          "I chose to build it as a deliberate engineering project. All backend implementation is handwritten against documentation. I use AI for Socratic mentoring, design review before implementation and code review afterwards, rather than for generating the backend code. The point is to understand the decisions well enough to defend them.",
         ],
       },
       {
@@ -122,24 +151,24 @@ export const projects: Project[] = [
         id: "constraints",
         title: "Constraints that shape the work",
         paragraphs: [
-          "I am the sole engineer, working alongside university commitments and an industrial attachment. The learning constraint makes implementation slower by design: I review the model, write the code myself, and work through the reasons a first attempt is insufficient.",
-          "The system also needs to reflect its local context. Payment integration is still research and planned work; I am considering a Cameroon-focused aggregator for mobile-money processing rather than treating a payment provider chosen for another market as an automatic fit.",
+          "I am the sole engineer, working alongside university commitments and an industrial attachment. The learning constraint makes implementation deliberate: I review the model, write the code myself, and work through the reasons a first attempt is insufficient.",
+          "The system also reflects its operational boundaries: staging is hosted on a single EC2 t3.small instance, accepting planned maintenance downtime (~11–12 seconds) for database schema migrations and backups rather than pretending to be a zero-downtime, multi-AZ deployment.",
         ],
       },
       {
         id: "my-role",
         title: "What I own",
         paragraphs: [
-          "I own the application design and implementation, from the database model and Laravel API to the Vue 3 interfaces. That includes authentication, permissions, state transitions, audit history, queued mail and the four dashboard surfaces.",
-          "The project uses PHPUnit, Pest, Vitest and Vue Test Utils, with linting as a quality gate. Student, Staff, Department Admin and Super Admin dashboards are fully wired and tested. GitHub Actions now tests and builds immutable images for controlled deployment to a private AWS staging environment.",
+          "I own the end-to-end design, implementation, and infrastructure, from the database schema and Laravel API to the Vue 3 interface, containerization, keyless CI/CD, and disaster recovery automation.",
+          "My technical contributions span: decoupled Vue 3 SPA architecture; transactional claim locks and file-storage rollback in Laravel; multi-stage Docker builds; keyless GitHub Actions OIDC pipelines publishing immutable commit-SHA images to Amazon ECR; approval-gated deployments via AWS Systems Manager; declarative CloudFormation disaster recovery (KMS, S3 versioning, SNS, CloudWatch); and unattended Linux systemd backup capture with automated isolated Docker restore testing.",
         ],
       },
       {
         id: "architecture",
         title: "A workflow with an accountable backend",
         paragraphs: [
-          "Vue 3, TypeScript and Axios provide the interface. Laravel handles the API using Sanctum bearer-token authentication, Eloquent, Gates and middleware. API Resources shape responses; observers and queued jobs support work around the request lifecycle. MySQL stores the workflow and its history, with Mailtrap used for queued email during development.",
-          "The architectural boundary that matters most is the one around a state change. The interface can offer an action, but the backend still has to decide whether the current user may perform it against the current state.",
+          "The frontend is a Vue 3 single-page application built with Vite and served via an Nginx reverse proxy. The backend is a Laravel 12 REST API running on PHP 8.3 Apache with a dedicated background worker container. MySQL 8.4 provides relational storage. Services communicate over an internal Docker network, with the frontend bound exclusively to host loopback (127.0.0.1:8080).",
+          "Nginx uses Docker’s embedded DNS (127.0.0.11) and variable-based upstream proxying to handle container dynamic IP recreation without 502 Bad Gateway errors. A one-shot attachments-init container enforces 0750 file permissions on shared storage before application containers start. Queue workers listen for SIGTERM with a 70-second stop grace period to prevent abrupt termination of in-flight jobs.",
         ],
       },
       {
@@ -148,56 +177,60 @@ export const projects: Project[] = [
         paragraphs: [
           "A stage-claiming bug exposed a time-of-check/time-of-use race: checking whether a stage was available did not, by itself, make the later claim safe. Two staff actions could compete for the same stage. The first, simpler fix did not fully resolve the problem.",
           "The eventual implementation brought the existence condition into the transaction, using whereExists alongside DB::transaction() and lockForUpdate(). The important shift was to reason about eligibility and mutation together, rather than treating a successful earlier check as a guarantee.",
-          "The corrected claim path treats the eligibility condition and the change of ownership as one operation. A single-user walkthrough is not enough to reason about this kind of bug: the competing actions are part of the problem.",
+          "In the deployment pipeline, a root-owned host script (/usr/local/sbin/campusdesk-deploy) acquires a non-blocking flock lock under /run/lock. It validates release commit SHAs and cryptographic sha256 digests. If the digests match currently running containers, it executes health and smoke tests only, completing as an idempotent no-op without image pulls, migrations, or downtime.",
         ],
       },
       {
         id: "hard-problem",
-        title: "Reopening was a modelling problem",
+        title: "Permissions, rollbacks, and operational heartbeats",
         paragraphs: [
-          "A request that can be reopened complicates the meaning of completion. I rejected two designs before accepting a status-flip approach that kept the existing stage and audit structure. Regenerating stages would have introduced schema complexity and conflicts with history references.",
-          "The same feature exposed a second assumption: history had associated changed_by with a staff profile. Once students could cause changes, that relationship was too narrow. Moving it to users.id made the audit model describe the actor instead of one particular kind of actor.",
+          "The most complex failure crossed infrastructure permissions, framework abstractions, and database integrity. Uploaded attachment volumes owned by root defaulted to 0755, preventing Apache’s unprivileged www-data user from writing. Laravel’s storage call failed silently, returning false, which an earlier schema allowed to be saved as an attachment path.",
+          "I solved this defensively in depth: a one-shot init container validates and sets directory ownership to www-data:www-data mode 0750 before backend containers start; the application treats invalid storage results as exceptions; failed requests roll back database records and explicitly delete orphan files; and regression tests cover all storage failure paths.",
+          "Reliability was similarly reinforced: backup capture uses Linux systemd timers and sandboxed services. An independent 15-minute monitor checks backup freshness and publishes custom CloudWatch metrics. The CloudWatch alarm uses TreatMissingData: breaching (Dead-Man's-Snitch), alerting operators via encrypted SNS if the host fails or crashes.",
         ],
       },
       {
         id: "visual-evidence",
         title: "Reading the architecture",
         paragraphs: [
-          "Read the architecture from the role dashboards to the backend: several interfaces reach the same application rules, and state changes meet in one persistence model. Queued email sits alongside that workflow rather than defining whether a request has changed state. The figure is an explanatory reconstruction, not an application screenshot.",
+          "Read the architecture from the role dashboards through Nginx to the backend API: several interfaces reach the same application rules, and state changes meet in one persistence model. Delivery moves from GitHub Actions OIDC to Amazon ECR, then to EC2 via AWS Systems Manager. Disaster recovery captures coherent snapshots to SSE-KMS encrypted S3. The figure is an explanatory reconstruction, not an application screenshot.",
         ],
       },
       {
         id: "outcome",
-        title: "Four working role surfaces",
+        title: "Four working role surfaces and verified staging",
         paragraphs: [
-          "All four dashboards are wired and tested, and the project now has a working CI and controlled delivery pipeline. The work has produced concrete experience with concurrency, ownership rules, history modelling, containerization, cloud deployment and revising designs after finding their weaknesses.",
-          "CampusDesk is not presented here as a deployed university service. There are no adoption figures or processing-time improvements to report yet.",
+          "All four role dashboards are wired and tested, backed by 71 backend automated tests (457 assertions) and 132 frontend tests across 14 files. The application runs in a private, hardened AWS staging environment on an Ubuntu 24.04 EC2 instance.",
+          "The delivery pipeline publishes immutable images to Amazon ECR and deploys via approval-gated Systems Manager commands without static SSH keys. Automated disaster recovery creates twice-daily coherent backups with round-trip download checksum verification and isolated Docker restore drills executing SQL CHECK TABLE on every base table.",
+          "CampusDesk is presented accurately as an active staging platform, not an enterprise high-availability cluster. It operates on a single EC2 instance with planned migration downtime, providing a concrete operational baseline.",
         ],
       },
       {
         id: "current-state",
         title: "Current state",
         paragraphs: [
-          "As of 8 October 2026, CampusDesk is my flagship active project. It runs in a private staging environment on Amazon EC2, with GitHub Actions, ECR and Systems Manager providing a controlled delivery path. Public access remains disabled while I complete the remaining security work.",
+          "As of October 2026, CampusDesk is my flagship active project. It runs in a private staging environment on Amazon EC2, with GitHub Actions, ECR, and Systems Manager providing a controlled delivery path. Staging credentials have been remediated through automated bulk disablement of 618 factory-seed accounts and persona password rotation.",
         ],
       },
       {
         id: "retrospective",
         title: "What I would carry forward",
         paragraphs: [
-          "I would bring actor identity and transition invariants into the earliest model review. The reopen feature and claim race both showed that a flow can look reasonable in isolation while depending on an assumption that stops being true elsewhere.",
-          "Rejecting an implementation before shipping it is useful work. The smaller final design was valuable because it preserved a coherent history and reused existing behaviour, not simply because it required fewer changes.",
+          "I would bring actor identity and transition invariants into the earliest model review. The reopen feature, claim race, and volume permissions all showed that a flow can look reasonable in isolation while depending on assumptions that fail in production.",
+          "The most valuable engineering lesson was valuing verifiable evidence over assumed success: testing restore drills instead of assuming backups work, verifying dynamic DNS instead of trusting service names, and treating demo credentials as an operational security event.",
         ],
       },
       {
         id: "next-steps",
         title: "What comes next",
         paragraphs: [
-          "Before public access, the remaining delivery work includes replacing shared demonstration credentials, configuring a stable address and DNS, adding HTTPS, reviewing exposed ports and completing another security-focused test. Product work includes validating the model with university staff and researching payment integration for document-processing fees.",
+          "The next infrastructure objective is migrating platform configuration to declarative Terraform modules with encrypted remote state and locking. For public release, remaining work includes configuring stable DNS, public TLS termination, reviewed security-group ingress, and centralized log shipping via CloudWatch Agent.",
         ],
       },
     ],
     relatedWriting: [
+      "building-campusdesk-beyond-crud",
+      "building-a-controlled-aws-delivery-platform-for-campusdesk",
       "why-i-built-campusdesk",
       "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
       "a-claim-is-more-than-a-check",

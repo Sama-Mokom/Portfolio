@@ -8,7 +8,7 @@ export const metadata = pageMetadata(
   "What I am building, deploying and thinking about in September 2026: CampusDesk, GoHighLevel integrations, Docker and AWS.",
   "/now",
 );
-const updated = "2026-09-18";
+const updated = "2026-10-17";
 const stale =
   process.env.NODE_ENV === "development" &&
   Date.now() - Date.parse(updated) > 60 * 24 * 60 * 60 * 1000;
@@ -22,7 +22,7 @@ export default function NowPage() {
         description="A small snapshot of where my attention is."
       />
       <p className="now-date eyebrow">
-        Last updated <time dateTime={updated}>18 September 2026</time> ·
+        Last updated <time dateTime={updated}>17 October 2026</time> ·
         Yaoundé, Cameroon
       </p>
       {stale && (
@@ -38,8 +38,8 @@ export default function NowPage() {
             <h2 id="now-building">Making the next step real.</h2>
             <p>
               <Link href="/work/campusdesk">CampusDesk</Link> is my main
-              personal project. All four dashboards are wired and tested; I’m
-              now planning CI/CD and deployment with Docker and AWS.
+              personal project. All four role dashboards are wired and tested,
+              and the platform is actively deployed in a private AWS staging environment.
             </p>
             <p>
               Alongside it, my second V-Groups internship centres on custom
@@ -50,20 +50,20 @@ export default function NowPage() {
             <p className="eyebrow">02 / Deployment</p>
             <h2 id="now-learning">Beyond a working application.</h2>
             <p>
-              Taking CampusDesk from a tested application to a production
-              deployment on Docker and AWS, with cloud infrastructure and
-              DevOps given as much care as the code. Data structures,
-              algorithms and system-design fundamentals are also part of the
-              longer plan.
+              Operating CampusDesk on AWS with keyless GitHub Actions OIDC,
+              approval-gated Systems Manager deployments, declarative CloudFormation
+              disaster recovery, and automated isolated restore testing. Planning
+              a Terraform migration and preparing for public edge configuration.
             </p>
           </section>
           <section aria-labelledby="now-thinking">
             <p className="eyebrow">03 / Thinking about</p>
             <h2 id="now-thinking">Making the reasoning visible.</h2>
             <p>
-              I’m turning project decisions into case studies and engineering
-              notes. I want the work to show what I tried, what failed, and what
-              the evidence changed—not just which tools I used.
+              Publishing detailed engineering notes on workflow concurrency, state
+              durability, and cloud delivery pipelines. I want the work to explain
+              what was tried, what failed, and how the architecture handles real-world
+              constraints.
             </p>
           </section>
         </div>

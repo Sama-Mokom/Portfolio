@@ -22,7 +22,7 @@ export default function ResumePage() {
   return (
     <div className="container secondary-page resume-page">
       <div className="resume-controls">
-        <p className="eyebrow">Résumé / September 2026</p>
+        <p className="eyebrow">Résumé / October 2026</p>
         <div className="secondary-actions">
           {pdfSize && (
             <a className="button" href="/mokom-resume.pdf" download>
@@ -48,12 +48,13 @@ export default function ResumePage() {
       <section className="resume-section" aria-labelledby="resume-summary">
         <h2 id="resume-summary">Profile</h2>
         <p>
-          Software Engineer building full-stack software with Laravel, React,
-          Vue and TypeScript. Experience contributing to a production education
-          platform through reviewed pull requests.
-          Interested in data correctness, understandable interfaces and systems
-          designed for local infrastructure constraints. Currently taking
-          CampusDesk toward production with Docker and AWS.
+          Software Engineer with demonstrated capabilities across full-stack
+          development, cloud infrastructure, and DevOps. Built and deployed
+          CampusDesk to AWS using Docker Compose, keyless GitHub Actions CI/CD
+          with OIDC, AWS Systems Manager, and CloudFormation for automated
+          disaster recovery. Experience contributing to a production education
+          platform through reviewed pull requests. Focused on systems
+          reliability, data correctness, and host-level security.
         </p>
       </section>
       <section className="resume-section" aria-labelledby="resume-experience">
@@ -107,14 +108,19 @@ export default function ResumePage() {
           <ul>
             <li>
               Built a university document request and tracking system with four
-              role-specific dashboards, now wired and tested.
+              role-specific dashboards, backed by Laravel 12 API, MySQL 8.4, and Vue 3 SPA.
             </li>
             <li>
-              Resolved a concurrent stage-claiming problem with transactional
-              checks and row locking; modelled auditable request transitions.
+              Resolved concurrent stage claiming with transactional checks and row locking;
+              modelled append-only request history and role authorization.
             </li>
             <li>
-              Currently planning CI/CD and deployment with Docker and AWS.
+              Architected keyless GitHub Actions CI/CD via AWS OIDC, deploying immutable
+              ECR container digests to EC2 via approval-gated AWS Systems Manager Run Command.
+            </li>
+            <li>
+              Implemented automated disaster recovery via CloudFormation and systemd,
+              with encrypted S3 replication and scheduled isolated Docker restore testing.
             </li>
           </ul>
         </article>
@@ -180,7 +186,7 @@ export default function ResumePage() {
         </p>
       </section>
       <p className="resume-updated">
-        Updated 18 September 2026. <Link href="/contact">Get in touch</Link>.
+        Updated 17 October 2026. <Link href="/contact">Get in touch</Link>.
       </p>
     </div>
   );

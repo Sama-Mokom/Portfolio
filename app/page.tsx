@@ -127,7 +127,7 @@ export default function Home() {
         <div className="container">
           <span className="eyebrow">Currently at work</span>
           <p>
-            CampusDesk deployment planning · GoHighLevel integrations at
+            CampusDesk AWS staging deployment & recovery automation · GoHighLevel integrations at
             V-Groups
           </p>
           <Link href="/now" style={{ color: "inherit", whiteSpace: "nowrap" }}>
@@ -168,9 +168,9 @@ export default function Home() {
           </Link>
         </div>
         <p className="lead">
-          Taking CampusDesk from a tested application to a production
-          deployment on Docker and AWS, with cloud infrastructure and DevOps
-          given as much care as the code.
+          Operating CampusDesk in a hardened AWS staging environment with keyless
+          GitHub Actions CI/CD, declarative CloudFormation disaster recovery,
+          and automated restore testing.
         </p>
       </section>
       <section className="section container contact-invitation">

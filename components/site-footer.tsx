@@ -46,7 +46,7 @@ export function SiteFooter() {
               <br />
               Built with Next.js & TypeScript.
               <br />
-              Updated 21 September 2026.
+              Updated 17 October 2026.
             </p>
             <Link className="text-link" href="/about#accessibility">
               Accessibility

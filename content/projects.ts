@@ -115,7 +115,8 @@ export const projects: Project[] = [
         cost: "Requires SSM agent connectivity, polling command invocation status during delivery, and maintaining separate federated IAM roles.",
       },
       {
-        title: "Automate isolated restore drills over unverified backup storage",
+        title:
+          "Automate isolated restore drills over unverified backup storage",
         choice:
           "Run scheduled restore drills inside an ephemeral Docker container on an isolated internal network, verifying SQL CHECK TABLE integrity and row counts against captured metadata.",
         rejected:
@@ -229,6 +230,7 @@ export const projects: Project[] = [
       },
     ],
     relatedWriting: [
+      "when-a-gateway-lacks-idempotency",
       "building-campusdesk-beyond-crud",
       "building-a-controlled-aws-delivery-platform-for-campusdesk",
       "why-i-built-campusdesk",

@@ -72,8 +72,9 @@ export default function AboutPage() {
           </p>
           <p>
             After my Advanced Levels, I was considering Electrical Engineering.
-            Watching ThePrimeAgen talk about software—with equal parts technical
-            depth and humour—pulled me toward Computer Engineering instead.
+            Watching ThePrimeAgen talk about software, with equal parts
+            technical depth and humour, pulled me toward Computer Engineering
+            instead.
           </p>
           <p>
             That curiosity still shapes the way I work. I like to draw the
@@ -248,8 +249,8 @@ export default function AboutPage() {
           <p>
             I try to let evidence change my mind. A passing test, an
             unsuccessful design and a backtest that undermines my own hypothesis
-            all tell me something useful. Sharing what I learn—and helping
-            others get access to learning—is part of the same commitment.
+            all tell me something useful. Sharing what I learn, and helping
+            others get access to learning, is part of the same commitment.
           </p>
           <Link className="text-link" href="/work">
             See how that shows up in my work <span aria-hidden="true">↗</span>

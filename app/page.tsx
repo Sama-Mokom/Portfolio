@@ -95,7 +95,7 @@ export default function Home() {
           <p className="discipline">Software Engineer</p>
           <p className="lead">
             I build full-stack web and mobile systems for real problems in
-            Cameroon — from making university document requests traceable to
+            Cameroon, from making university document requests traceable to
             measuring the networks we rely on.
           </p>
           <div className="actions">
@@ -127,8 +127,8 @@ export default function Home() {
         <div className="container">
           <span className="eyebrow">Currently at work</span>
           <p>
-            CampusDesk AWS staging deployment & recovery automation · GoHighLevel integrations at
-            V-Groups
+            CampusDesk AWS staging deployment & recovery automation ·
+            GoHighLevel integrations at V-Groups
           </p>
           <Link href="/now" style={{ color: "inherit", whiteSpace: "nowrap" }}>
             Now <Arrow />
@@ -168,9 +168,9 @@ export default function Home() {
           </Link>
         </div>
         <p className="lead">
-          Operating CampusDesk in a hardened AWS staging environment with keyless
-          GitHub Actions CI/CD, declarative CloudFormation disaster recovery,
-          and automated restore testing.
+          Operating CampusDesk in a hardened AWS staging environment with
+          keyless GitHub Actions CI/CD, declarative CloudFormation disaster
+          recovery, and automated restore testing.
         </p>
       </section>
       <section className="section container contact-invitation">

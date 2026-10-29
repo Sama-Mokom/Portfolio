@@ -15,7 +15,7 @@ export default function Work() {
       <PageIntro
         eyebrow="Featured work"
         title="Projects that create real impact."
-        description="University systems, mobile network measurement, production contributions and experiments that challenged my assumptions. Here is what I built — and what I learned."
+        description="University systems, mobile network measurement, production contributions and experiments that challenged my assumptions. Here is what I built, and what I learned."
       />
       <div className="project-grid project-grid--work">
         {projects.map((p, i) => (

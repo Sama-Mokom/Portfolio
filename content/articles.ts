@@ -65,7 +65,7 @@ export const articles: Article[] = [
         id: "the-idempotency-gap-in-local-gateways",
         title: "The idempotency gap in local gateways",
         paragraphs: [
-          "I am not going to claim I know whether the developers of the platform are aware of this issue or where in their pipeline the breakdown occurs. What I do know is that I have to implement payments on CampusDesk, and I refuse to let users—especially students—experience that same frustrating feeling of double payments.",
+          "I am not going to claim I know whether the developers of the platform are aware of this issue or where in their pipeline the breakdown occurs. What I do know is that I have to implement payments on CampusDesk, and I refuse to let users, especially students, experience that same frustrating feeling of double payments.",
           "That realization drove me to do as much research as possible into how modern systems handle payments safely, looking into idempotency and the different ways it can be implemented.",
           "Idempotency guarantees that performing an operation multiple times produces the exact same outcome as performing it once, without unintended side effects. In many mature payment APIs, idempotency is supported natively through client-supplied idempotency keys. A unique key identifies the payment attempt; if network instability or a nervous retry causes the request to be transmitted twice, the gateway recognizes the key and returns the original response instead of initiating a duplicate charge.",
           "Currently, however, most of the payment gateways and Mobile Money aggregators available in Cameroon do not support idempotency keys. If an application sends two charge requests across the wire, the gateway will treat each as a brand-new transaction and deduct funds twice.",
@@ -86,7 +86,7 @@ export const articles: Article[] = [
         title: "Spotting shortcomings in everyday systems",
         paragraphs: [
           "This challenge highlights how I approach software engineering: by studying the engineering world around me, spotting the shortcomings in the systems I use every day, and finding deliberate ways to build around those shortcomings.",
-          "Experiencing the double-charge problem as a University of Buea student made the concept of payment idempotency concrete and urgent. It showed that building software for local conditions requires anticipating local constraints—such as network latency, traffic surges, and gateway limitations—from the very beginning of system design.",
+          "Experiencing the double-charge problem as a University of Buea student made the concept of payment idempotency concrete and urgent. It showed that building software for local conditions requires anticipating local constraints, such as network latency, traffic surges, and gateway limitations, from the very beginning of system design.",
           "Good engineering is not about waiting for perfect infrastructure. It is about understanding the boundaries of the environment you are building for and making your systems dependable despite them.",
         ],
       },
@@ -245,7 +245,7 @@ export const articles: Article[] = [
           "The recovery set is uploaded to a private, versioned S3 bucket encrypted with a dedicated KMS key. Upload success alone is not accepted as proof of recovery.",
           "For every artifact, the process verifies the required encryption metadata and a non-null S3 version ID. It then downloads the data again and verifies the checksums and archive structure before marking the backup as off-site verified.",
           "Systemd triggers capture at midnight and midday UTC. A second timer checks freshness every 15 minutes. A successful check publishes a CloudWatch heartbeat, while a missing-heartbeat alarm notifies through an encrypted SNS topic.",
-          "The recovery infrastructure—S3, KMS, SNS, the scoped instance-role policy, and the CloudWatch alarm—is currently defined through CloudFormation.",
+          "The recovery infrastructure (S3, KMS, SNS, the scoped instance-role policy, and the CloudWatch alarm) is currently defined through CloudFormation.",
         ],
       },
       {
@@ -303,7 +303,7 @@ export const articles: Article[] = [
           "The result is not a collection of cloud services connected because they appeared in an architecture diagram.",
           "It is a chain of explicit contracts: pull requests prove that the code, configuration, and images can be built; development pushes publish immutable artifacts; oIDC replaces permanent AWS credentials; a commit SHA identifies a coordinated release; image digests identify its exact contents; a protected environment records the deployment decision; systems Manager exposes a narrow server-side operation; the deployment script verifies, locks, migrates, recreates, and tests; recovery automation protects the state that containers cannot replace; restore testing proves more than the existence of backup files; and operational limitations remain documented until the architecture genuinely removes them.",
           "I am still expanding the platform, but I am doing so from a foundation whose behaviour I can trace from source commit to running container and from live data to a verified recovery set.",
-          "That is the standard I want the rest of the infrastructure—including Terraform—to preserve.",
+          "That is the standard I want the rest of the infrastructure, including Terraform, to preserve.",
         ],
       },
     ],
@@ -572,7 +572,7 @@ export const articles: Article[] = [
     slug: "from-ci-cd-theory-to-a-working-aws-deployment-pipeline",
     title: "From CI/CD theory to a working AWS deployment pipeline",
     summary:
-      "How CampusDesk moved from local Docker containers to immutable images, controlled AWS deployments and tested off-site recovery—and what building the pipeline taught me that tutorials could not.",
+      "How CampusDesk moved from local Docker containers to immutable images, controlled AWS deployments and tested off-site recovery, and what building the pipeline taught me that tutorials could not.",
     date: "2026-10-08",
     tags: ["ci-cd", "docker", "aws", "github-actions"],
     relatedWork: ["campusdesk"],
@@ -614,7 +614,7 @@ export const articles: Article[] = [
         title: "Moving to AWS",
         paragraphs: [
           "To make CampusDesk available outside my computer, I needed a server that could remain online and run the application. I considered Microsoft Azure and Google Cloud, but AWS was the provider with which I had the most experience. I had attended several AWS events and knew people with practical AWS experience whom I could approach for guidance, so AWS was the most sensible choice for this project.",
-          "I decided to run CampusDesk on an Amazon EC2 instance—essentially a virtual computer hosted in AWS. The application is now running in a private staging environment on that instance.",
+          "I decided to run CampusDesk on an Amazon EC2 instance, essentially a virtual computer hosted in AWS. The application is now running in a private staging environment on that instance.",
           "It is not publicly accessible yet. Access is deliberately restricted through an SSH tunnel while I complete the remaining security work.",
         ],
       },
@@ -641,7 +641,7 @@ export const articles: Article[] = [
         title: "From manual deployments to controlled delivery",
         paragraphs: [
           "Initially, deploying a new version meant connecting to the EC2 instance through SSH, pulling the images and starting the containers manually. It worked, but it was repetitive, slow and easy to get wrong. That experience led me to build the continuous delivery part of the pipeline.",
-          "The deployment workflow is intentionally not triggered by every push. I start it manually, provide the full commit SHA I want to deploy and approve the deployment through a protected GitHub environment. The workflow verifies that the selected commit belongs to the development branch and that both corresponding images exist in ECR. It then resolves those images to their exact digests—their unique content identities—and sends a restricted deployment command to the EC2 instance through AWS Systems Manager.",
+          "The deployment workflow is intentionally not triggered by every push. I start it manually, provide the full commit SHA I want to deploy and approve the deployment through a protected GitHub environment. The workflow verifies that the selected commit belongs to the development branch and that both corresponding images exist in ECR. It then resolves those images to their exact digests, their unique content identities, and sends a restricted deployment command to the EC2 instance through AWS Systems Manager.",
           "A fixed deployment script on the server pulls the exact images, runs database migrations, recreates the required application containers and performs health and API checks. The workflow waits for the command to finish and reports whether the deployment succeeded.",
           "The images are not rebuilt on EC2. GitHub Actions builds them once, ECR stores them, and the server pulls them. This makes deployments more predictable because the version tested and published by CI is the same version that runs in staging.",
           "This is continuous delivery rather than fully automatic continuous deployment. Releasing a version still requires a deliberate human decision, but everything after that decision follows a controlled and repeatable process.",

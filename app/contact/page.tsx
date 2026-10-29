@@ -30,8 +30,8 @@ export default async function ContactPage({
             backend projects, and integration work.
           </p>
           <p>
-            If you have a useful problem to solve—or a question about something
-            I’ve built—I’d like to hear about it.
+            If you have a useful problem to solve, or a question about something
+            I’ve built, I’d like to hear about it.
           </p>
           <dl className="contact-details">
             <div>

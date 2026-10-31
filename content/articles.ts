@@ -58,7 +58,7 @@ export const articles: Article[] = [
         paragraphs: [
           "I know a good number of students who have experienced this exact situation: you log in, try to pay your service charge, and wait to view your results. Due to the sheer volume of students carrying out the same operation, the platform hangs without providing immediate visual feedback.",
           "Unsure whether the request registered, you impulsively click the pay button again.",
-          "What happens next? The platform processes two separate charges for a single service fee. You are left sitting there with 2,000 XAF deducted from your Mobile Money wallet when the service only required 1,000 XAF. Anyone who has used the platform knows just how deeply that feeling sucks.",
+          "What happens next? The platform processes multiple separate charges for a single service fee. You are left sitting there with up to 4,000 XAF deducted from your Mobile Money wallet when the service only required 1,000 XAF. Anyone who has used the platform knows just how deeply that feeling sucks.",
         ],
       },
       {

@@ -76,29 +76,38 @@ axe https://your-deployed-url.com
 Replace placeholder URLs in these files:
 
 **index.html:**
+
 ```html
 <!-- Line 19: Update og:url -->
-<meta property="og:url" content="https://YOUR-USERNAME.github.io/portfolio">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/portfolio" />
 
 <!-- Line 20: Update og:image -->
-<meta property="og:image" content="https://YOUR-USERNAME.github.io/portfolio/New headshot 2.png">
+<meta
+  property="og:image"
+  content="https://YOUR-USERNAME.github.io/portfolio/New headshot 2.png"
+/>
 
 <!-- Line 27: Update twitter:image -->
-<meta name="twitter:image" content="https://YOUR-USERNAME.github.io/portfolio/New headshot 2.png">
+<meta
+  name="twitter:image"
+  content="https://YOUR-USERNAME.github.io/portfolio/New headshot 2.png"
+/>
 
 <!-- Line 42: Update canonical -->
-<link rel="canonical" href="https://YOUR-USERNAME.github.io/portfolio/">
+<link rel="canonical" href="https://YOUR-USERNAME.github.io/portfolio/" />
 
 <!-- Lines 304-316: Update structured data URLs -->
 ```
 
 **sitemap.xml:**
+
 ```xml
 <!-- Replace all instances of sama-mokom with YOUR-USERNAME -->
 https://YOUR-USERNAME.github.io/portfolio/
 ```
 
 **robots.txt:**
+
 ```txt
 Sitemap: https://YOUR-USERNAME.github.io/portfolio/sitemap.xml
 ```
@@ -115,6 +124,7 @@ Sitemap: https://YOUR-USERNAME.github.io/portfolio/sitemap.xml
 ### Performance Testing
 
 1. **Google Lighthouse** (Built into Chrome)
+
    ```
    1. Open site in Chrome
    2. F12 → Lighthouse tab
@@ -133,7 +143,7 @@ Sitemap: https://YOUR-USERNAME.github.io/portfolio/sitemap.xml
 ## 🔒 Security
 
 - [x] **HTTPS** - Automatic on GitHub Pages/Netlify/Vercel ✓
-- [x] **Security Headers** - Configured in netlify.toml ✓
+- [x] **Security Headers** - Configured in `next.config.ts` ✓
 - [x] **No Sensitive Data** - No API keys or passwords ✓
 - [ ] **Check External Links** - Verify all links work
 
@@ -171,12 +181,17 @@ Test on these browsers:
 3. Add tracking code before `</head>`:
 
 ```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX");
 </script>
 ```
 
@@ -279,18 +294,23 @@ After deploying:
 ## 🐛 Common Issues & Solutions
 
 ### Issue: Images not loading
+
 **Solution**: Check file paths are relative, verify case sensitivity
 
 ### Issue: Slow load times
+
 **Solution**: Compress images, especially headshot (12MB → 200KB)
 
 ### Issue: Dark mode not working
+
 **Solution**: Check localStorage is enabled, verify script.js loads
 
 ### Issue: Poor mobile experience
+
 **Solution**: Test on actual devices, check viewport meta tag
 
 ### Issue: Low SEO score
+
 **Solution**: Verify all meta tags, submit sitemap to Search Console
 
 ---
@@ -312,4 +332,4 @@ After deploying:
 
 ---
 
-*Last updated: December 2024*
+_Last updated: December 2024_

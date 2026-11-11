@@ -27,19 +27,19 @@ The design intentionally keeps most pages as server-rendered/static React compon
 
 ## 2. The folder map and the first place to look
 
-| Need | First place to edit | What it controls |
-| --- | --- | --- |
-| Add or rewrite a featured case study | `content/projects.ts` | Project facts, sections, links, architecture diagram labels, decisions, and related writing. |
-| Add or rewrite a post | `content/articles.ts` | Post metadata, body sections, tags, optional example code, and related projects/posts. |
-| Change biography, experience, skills, smaller work or experiments | `content/profile.ts` and `content/profile-secondary.ts` | Structured profile data reused by several pages. |
-| Change a page’s layout or static copy | Corresponding `app/.../page.tsx` | The route-specific page composition. |
-| Change navigation or footer links | `components/site-header.tsx` / `components/site-footer.tsx` | Site-wide chrome. |
-| Change a reusable card, diagram, tag, heading, link or reader control | `components/` | Reused presentation/interaction units. |
-| Change colors, type scale, spacing, common page styling | `styles/tokens.css`, then `styles/globals.css` | Theme tokens and shared page styles. |
-| Change About, Contact, Lab, Now, or Résumé-specific styling | `app/secondary.css` | The secondary-page visual layer. |
-| Change title/description/canonical/social metadata behavior | `lib/metadata.ts` | Metadata policy used by every route. |
-| Change form validation or delivery policy | `lib/contact.ts` and `app/api/contact/route.ts` | Shared form rules and the server endpoint. |
-| Change paths exposed to crawlers / RSS subscribers | `app/robots.ts`, `app/sitemap.ts`, `app/rss.xml/route.ts` | Search-engine and feed output, driven from content. |
+| Need                                                                  | First place to edit                                         | What it controls                                                                             |
+| --------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Add or rewrite a featured case study                                  | `content/projects.ts`                                       | Project facts, sections, links, architecture diagram labels, decisions, and related writing. |
+| Add or rewrite a post                                                 | `content/articles.ts`                                       | Post metadata, body sections, tags, optional example code, and related projects/posts.       |
+| Change biography, experience, skills, smaller work or experiments     | `content/profile.ts` and `content/profile-secondary.ts`     | Structured profile data reused by several pages.                                             |
+| Change a page’s layout or static copy                                 | Corresponding `app/.../page.tsx`                            | The route-specific page composition.                                                         |
+| Change navigation or footer links                                     | `components/site-header.tsx` / `components/site-footer.tsx` | Site-wide chrome.                                                                            |
+| Change a reusable card, diagram, tag, heading, link or reader control | `components/`                                               | Reused presentation/interaction units.                                                       |
+| Change colors, type scale, spacing, common page styling               | `styles/tokens.css`, then `styles/globals.css`              | Theme tokens and shared page styles.                                                         |
+| Change About, Contact, Lab, Now, or Résumé-specific styling           | `app/secondary.css`                                         | The secondary-page visual layer.                                                             |
+| Change title/description/canonical/social metadata behavior           | `lib/metadata.ts`                                           | Metadata policy used by every route.                                                         |
+| Change form validation or delivery policy                             | `lib/contact.ts` and `app/api/contact/route.ts`             | Shared form rules and the server endpoint.                                                   |
+| Change paths exposed to crawlers / RSS subscribers                    | `app/robots.ts`, `app/sitemap.ts`, `app/rss.xml/route.ts`   | Search-engine and feed output, driven from content.                                          |
 
 ## 3. `app/`: routes, global shell and server capabilities
 
@@ -88,26 +88,27 @@ Next App Router maps this folder structure directly to URLs. A `page.tsx` serves
   6. otherwise returns a truthful email-draft fallback instead of claiming a message was sent.
 
   JSON clients receive JSON errors/statuses; normal HTML forms receive redirects or a safe standalone fallback page. If switching provider, change both endpoint validation in `lib/contact.ts` and this delivery block.
+
 - `app/rss.xml/route.ts` creates a static RSS 2.0 feed from `content/articles.ts`. It escapes XML and includes article sections plus optional code. Do not insert already-escaped HTML into article content: the route escapes raw strings itself.
 - `app/sitemap.ts` creates `/sitemap.xml` from main pages, all project slugs, article slugs, and tags. It returns no sitemap until a valid production URL is configured.
 - `app/robots.ts` lets crawlers access public pages and excludes `/api/` only when production URL configuration exists; preview/unconfigured environments disallow all crawling.
 
 ## 4. `components/`: reusable UI and carefully scoped browser behavior
 
-| File | Responsibility | Practical edit guidance |
-| --- | --- | --- |
-| `link.tsx` | Wraps Next’s `Link` with `prefetch={false}`. | All internal links use this to avoid downloading pages before the visitor asks—an intentional metered-connection decision. Do not replace it casually with raw `next/link` if that policy should remain global. |
-| `site-header.tsx` | Primary nav, route highlighting, theme switcher, mobile dialog/menu, focus handling, no-JS nav fallback. | Update its `links` array for main navigation. Theme preference is stored under `localStorage.theme`. Its dialog locks scroll, restores focus on close, and traps Tab at the ends. |
-| `site-footer.tsx` | Shared navigation, external profiles, location, build/updated text, RSS and accessibility links. | Update the footer’s explicit “Updated” date when appropriate; it does not derive it from content. |
-| `ui.tsx` | `Arrow`, `PageIntro`, `SectionHeading`, and `Tags`. | Use these first for common headings/tags/icons, so visual markup stays consistent. |
-| `project-card.tsx` | Project preview used on the home and work pages. | Combines generated thumbnail artwork, title/tagline, first three technologies and external project links. |
-| `project-media.tsx` | Shared case-study hero media. | Reuses each project's generated `thumbnail` and `thumbnailAlt` fields so cards and detail pages cannot drift to different media. |
-| `project-links.tsx` | Optional repository/live external links. | Treat `null` as intentionally unavailable; it renders nothing when both links are absent. |
-| `writing-row.tsx` | Compact article listing. | Formats a UTC date and calculates reading time using the shared helper. |
-| `reading-tools.tsx` | Article/case-study scroll progress plus desktop/mobile contents navigation. | Client-side `IntersectionObserver` marks the visible heading. Supply stable, unique section IDs. |
-| `code-block.tsx` | Accessible optional code example and Copy button. | Uses the Clipboard API, then announces success/failure to assistive technology. It does not perform syntax highlighting. |
-| `contact-form.tsx` | Client enhancement for the contact form. | Validates before sending, focuses error summaries, supports 15-second request cancellation, submits to `/api/contact`, and falls back to a `mailto:` draft if direct delivery is unavailable. Keep its validation imports shared with the route—client checks are not the security boundary. |
-| `print-button.tsx` | Browser print trigger for the résumé. | The print layout is defined in `app/secondary.css`, not here. |
+| File                | Responsibility                                                                                           | Practical edit guidance                                                                                                                                                                                                                                                                      |
+| ------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `link.tsx`          | Wraps Next’s `Link` with `prefetch={false}`.                                                             | All internal links use this to avoid downloading pages before the visitor asks—an intentional metered-connection decision. Do not replace it casually with raw `next/link` if that policy should remain global.                                                                              |
+| `site-header.tsx`   | Primary nav, route highlighting, theme switcher, mobile dialog/menu, focus handling, no-JS nav fallback. | Update its `links` array for main navigation. Theme preference is stored under `localStorage.theme`. Its dialog locks scroll, restores focus on close, and traps Tab at the ends.                                                                                                            |
+| `site-footer.tsx`   | Shared navigation, external profiles, location, build/updated text, RSS and accessibility links.         | Update the footer’s explicit “Updated” date when appropriate; it does not derive it from content.                                                                                                                                                                                            |
+| `ui.tsx`            | `Arrow`, `PageIntro`, `SectionHeading`, and `Tags`.                                                      | Use these first for common headings/tags/icons, so visual markup stays consistent.                                                                                                                                                                                                           |
+| `project-card.tsx`  | Project preview used on the home and work pages.                                                         | Combines generated thumbnail artwork, title/tagline, first three technologies and external project links.                                                                                                                                                                                    |
+| `project-media.tsx` | Shared case-study hero media.                                                                            | Reuses each project's generated `thumbnail` and `thumbnailAlt` fields so cards and detail pages cannot drift to different media.                                                                                                                                                             |
+| `project-links.tsx` | Optional repository/live external links.                                                                 | Treat `null` as intentionally unavailable; it renders nothing when both links are absent.                                                                                                                                                                                                    |
+| `writing-row.tsx`   | Compact article listing.                                                                                 | Formats a UTC date and calculates reading time using the shared helper.                                                                                                                                                                                                                      |
+| `reading-tools.tsx` | Article/case-study scroll progress plus desktop/mobile contents navigation.                              | Client-side `IntersectionObserver` marks the visible heading. Supply stable, unique section IDs.                                                                                                                                                                                             |
+| `code-block.tsx`    | Accessible optional code example and Copy button.                                                        | Uses the Clipboard API, then announces success/failure to assistive technology. It does not perform syntax highlighting.                                                                                                                                                                     |
+| `contact-form.tsx`  | Client enhancement for the contact form.                                                                 | Validates before sending, focuses error summaries, supports 15-second request cancellation, submits to `/api/contact`, and falls back to a `mailto:` draft if direct delivery is unavailable. Keep its validation imports shared with the route—client checks are not the security boundary. |
+| `print-button.tsx`  | Browser print trigger for the résumé.                                                                    | The print layout is defined in `app/secondary.css`, not here.                                                                                                                                                                                                                                |
 
 ## 5. `content/`: the portfolio’s canonical data layer
 
@@ -199,7 +200,7 @@ Only `public/` is web-exposed by Next. Keep raw/private materials outside it.
 - `docs/CONTENT_REQUIREMENTS.md` mirrors the remaining content/evidence requirements in a reader-facing checklist.
 - `REFFERENCE_MAP.md` and `MOCKUPS_MAP.md` map supplied visual references to the designed pages. Note the spelling of `REFFERENCE_MAP.md` in the actual filename.
 - `OPTIMIZATION_CHECKLIST.md` is a broader pre-launch/operational checklist.
-- `DEPLOYMENT.md` is a legacy static-site-oriented deployment guide. It includes options such as GitHub Pages/static Netlify that do **not** match this active app’s server endpoint and Next Image requirements. Treat the README’s deployment section as the current source of truth unless this file is updated.
+- `DEPLOYMENT.md` is the Vercel deployment guide for the Next.js application (`https://samamokom.vercel.app`).
 
 ## 10. Legacy/reference files at the repository root
 
@@ -211,7 +212,7 @@ These files are not imported by the active Next application and should not be ch
 - `New headshot 2.jpg` and `Nkeng_Sama_Mokom_CV.pdf`: source/reference assets in the repository root, not public URLs. The live equivalents are the optimized WebP and `public/mokom-resume.pdf`.
 - `robots.txt` and `sitemap.xml`: static legacy versions. The live Next application instead generates these at `/robots.txt` and `/sitemap.xml` from `app/robots.ts` and `app/sitemap.ts`.
 - `googledae614625701565e.html`: a root-level Google verification file from the static-site setup. It is not in `public/`, so the active Next application does not expose it; move it into `public/` only if that verification is still required.
-- `netlify.toml`: static-host/Spa-rewrite configuration from the older site. Its `publish = "."` and rewrite-to-`index.html` settings conflict with the current Next server application; do not deploy the active app with this configuration unchanged.
+
 - `.blueprint-audit.txt`, `.headshot-review.jpg`, `.tools/`, `.playwright/`, `.next/`, test reports, and Lighthouse artifacts are local/generated or ignored support material, not portfolio source.
 
 ## 11. Safe recipes for common changes

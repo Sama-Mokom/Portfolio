@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Analytics } from "@/components/analytics";
 import {
   hasProductionUrl,
   siteDescription,
@@ -72,6 +73,7 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

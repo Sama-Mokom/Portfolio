@@ -9,6 +9,7 @@ const sections = [
   ["skills", "Skills"],
   ["beyond", "Interests"],
   ["values", "Values"],
+  ["privacy", "Privacy"],
 ] as const;
 
 export function SectionIndex() {

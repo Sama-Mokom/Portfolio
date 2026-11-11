@@ -182,3 +182,17 @@ test("metadata, feed and not-found response are usable", async ({
     page.getByRole("link", { name: /home|work/i }).first(),
   ).toBeVisible();
 });
+
+test("does not load analytics script outside Vercel production", async ({
+  page,
+}) => {
+  const analyticsRequests: string[] = [];
+  page.on("request", (req) => {
+    if (req.url().includes("cloud.umami.is")) {
+      analyticsRequests.push(req.url());
+    }
+  });
+  await ready(page, "/");
+  await expect(page.locator('script[src*="cloud.umami.is"]')).toHaveCount(0);
+  expect(analyticsRequests).toEqual([]);
+});

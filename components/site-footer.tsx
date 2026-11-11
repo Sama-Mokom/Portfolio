@@ -64,9 +64,14 @@ export function SiteFooter() {
               <br />
               Updated 17 October 2026.
             </p>
-            <Link className="text-link" href="/about#accessibility">
-              Accessibility
-            </Link>
+            <div className="footer-colophon-links">
+              <Link className="text-link" href="/about#accessibility">
+                Accessibility
+              </Link>
+              <Link className="text-link" href="/about#privacy">
+                Privacy
+              </Link>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">

@@ -677,6 +677,11 @@ a.tag {
 .footer-nav a:hover {
   text-decoration: underline;
 }
+.footer-colophon-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
 .footer-colophon .eyebrow {
   margin-bottom: 1rem;
 }

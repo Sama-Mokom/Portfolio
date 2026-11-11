@@ -280,6 +280,30 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+      <section
+        className="secondary-section secondary-columns"
+        id="privacy"
+        aria-labelledby="privacy-title"
+      >
+        <div>
+          <p className="eyebrow">Using this site</p>
+          <h2 id="privacy-title">Privacy</h2>
+        </div>
+        <div className="prose">
+          <p>
+            This site uses cookie-free analytics powered by Umami to understand
+            which articles and case studies are useful. It does not set cookies,
+            collect personal data, or track visitors across sites, and nothing
+            is shared or sold.
+          </p>
+          <p>
+            Aggregate counts cover page views, finished article reads, clicks on
+            résumé, project and social links, and whether a contact form
+            submission succeeded. Analytics data is retained for six months and
+            then deleted.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

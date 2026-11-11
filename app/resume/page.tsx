@@ -25,7 +25,12 @@ export default function ResumePage() {
         <p className="eyebrow">Résumé / October 2026</p>
         <div className="secondary-actions">
           {pdfSize && (
-            <a className="button" href="/mokom-resume.pdf" download>
+            <a
+              className="button"
+              href="/mokom-resume.pdf"
+              download
+              data-umami-event="cv-download"
+            >
               Download PDF <span className="download-size">{pdfSize} KB</span>
               <span aria-hidden="true">↓</span>
             </a>
@@ -108,19 +113,23 @@ export default function ResumePage() {
           <ul>
             <li>
               Built a university document request and tracking system with four
-              role-specific dashboards, backed by Laravel 12 API, MySQL 8.4, and Vue 3 SPA.
+              role-specific dashboards, backed by Laravel 12 API, MySQL 8.4, and
+              Vue 3 SPA.
             </li>
             <li>
-              Resolved concurrent stage claiming with transactional checks and row locking;
-              modelled append-only request history and role authorization.
+              Resolved concurrent stage claiming with transactional checks and
+              row locking; modelled append-only request history and role
+              authorization.
             </li>
             <li>
-              Architected keyless GitHub Actions CI/CD via AWS OIDC, deploying immutable
-              ECR container digests to EC2 via approval-gated AWS Systems Manager Run Command.
+              Architected keyless GitHub Actions CI/CD via AWS OIDC, deploying
+              immutable ECR container digests to EC2 via approval-gated AWS
+              Systems Manager Run Command.
             </li>
             <li>
-              Implemented automated disaster recovery via CloudFormation and systemd,
-              with encrypted S3 replication and scheduled isolated Docker restore testing.
+              Implemented automated disaster recovery via CloudFormation and
+              systemd, with encrypted S3 replication and scheduled isolated
+              Docker restore testing.
             </li>
           </ul>
         </article>

@@ -15,6 +15,7 @@ function fillEnquiry() {
 }
 
 afterEach(() => {
+  delete window.umami;
   vi.unstubAllGlobals();
 });
 
@@ -30,11 +31,14 @@ describe("contact form", () => {
     },
   );
 
-  it("shows a recognised delivery status from a native submission", () => {
+  it("shows a recognised delivery status from a native submission and tracks it", () => {
+    const spy = vi.fn();
+    window.umami = { track: spy };
     render(<ContactForm canSend initialStatus="sent" />);
     expect(screen.getByRole("status")).toHaveTextContent(
       "accepted for delivery",
     );
+    expect(spy).toHaveBeenCalledWith("contact-submit", { result: "sent" });
   });
 
   it("focuses a linked error summary and associates field errors", async () => {
@@ -51,7 +55,9 @@ describe("contact form", () => {
     ).toHaveLength(3);
   });
 
-  it("submits a configured form once, announces acceptance and clears fields", async () => {
+  it("submits a configured form once, announces acceptance, clears fields and tracks sent", async () => {
+    const spy = vi.fn();
+    window.umami = { track: spy };
     const fetch = vi
       .fn()
       .mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
@@ -69,11 +75,14 @@ describe("contact form", () => {
       "/api/contact",
       expect.objectContaining({ method: "POST", body: expect.any(FormData) }),
     );
+    expect(spy).toHaveBeenCalledWith("contact-submit", { result: "sent" });
     expect(screen.getByLabelText("Name")).toHaveValue("");
     expect(screen.getByLabelText("Message")).toHaveValue("");
   });
 
-  it("preserves the enquiry and enables retry after a network failure", async () => {
+  it("preserves the enquiry, enables retry and tracks failed after a network failure", async () => {
+    const spy = vi.fn();
+    window.umami = { track: spy };
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("offline")));
     render(<ContactForm canSend />);
     fillEnquiry();
@@ -81,6 +90,7 @@ describe("contact form", () => {
     await waitFor(() =>
       expect(screen.getByRole("status")).toHaveTextContent(/confirm.*sent/i),
     );
+    expect(spy).toHaveBeenCalledWith("contact-submit", { result: "failed" });
     expect(screen.getByLabelText("Name")).toHaveValue("Ada Lovelace");
     expect(screen.getByRole("button", { name: /send message/i })).toBeEnabled();
   });

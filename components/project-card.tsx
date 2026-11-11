@@ -35,7 +35,11 @@ export function ProjectCard({
           </div>
         </div>
       </Link>
-      <ProjectLinks project={project} className="project-card-links" />
+      <ProjectLinks
+        project={project}
+        className="project-card-links"
+        from="work-index"
+      />
     </article>
   );
 }

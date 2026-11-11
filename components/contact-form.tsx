@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { track } from "@/lib/analytics";
 import {
   buildMailto,
   CONTACT_EMAIL,
@@ -43,6 +44,13 @@ export function ContactForm({
     if (formRef.current) formRef.current.noValidate = true;
   }, []);
   useEffect(() => {
+    if (initialStatus === "sent") {
+      track("contact-submit", { result: "sent" });
+    } else if (initialStatus === "failed" || initialStatus === "unavailable") {
+      track("contact-submit", { result: "failed" });
+    }
+  }, [initialStatus]);
+  useEffect(() => {
     if (Object.keys(errors).length) summaryRef.current?.focus();
   }, [errors]);
 
@@ -70,6 +78,7 @@ export function ContactForm({
       setMessage(
         "Your email app should open with a draft. Review it and send it there; this website has not sent a message.",
       );
+      track("contact-submit", { result: "mailto" });
       window.location.href = mailto;
       return;
     }
@@ -84,21 +93,34 @@ export function ContactForm({
         headers: { Accept: "application/json" },
         signal: controller.signal,
       });
-      const result: { ok?: boolean; message?: string; errors?: ContactErrors } =
-        await response.json();
+      const result: {
+        ok?: boolean;
+        message?: string;
+        errors?: ContactErrors;
+        mailto?: string;
+      } = await response.json();
       if (!response.ok || !result.ok) {
-        if (result.errors) setErrors(result.errors);
+        if (result.errors) {
+          setErrors(result.errors);
+        } else if (result.mailto) {
+          setDraft(result.mailto);
+          track("contact-submit", { result: "mailto" });
+        } else {
+          track("contact-submit", { result: "failed" });
+        }
         setMessage(
           result.message ??
             "Your message could not be sent. Please try again or email me directly.",
         );
       } else {
+        track("contact-submit", { result: "sent" });
         setMessage(
           "Your message was accepted for delivery. Thanks for getting in touch.",
         );
         form.reset();
       }
     } catch {
+      track("contact-submit", { result: "failed" });
       setMessage(
         "I couldn’t confirm that your message was sent. Please email me directly, or try again when your connection is available.",
       );

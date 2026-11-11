@@ -4,6 +4,7 @@ import { articles } from "@/content/articles";
 import { getArticle, getProject, articleReadingTime } from "@/lib/content";
 import { Arrow } from "@/components/ui";
 import { CodeBlock } from "@/components/code-block";
+import { ArticleReadTracker } from "@/components/article-read-tracker";
 import {
   ReadingProgress,
   TableOfContents,
@@ -35,6 +36,7 @@ export default async function Post({
   return (
     <div className="container">
       <ReadingProgress />
+      <ArticleReadTracker slug={article.slug} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

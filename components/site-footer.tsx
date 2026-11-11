@@ -30,11 +30,27 @@ export function SiteFooter() {
             ))}
           </nav>
           <nav className="footer-nav" aria-label="Elsewhere">
-            <a href="https://github.com/Sama-Mokom">GitHub ↗</a>
-            <a href="https://www.linkedin.com/in/sama-mokom-784161283">
+            <a
+              href="https://github.com/Sama-Mokom"
+              data-umami-event="social-click"
+              data-umami-event-target="github"
+            >
+              GitHub ↗
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sama-mokom-784161283"
+              data-umami-event="social-click"
+              data-umami-event-target="linkedin"
+            >
               LinkedIn ↗
             </a>
-            <a href="mailto:yungkaparaz@gmail.com">Email ↗</a>
+            <a
+              href="mailto:yungkaparaz@gmail.com"
+              data-umami-event="social-click"
+              data-umami-event-target="email"
+            >
+              Email ↗
+            </a>
             <Link href="/rss.xml" prefetch={false}>
               RSS feed
             </Link>

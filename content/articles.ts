@@ -19,6 +19,122 @@ export interface Article {
  */
 export const articles: Article[] = [
   {
+    slug: "the-friday-deploy-curse-is-real",
+    title:
+      "The Friday Deploy Curse Is Real: Debugging Silent Backup Failures and Docker Volume Drift on CampusDesk",
+    summary:
+      "A classic Friday afternoon deploy seemed to go smoothly until CloudWatch fired a missing heartbeat alert. How an innocent database reset, Docker volume persistence, and an observability blind spot led to a deep dive into Linux systemd timers, backup coherence invariants, and AWS alerting.",
+    date: "2026-11-12",
+    tags: [
+      "campusdesk",
+      "aws",
+      "cloudwatch",
+      "linux",
+      "docker",
+      "laravel",
+      "post-mortem",
+    ],
+    relatedWork: ["campusdesk"],
+    relatedPosts: [
+      "when-a-gateway-lacks-idempotency",
+      "building-a-controlled-aws-delivery-platform-for-campusdesk",
+      "building-campusdesk-beyond-crud",
+    ],
+    diagram: {
+      steps: [
+        "migrate:fresh resets database down to 3 seeded files, leaving orphaned PDFs in persistent Docker volume",
+        "campusdesk-backup.service enforces strict coherence (3 DB rows != 5 volume files) and halts capture",
+        "Backup process notifies SNS but lacks CloudWatch failure metric; watchdog timer notices 12.5h later",
+        "Remediated via byte-verified quarantine, Laravel command prohibition, and 5-minute KMS-encrypted CloudWatch alarms",
+      ],
+      caption:
+        "From state drift and telemetry blind spots to hardened coherence invariants and active AWS alerting.",
+    },
+    code: {
+      label: "capture-recovery-set.sh (strict coherence verification)",
+      language: "bash",
+      value: `awk 'NR==FNR { seen[$0]=1; next } !seen[$0] { print "ERROR: orphaned_in_volume=" $0 > "/dev/stderr" }' \\
+  "$ATTACHMENT_DB_PATHS_FILE" "$ATTACHMENT_ARCHIVE_PATHS_FILE"
+awk 'NR==FNR { seen[$0]=1; next } !seen[$0] { print "ERROR: missing_from_volume=" $0 > "/dev/stderr" }' \\
+  "$ATTACHMENT_ARCHIVE_PATHS_FILE" "$ATTACHMENT_DB_PATHS_FILE"`,
+    },
+    sections: [
+      {
+        id: "the-friday-push-and-the-blind-spot",
+        title: "The Friday push, the weekend ping, and the blind spot",
+        paragraphs: [
+          "I've always known that pushing changes to prod on a Friday was a taboo, but most of that knowledge came from second-hand experience and from other engineers sharing their experiences. I never actually experienced a failure of that sort first-hand... until now 😂. Let me walk you through it.",
+          "Last week, I implemented a new feature for CampusDesk, tested it, and pushed it to staging. All checks in my pipeline passed, images built and published as expected, and I deployed to my EC2 instance. There were a couple of hiccups with the new feature in the live environment, but I fixed those, tested everything in staging, shut down my PC, and closed up shop for the day (a Friday btw).",
+          "All of a sudden, I received a Heartbeat alert from my CloudWatch service at around 01:15 WAT: my scheduled backup had just failed. I had configured backups for CampusDesk twice a day (00:00 and 12:00 UTC, which is 01:00 and 13:00 local time). The backups had been functioning without any hiccups since I set them up, and the 15-minute heartbeat checks were working fine.",
+          "I took it lightly at first because it was the weekend and figured I would fix it when I got back to the office on Monday. But then I received another alert at 13:15, and that was when I knew I had to fix this urgently.",
+          "Here I was looking at my CloudWatch console, and unfortunately I had little to no information to work with: no logs or error traces to help me diagnose what was causing this backup to fail. This was a major observability gap which I intended on closing. I had to go into this issue partially blind, but I saw this as an opportunity to learn and improve my skills by solving the problem and ensuring it is properly handled whenever something of this sort comes up next.",
+        ],
+      },
+      {
+        id: "a-tale-of-two-systemd-timers",
+        title: "A tale of two systemd timers: producer vs. watchdog",
+        paragraphs: [
+          "To understand why CloudWatch went completely silent, you need a mental model of how the backup subsystem on the staging EC2 host was architected.",
+          "I designed the recovery mechanism using two independent systemd timers. The producer (campusdesk-backup.service) runs every 12 hours (00:00 and 12:00 UTC). It briefly pauses the application containers to take a coherent snapshot, dumps MySQL, archives the private attachments Docker volume, and restarts the containers. It uploads to a versioned S3 recovery bucket with SSE-KMS encryption, downloads the backup to verify SHA-256 checksums, and updates the local success marker.",
+          "Crucially, the backup script enforces a strict design invariant: every valid file path recorded in the MySQL attachments table must match a physical file inside the Docker volume byte-for-byte. If there is a database row pointing to a missing file or an orphan file on disk with no database row, the script refuses to produce an inconsistent backup and exits with status 1.",
+          "The watchdog (campusdesk-backup-monitor.service) runs every 15 minutes. It does not run backups; it simply checks whether the success marker is newer than 12.5 hours. If fresh, it emits OffsiteBackupFresh = 1 to CloudWatch. If stale, it stops sending 1 and sends an SNS alert. CloudWatch alarms after two missing periods.",
+          "Here was the structural blind spot: when the backup failed, it sent an alert but published zero metrics to CloudWatch. Only the monitor published metrics. So from CloudWatch's perspective, no infrastructure or application error was visible; datapoints simply ceased to exist 12.5 hours after the last good backup.",
+        ],
+      },
+      {
+        id: "chasing-red-herrings",
+        title: "Chasing red herrings: timeline math vs. assumptions",
+        paragraphs: [
+          "When an alert fires right after a deployment, instinct tells you that the code you just shipped broke the system. My initial suspect was commit 4207da7, deployed that Friday afternoon.",
+          "Instead of guessing, I compared the CloudWatch alarm timestamp against Git commit history and GitHub Actions execution logs. Commit 4207da7 was created at 15:24 UTC and deployed at 15:27 UTC—nearly two hours after the CloudWatch alarm was already firing at 13:31 UTC.",
+          "Furthermore, because the freshness monitor allows a 12.5-hour grace period and CloudWatch waits two 15-minute evaluation periods (30 minutes) before alarming, an alarm firing at 13:31 UTC proved mathematically that the 00:00 UTC backup had succeeded and that the 12:00 UTC backup was the very first failure.",
+          "That meant the backup broke two hours before the Friday afternoon commit was even written. The deployment was an innocent red herring. The failure was originating directly on the host.",
+        ],
+      },
+      {
+        id: "the-anatomy-of-drift",
+        title: "The anatomy of drift: migrate:fresh vs. Docker volumes",
+        paragraphs: [
+          "I inspected the systemd journal on the EC2 host with journalctl -u campusdesk-backup.service and immediately found the abort signal: ERROR: Attachment database and archive paths do not match exactly.",
+          "This pointed directly to the coherence check in the recovery script, which compares MySQL attachment paths against the files inside the persistent attachments Docker volume.",
+          "Inspecting MySQL showed 3 seeded attachment rows. But inspecting the physical Docker volume on disk revealed 5 files: the 3 seeded text files plus two PDF files created during earlier test cycles.",
+          "The root cause clicked: at 11:47 UTC on Friday (just 12 minutes before the scheduled backup), I had run php artisan migrate:fresh --seed to test the new feature with clean tables. migrate:fresh drops and recreates MySQL tables, but it knows nothing about Docker volumes. The persistent volume retained the old uploaded PDFs, leaving them orphaned on disk.",
+          "Twelve minutes later, the noon backup ran, caught the 3 DB rows != 5 volume files mismatch, and aborted. The backup script wasn't broken; its safety guard was working exactly as intended, but doing so without failure telemetry.",
+        ],
+      },
+      {
+        id: "surgical-remediation",
+        title: "Surgical remediation without data loss",
+        paragraphs: [
+          "Remediating state drift requires caution. Before modifying any files, I preserved the last pre-reset backup by copying it out of the 14-day auto-prune directory into a retained directory so it would never be automatically deleted.",
+          "Next, rather than recklessly deleting the orphaned PDFs from the Docker volume, I quarantined them into a root-only directory (0700 permissions) with 0600 file permissions. I verified byte-for-byte parity with cmp --silent before removing them from the live volume.",
+          "With the live volume once again matching the 3 seeded database records, I manually started campusdesk-backup.service and campusdesk-backup-monitor.service.",
+          "The backup executed successfully, verified S3 KMS upload and SHA-256 round-trip integrity, and updated the success marker. The monitor immediately published OffsiteBackupFresh = 1, transitioning the CloudWatch alarm back to OK.",
+        ],
+      },
+      {
+        id: "preventative-engineering",
+        title: "Four layers of permanent defense",
+        paragraphs: [
+          "Resolving the immediate mismatch was only half the job. I implemented four engineering improvements to permanently harden the system against this class of failure.",
+          "First, I added DB::prohibitDestructiveCommands() in Laravel's AppServiceProvider for staging and production. This uses Laravel 12's Prohibitable trait to hard-block migrate:fresh, migrate:reset, and db:wipe, even if --force is supplied.",
+          "Second, I added an awk set-difference comparison to the capture script so that any future mismatch prints the exact orphaned_in_volume or missing_from_volume file paths directly to stderr and journalctl.",
+          "Third, I eliminated the observability blind spot: the backup script now explicitly emits BackupCaptureFailed = 1 on failure and 0 on success to CloudWatch, while the monitor script publishes OffsiteBackupFresh = 0 when stale.",
+          "Finally, I added a dedicated CloudFormation CloudWatch alarm that alerts within 5 minutes of any capture failure (instead of waiting 12.5 hours) and updated the KMS key policy so CloudWatch can publish encrypted SNS notifications directly.",
+        ],
+      },
+      {
+        id: "what-this-taught-me",
+        title: "What this incident taught me",
+        paragraphs: [
+          "This incident reinforced the value of strict system invariants. The backup script's refusal to capture an inconsistent state was not a malfunction; it prevented corrupted recovery sets from entering offsite storage.",
+          "It also proved that state lifecycle must be managed holistically. Relational tables and persistent Docker volumes are coupled; treating database resets in isolation from file storage inevitably produces drift.",
+          "Most importantly, observability must monitor failure, not just the absence of health. Closing the telemetry gap transformed a silent, delayed watchdog into an immediate, self-diagnosing alerting system.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "when-a-gateway-lacks-idempotency",
     title:
       "When a Gateway Lacks Idempotency: Avoiding Double Payments on CampusDesk",

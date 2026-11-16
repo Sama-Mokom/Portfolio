@@ -230,6 +230,7 @@ export const projects: Project[] = [
       },
     ],
     relatedWriting: [
+      "the-friday-deploy-curse-is-real",
       "when-a-gateway-lacks-idempotency",
       "building-campusdesk-beyond-crud",
       "building-a-controlled-aws-delivery-platform-for-campusdesk",
